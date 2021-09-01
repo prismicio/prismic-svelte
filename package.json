@@ -1,14 +1,14 @@
 {
-	"name": "package_name",
+	"name": "@prismicio/svelte",
 	"version": "0.0.0",
-	"description": "package_description",
+	"description": "Svelte plugin, components, and composables to fetch and present Prismic content",
 	"keywords": [
 		"typescript",
 		"prismic"
 	],
 	"repository": {
 		"type": "git",
-		"url": "ssh://git@github.com/github_org_slash_github_repo.git"
+		"url": "ssh://git@github.com/prismicio/prismic-svelte.git"
 	},
 	"license": "Apache-2.0",
 	"author": "Prismic <contact@prismic.io> (https://prismic.io)",
