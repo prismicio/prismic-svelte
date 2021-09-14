@@ -28,7 +28,8 @@
 		"src"
 	],
 	"scripts": {
-		"build": "npm run build:sk && siroc build",
+		"//build": "npm run build:sk && siroc build:extendRollup",
+		"build": "siroc build",
 		"build:sk": "npm --prefix ./src/ run package",
 		"dev": "npm run build:sk && siroc build --watch",
 		"format": "prettier --write .",
@@ -40,6 +41,9 @@
 		"lint": "eslint --ext .js,.ts .",
 		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava",
 		"test": "npm run lint && npm run unit"
+	},
+	"dependencies": {
+		"rollup-plugin-svelte": "^7.1.0"
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^4.29.1",

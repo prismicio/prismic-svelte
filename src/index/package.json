@@ -1,9 +1,10 @@
 {
-  "name": "~TODO~",
+  "name": "prismic-sveltekit",
   "version": "0.0.1",
   "type": "module",
   "devDependencies": {
     "@sveltejs/kit": "next",
+    "sm-commons": "^0.0.23",
     "svelte": "^3.34.0",
     "svelte-check": "^2.0.0",
     "svelte-preprocess": "^4.0.0",
@@ -13,6 +14,7 @@
   },
   "exports": {
     "./package.json": "./package.json",
+    "./SliceZone.svelte": "./SliceZone.svelte",
     ".": "./index.js"
   }
 }
