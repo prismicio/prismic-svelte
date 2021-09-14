@@ -1,3 +1,3 @@
 export const hello = (str: string): void => {
-	console.info("Hello %s", str);
+	console.info("Herro %s", str);
 };
