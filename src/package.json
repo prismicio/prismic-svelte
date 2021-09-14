@@ -12,6 +12,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/kit": "next",
+		"sm-commons": "^0.0.23",
 		"svelte": "^3.34.0",
 		"svelte-check": "^2.0.0",
 		"svelte-preprocess": "^4.0.0",
