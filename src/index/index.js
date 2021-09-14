@@ -1,3 +1,3 @@
 export const hello = (str) => {
-    console.info("Herro %s", str);
+    console.info("Rockies %s", str);
 };
