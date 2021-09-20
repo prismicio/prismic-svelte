@@ -21,6 +21,9 @@ yarn.lock
 # npm
 npm-debug.log*
 
+# sveltekit
+/.svelte-kit
+
 # tests
 coverage
 .eslintcache

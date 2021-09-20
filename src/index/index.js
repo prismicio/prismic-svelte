@@ -1,5 +1,0 @@
-export const hello = (str) => {
-    console.info("Rockies %s", str);
-};
-export const dog = "cat";
-export * from "./SliceZone.svelte";

@@ -14,24 +14,19 @@
 	"author": "Prismic <contact@prismic.io> (https://prismic.io)",
 	"type": "module",
 	"exports": {
-		".": {
-			"require": "./dist/index.cjs",
-			"import": "./dist/index.mjs"
-		},
-		"./package.json": "./package.json"
+		".": "./dist/index.js",
+		"./package.json": "./dist/package.json",
+		"./SliceZone.svelte": "./dist/SliceZone.svelte"
 	},
-	"main": "dist/index.cjs",
-	"module": "dist/index.mjs",
+	"main": "dist/index.js",
+	"module": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"files": [
 		"dist",
 		"src"
 	],
 	"scripts": {
-		"//build": "npm run build:sk && siroc build:extendRollup",
-		"build": "siroc build",
-		"build:sk": "npm --prefix ./src/ run package",
-		"dev": "npm run build:sk && siroc build --watch",
+		"build": "svelte-kit build",
 		"format": "prettier --write .",
 		"prepare": "npm run build",
 		"release": "npm run build && npm run test && standard-version && git push --follow-tags && npm run build && npm publish",
@@ -40,12 +35,20 @@
 		"release:alpha:dry": "standard-version --release-as major --prerelease alpha --dry-run",
 		"lint": "eslint --ext .js,.ts .",
 		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava",
-		"test": "npm run lint && npm run unit"
+		"test": "npm run lint && npm run unit",
+		"dev": "svelte-kit dev",
+		"preview": "svelte-kit preview",
+		"package": "svelte-kit package",
+		"check": "svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"dependencies": {
 		"rollup-plugin-svelte": "^7.1.0"
 	},
 	"devDependencies": {
+		"@rollup/plugin-inject": "^4.0.2",
+		"@sveltejs/kit": "next",
+		"@types/node": "^16.9.4",
 		"@typescript-eslint/eslint-plugin": "^4.29.1",
 		"@typescript-eslint/parser": "^4.29.1",
 		"ava": "^3.15.0",
@@ -55,9 +58,15 @@
 		"eslint-plugin-tsdoc": "^0.2.14",
 		"nyc": "^15.1.0",
 		"prettier": "^2.3.2",
-		"siroc": "^0.15.0",
+		"rollup-plugin-includepaths": "^0.2.4",
+		"sm-commons": "^0.0.23",
 		"standard-version": "^9.3.1",
+		"svelte": "^3.34.0",
+		"svelte-check": "^2.0.0",
+		"svelte-preprocess": "^4.0.0",
+		"svelte2tsx": "^0.4.6",
 		"ts-eager": "^2.0.2",
+		"tslib": "^2.0.0",
 		"typescript": "^4.3.5"
 	},
 	"engines": {
