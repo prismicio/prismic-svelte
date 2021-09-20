@@ -15,12 +15,12 @@
 	"type": "module",
 	"exports": {
 		".": "./dist/index.js",
-		"./package.json": "./dist/package.json",
+		"./package.json": "./package.json",
 		"./SliceZone.svelte": "./dist/SliceZone.svelte"
 	},
 	"main": "dist/index.js",
 	"module": "dist/index.js",
-	"types": "dist/index.d.ts",
+	"types": "dist/types.d.ts",
 	"files": [
 		"dist",
 		"src"
@@ -46,6 +46,9 @@
 		"rollup-plugin-svelte": "^7.1.0"
 	},
 	"devDependencies": {
+		"@prismicio/client": "^6.0.0-alpha.15",
+		"@prismicio/helpers": "^2.0.0-alpha.8",
+		"@prismicio/types": "^0.1.12",
 		"@rollup/plugin-inject": "^4.0.2",
 		"@sveltejs/kit": "next",
 		"@types/node": "^16.9.4",
