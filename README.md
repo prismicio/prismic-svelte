@@ -1,9 +1,10 @@
 <!--
 
-Replace all on all files:
+Replace all on all files (README.md, CONTRIBUTING.md, bug_report.md, package.json):
 - @prismicio/svelte
-- Svelte plugin, components, and composables to fetch and present Prismic content
+- Svelte components and helpers to fetch and present Prismic content
 - prismicio/prismic-svelte
+- prismic-svelte
 
 -->
 
@@ -16,19 +17,13 @@ Replace all on all files:
 [![Conventional Commits][conventional-commits-src]][conventional-commits-href]
 [![License][license-src]][license-href]
 
-<!-- Replacing link to Prismic with [Prismic][prismic] is useful here -->
+<!-- TODO: Replacing link to Prismic with [Prismic][prismic] is useful here -->
 
-Svelte plugin, components, and composables to fetch and present [Prismic][prismic] content.
+[Svelte][svelte] components and helpers to fetch and present [Prismic][prismic] content.
 
-<!--
-
-TODO: Create a small list of package features:
-
-- 🤔 &nbsp;A useful feature;
-- 🥴 &nbsp;Another useful feature;
-- 🙃 &nbsp;A final useful feature.
-
--->
+- 📝 &nbsp;Display content from Prismic like [Rich Text][prismic-rich-text] and [Link][prismic-link] fields;
+- 🍡 &nbsp;Render Prismic [Slice Zones][prismic-slices] declaratively with Svelte components;
+- 🎣 &nbsp;Fetch Prismic content.
 
 ## Install
 
@@ -50,7 +45,9 @@ Whether you're helping us fix bugs, improve the docs, or spread the word, we'd l
 
 **Suggesting an improvement**: [Open an issue][repo-feature-request] explaining your improvement or feature so we can discuss and learn more.
 
-**Submitting code changes**: For small fixes, feel free to [open a PR][repo-pull-requests] with a description of your changes. For large changes, please first [open an issue][repo-feature-request] so we can discuss if and how the changes should be implemented.
+**Submitting code changes**: For small fixes, feel free to [open a pull request][repo-pull-requests] with a description of your changes. For large changes, please first [open an issue][repo-feature-request] so we can discuss if and how the changes should be implemented.
+
+For more clarity on this project and its structure you can also check out the detailed [CONTRIBUTING.md][contributing] document.
 
 ## License
 
@@ -78,6 +75,11 @@ Whether you're helping us fix bugs, improve the docs, or spread the word, we'd l
 
 [prismic-docs]: https://prismic.io/docs
 [changelog]: ./CHANGELOG.md
+[contributing]: ./CONTRIBUTING.md
+[svelte]: https://svelte.dev
+[prismic-rich-text]: https://prismic.io/docs/core-concepts/rich-text-title
+[prismic-link]: https://prismic.io/docs/core-concepts/link-content-relationship
+[prismic-slices]: https://prismic.io/docs/core-concepts/slices
 
 <!-- TODO: Replace link with a more useful one if available -->
 
