@@ -1,12 +1,19 @@
 import * as prismic from "@prismicio/client";
 import * as prismicH from "@prismicio/helpers";
-import type { PrismicConfig } from "./types";
+// import type { PrismicConfig } from "./types";
 
-const configurePrismic = (config: PrismicConfig): any => {
-	const endpoint = prismic.getEndpoint(config.repoName);
-	const client = (fetch: any) => prismic.createClient(endpoint, fetch);
+const configurePrismic = (globalOptions: any): any => {
+	const createClient = (clientOptions: any) => {
+		const options = Object.assign(globalOptions, clientOptions);
+		console.log(clientOptions.repositoryName || globalOptions.repositoryName);
+		const endpoint = prismic.getEndpoint(
+			clientOptions.repositoryName || globalOptions.repositoryName,
+		);
 
-	return { ...prismicH, client };
+		return prismic.createClient(endpoint, options);
+	};
+
+	return { ...prismicH, createClient };
 };
 
 export default configurePrismic;

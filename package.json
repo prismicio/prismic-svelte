@@ -45,11 +45,14 @@
 	"dependencies": {
 		"rollup-plugin-svelte": "^7.1.0"
 	},
+	"//": {
+		"@rollup/plugin-inject": "^4.0.2",
+		"rollup-plugin-includepaths": "^0.2.4"
+	},
 	"devDependencies": {
 		"@prismicio/client": "^6.0.0-alpha.15",
 		"@prismicio/helpers": "^2.0.0-alpha.8",
 		"@prismicio/types": "^0.1.12",
-		"@rollup/plugin-inject": "^4.0.2",
 		"@sveltejs/kit": "next",
 		"@types/node": "^16.9.4",
 		"@typescript-eslint/eslint-plugin": "^4.29.1",
@@ -61,7 +64,6 @@
 		"eslint-plugin-tsdoc": "^0.2.14",
 		"nyc": "^15.1.0",
 		"prettier": "^2.3.2",
-		"rollup-plugin-includepaths": "^0.2.4",
 		"sm-commons": "^0.0.23",
 		"standard-version": "^9.3.1",
 		"svelte": "^3.34.0",
