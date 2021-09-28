@@ -5,7 +5,6 @@ import * as prismicH from "@prismicio/helpers";
 const configurePrismic = (globalOptions: any): any => {
 	const createClient = (clientOptions: any) => {
 		const options = Object.assign(globalOptions, clientOptions);
-		console.log(clientOptions.repositoryName || globalOptions.repositoryName);
 		const endpoint = prismic.getEndpoint(
 			clientOptions.repositoryName || globalOptions.repositoryName,
 		);

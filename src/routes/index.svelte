@@ -1,3 +1,7 @@
-<h1>Welcome to SvelteKit</h1>
+<script>
+  import SliceZone from "./../lib/SliceZone.svelte"
+</script>
 
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<h1>SliceZone</h1>
+
+<SliceZone />
