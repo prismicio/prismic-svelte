@@ -16,7 +16,8 @@
 	"exports": {
 		".": "./dist/index.js",
 		"./package.json": "./package.json",
-		"./SliceZone.svelte": "./dist/SliceZone.svelte"
+		"./SliceZone.svelte": "./dist/SliceZone.svelte",
+		"./PrismicLink.svelte": "./dist/PrismicLink.svelte"
 	},
 	"main": "dist/index.js",
 	"module": "dist/index.js",
@@ -42,18 +43,9 @@
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
 	},
-	"dependencies": {
-		"@prismicio/client": "^6.0.0-alpha.15",
-		"@prismicio/helpers": "^2.0.0-alpha.8",
-		"rollup-plugin-svelte": "^7.1.0"
-	},
-	"//": {
-		"@rollup/plugin-inject": "^4.0.2",
-		"rollup-plugin-includepaths": "^0.2.4"
-	},
 	"devDependencies": {
 		"@prismicio/client": "^6.0.0-alpha.15",
-		"@prismicio/helpers": "^2.0.0-alpha.8",
+		"@prismicio/helpers": "^2.0.0-alpha.9",
 		"@prismicio/types": "^0.1.13",
 		"@rollup/plugin-inject": "^4.0.2",
 		"@sveltejs/kit": "next",
@@ -69,8 +61,8 @@
 		"prettier": "^2.4.1",
 		"prettier-plugin-jsdoc": "^0.3.24",
 		"rollup-plugin-includepaths": "^0.2.4",
-		"sm-commons": "^0.0.23",
 		"siroc": "^0.16.0",
+		"sm-commons": "^0.0.23",
 		"standard-version": "^9.3.1",
 		"svelte": "^3.43.0",
 		"svelte-check": "^2.2.6",
