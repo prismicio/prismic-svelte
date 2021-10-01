@@ -14,45 +14,55 @@
 	"author": "Prismic <contact@prismic.io> (https://prismic.io)",
 	"type": "module",
 	"exports": {
-		".": {
-			"require": "./dist/index.cjs",
-			"import": "./dist/index.mjs"
-		},
+		".": "./index.js",
 		"./package.json": "./package.json"
 	},
-	"main": "dist/index.cjs",
-	"module": "dist/index.mjs",
-	"types": "dist/index.d.ts",
+	"main": "index.js",
+	"module": "index.js",
+	"types": "index.d.ts",
+
+  "svelte": "./index.js",
 	"files": [
 		"dist",
 		"src"
 	],
 	"scripts": {
-		"build": "siroc build",
-		"dev": "siroc build --watch",
+		"build": "svelte-kit package && cp -r src dist/src",
+		"dev": "svelte-kit dev",
 		"format": "prettier --write .",
 		"prepare": "npm run build",
-		"release": "npm run build && npm run test && standard-version && git push --follow-tags && npm run build && npm publish",
+		"release": "npm run build && npm run test && standard-version && git push --follow-tags && npm run build && npm publish ./dist",
 		"release:dry": "standard-version --dry-run",
-		"release:alpha": "npm run build && npm run test && standard-version --release-as major --prerelease alpha && git push --follow-tags && npm run build && npm publish --tag alpha",
+		"release:alpha": "npm run build && npm run test && standard-version --release-as major --prerelease alpha && git push --follow-tags && npm run build && npm publish ./dist --tag alpha",
 		"release:alpha:dry": "standard-version --release-as major --prerelease alpha --dry-run",
 		"lint": "eslint --ext .js,.ts .",
 		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava",
 		"test": "npm run lint && npm run unit"
 	},
+	"dependencies": {
+		"@prismicio/client": "beta",
+		"@prismicio/helpers": "beta",
+		"@prismicio/types": "^0.1.13"
+	},
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^4.31.2",
-		"@typescript-eslint/parser": "^4.31.2",
+		"@sveltejs/kit": "next",
+		"@typescript-eslint/eslint-plugin": "^4.32.0",
+		"@typescript-eslint/parser": "^4.32.0",
 		"ava": "^3.15.0",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-svelte3": "^3.2.1",
 		"eslint-plugin-tsdoc": "^0.2.14",
 		"nyc": "^15.1.0",
 		"prettier": "^2.4.1",
 		"prettier-plugin-jsdoc": "^0.3.24",
 		"siroc": "^0.16.0",
 		"standard-version": "^9.3.1",
+		"svelte": "^3.43.1",
+		"svelte2tsx": "^0.4.7",
+    "svelte-check": "^2.2.6",
+    "svelte-preprocess": "^4.9.7",
 		"ts-eager": "^2.0.2",
 		"typescript": "^4.4.3"
 	},
