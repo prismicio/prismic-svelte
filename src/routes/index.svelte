@@ -1,6 +1,6 @@
 <script lang="ts">
-  import SliceZone from "$lib/SliceZone.svelte"
-  import PrismicLink from "$lib/PrismicLink.svelte";
+  import SliceZone from "$lib/components/SliceZone.svelte"
+  import PrismicLink from "$lib/components/PrismicLink.svelte";
   import * as prismic from "@prismicio/client"
   import { configurePrismic } from "$lib";
   import type {PrismicDocument as DocumentType} from "@prismicio/client"
