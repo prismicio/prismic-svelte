@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ErrorMessage from './components/ErrorMessage.svelte';
+  import ErrorMessage from './ErrorMessage.svelte';
   import { pascalize } from 'sm-commons/utils/str'
 
   import type { SliceZone as SliceZoneType } from "@prismicio/types"
