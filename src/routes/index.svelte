@@ -1,18 +1,7 @@
 <script lang="ts">
   import SliceZone from "$lib/components/SliceZone.svelte"
   import PrismicLink from "$lib/components/PrismicLink.svelte";
-  import * as prismic from "@prismicio/client"
-  import { configurePrismic } from "$lib";
-  import type {PrismicDocument as DocumentType} from "@prismicio/client"
-  import { documentAsLink } from "@prismicio/helpers";
-
-  const prismic = configurePrismic({
-    repositoryName: "sam-onboarding-nuxt-blog", 
-    routes: [{
-      type: "post", 
-      path: "/:uid"
-    }
-  ]})
+  import prismic from "./prismic"
 
   const client = prismic.createClient({fetch})
   const promise = client.getAllByType("post")
