@@ -7,16 +7,16 @@
   } from "@prismicio/types";
 
   // TODO: Add PrismicDocument Type to field typing
-  export let field:LinkFieldType | null | undefined
-  export let linkResolver:any | null | undefined
-  export let download:boolean | null | undefined
-  export let hreflang:string | undefined
-  export let referrerpolicy:string |undefined 
-  export let rel:string | undefined
-  export let target:string | undefined
-  export let type:string | undefined
-  export let prefetch:true | undefined
-  export let noscroll:true | undefined
+  export let field:LinkFieldType | null | undefined, 
+    linkResolver:any | null | undefined, 
+    download:boolean | null | undefined, 
+    hreflang:string | undefined,
+    referrerpolicy:string |undefined,
+    rel:string | undefined,
+    target:string | undefined,
+    type:string | undefined,
+    prefetch:true | undefined,
+    noscroll:true | undefined
 
   const attrs = {
     download,
