@@ -31,7 +31,6 @@
   const href:string = link || ""
 </script>
 
-<!-- svelte-ignore a11y-missing-attribute -->
 <a 
   {href}
   {...attrs} 
