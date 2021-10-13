@@ -14,7 +14,13 @@
 		"forceConsistentCasingInFileNames": true,
 		"jsx": "preserve",
 		"lib": ["esnext", "dom"],
-		"types": ["node"]
+		"types": ["node"],
+
+		"baseUrl": ".",
+		"paths": {
+			"$lib": ["src/lib"],
+			"$lib/*": ["src/lib/*"],
+		}
 	},
 	"exclude": ["node_modules", "dist", "examples"]
 }
