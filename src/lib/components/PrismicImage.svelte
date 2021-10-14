@@ -29,4 +29,6 @@
 	const image = usePrismicImage(field);
 </script>
 
-<img src={image.url} alt={image.alt} height={image.height} />
+{#if field.url}
+	<img src={image.url} alt={image.alt} height={image.height} />
+{/if}
