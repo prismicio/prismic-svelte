@@ -10,9 +10,9 @@
   const endpoint = prismic.getEndpoint(repoName)
   const client = prismic.createClient(endpoint)
 
-	// const { client } = usePrismic();
-
+  
   export async function load() {
+    // const { client } = usePrismic();
     const document = await client.getSingle('homepage');
     return {
       props: {
