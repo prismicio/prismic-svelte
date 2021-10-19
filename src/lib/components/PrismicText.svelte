@@ -8,4 +8,5 @@
   export let separator:string
 </script>
 
+<!-- TODO: Separator not working for newlines `\n\n` -->
 {@html prismicH.asText(field, separator)}

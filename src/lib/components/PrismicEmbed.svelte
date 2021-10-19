@@ -1,3 +1,9 @@
-<!-- TODO: Create embed component -->
+<!-- TODO: Why are embeds 200px wide? -->
 
-{@html "todo"}
+<script lang="ts">
+  import type * as prismicT from "@prismicio/types"
+
+  export let field:prismicT.EmbedField
+</script>
+
+{@html field.html}

@@ -1,28 +1,34 @@
-<script lang="ts">
-  import SliceZone from "$lib/components/SliceZone.svelte"
-  import PrismicLink from "$lib/components/PrismicLink.svelte";
-  import prismic from "./prismic"
+<script context="module" lang="ts">
+  import type * as prismicT from "@prismicio/types"
+  import * as slices from "./slices"
 
-  const client = prismic.createClient({fetch})
-  const promise = client.getAllByType("post")
+	import { usePrismic } from "$lib";
+  import { PrismicEmbed, PrismicImage, PrismicLink, PrismicRichText, PrismicText, SliceZone } from "$lib";
 
-  const get = async () => {
-    const posts = await client.getAllByType("post")
-    const post = posts[0]
+	const { client } = usePrismic();
+
+  export async function load() {
+    const document = await client.getSingle('homepage');
+    return {
+      props: {
+        document,
+      }
+    };
   }
-  
-  get()
 </script>
 
-<h1>SliceZone</h1>
+<script lang="ts">
+  export let document:prismicT.PrismicDocument
+</script>
 
-{#await promise}
-  Loading...
-{:then response}
-  <PrismicLink prefetch field={response[0].data.author} linkResolver={(doc) => "/" + doc.uid}>Woop woop</PrismicLink>
-  {JSON.stringify(prismic.asLink(response[0].data.author, (doc) => "/" + doc.uid), null, 2)}
-{:catch error}
-  {JSON.stringify(error)}
-{/await}
+<main>
+  <h1>Welcome to SvelteKit</h1>
+  <SliceZone body={document.data.body} {slices} />
+</main>
 
-<SliceZone />
+<style>
+  main {
+    max-width: min(90%, 800px);
+    margin: auto;
+  }
+</style>

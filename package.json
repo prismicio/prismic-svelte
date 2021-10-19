@@ -20,14 +20,13 @@
 	"main": "index.js",
 	"module": "index.js",
 	"types": "index.d.ts",
-
-  "svelte": "./index.js",
+	"svelte": "./index.js",
 	"files": [
 		"dist",
 		"src"
 	],
 	"scripts": {
-		"build": "svelte-kit package && cp -r src dist/src",
+		"build": "svelte-kit package && shx cp -r src dist/src",
 		"dev": "svelte-kit dev",
 		"format": "prettier --write .",
 		"prepare": "npm run build",
@@ -43,16 +42,12 @@
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
 	},
-	"dependencies": {
-		"@prismicio/client": "beta",
-		"@prismicio/helpers": "beta",
-		"@prismicio/types": "^0.1.13"
-	},
 	"devDependencies": {
 		"@prismicio/client": "^6.0.0-alpha.15",
 		"@prismicio/helpers": "^2.0.0-alpha.9",
 		"@prismicio/types": "^0.1.13",
 		"@rollup/plugin-inject": "^4.0.2",
+		"@prismicio/mock": "0.0.6",
 		"@sveltejs/kit": "next",
 		"@types/node": "^16.10.1",
 		"@typescript-eslint/eslint-plugin": "^4.32.0",
@@ -61,19 +56,19 @@
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-svelte3": "^3.2.1",
+		"eslint-plugin-svelte3": "^3.2.1",
 		"eslint-plugin-tsdoc": "^0.2.14",
 		"nyc": "^15.1.0",
 		"prettier": "^2.4.1",
 		"prettier-plugin-jsdoc": "^0.3.24",
-		"rollup-plugin-includepaths": "^0.2.4",
+		"shx": "^0.3.3",
 		"siroc": "^0.16.0",
 		"sm-commons": "^0.0.23",
 		"standard-version": "^9.3.1",
 		"svelte": "^3.43.1",
+		"svelte-check": "^2.2.6",
+		"svelte-preprocess": "^4.9.7",
 		"svelte2tsx": "^0.4.7",
-    "svelte-check": "^2.2.6",
-    "svelte-preprocess": "^4.9.7",
 		"ts-eager": "^2.0.2",
 		"tslib": "^2.3.1",
 		"typescript": "^4.4.3"
