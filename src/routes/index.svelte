@@ -5,7 +5,12 @@
 	import { usePrismic } from "$lib";
   import { PrismicEmbed, PrismicImage, PrismicLink, PrismicRichText, PrismicText, SliceZone } from "$lib";
 
-	const { client } = usePrismic();
+  import * as prismic from "@prismicio/client"
+  const repoName = "svelte-package-dev"
+  const endpoint = prismic.getEndpoint(repoName)
+  const client = prismic.createClient(endpoint)
+
+	// const { client } = usePrismic();
 
   export async function load() {
     const document = await client.getSingle('homepage');
