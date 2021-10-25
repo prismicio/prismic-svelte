@@ -12,6 +12,14 @@ const routes = [
 
 const linkResolver = (doc) => `/${doc.type}/${doc.uid}`;
 
-const prismic = configurePrismic({ repositoryName, routes, linkResolver, slices });
+const htmlSerializer = () => null
+
+const prismic = configurePrismic({
+  repositoryName,
+  routes,
+  linkResolver,
+  slices,
+  htmlSerializer
+});
 
 export default prismic;

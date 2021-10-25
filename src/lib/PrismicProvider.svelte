@@ -13,7 +13,7 @@
 		prismic: undefined,
 		htmlSerializer: undefined,
 		slices: undefined,
-	};
+	}
 
 	setContext<PrismicContext>(prismicKey, {
 		client: prismic.client,
