@@ -6,7 +6,7 @@ const configurePrismic = (globalOptions: any): any => {
 	const createClient = (clientOptions: any) => {
 		const options = Object.assign(globalOptions, clientOptions);
 		const endpoint = prismic.getEndpoint(
-			clientOptions.repositoryName || globalOptions.repositoryName,
+			clientOptions?.repositoryName || globalOptions?.repositoryName,
 		);
 
 		return prismic.createClient(endpoint, options);

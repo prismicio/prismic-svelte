@@ -1,11 +1,18 @@
 import { configurePrismic } from "$lib";
 
-  const prismic = configurePrismic({
-  repositoryName: "sam-onboarding-nuxt-blog", 
-  routes: [{
-    type: "post", 
-    path: "/:uid"
-  }
-]})
+const repositoryName = "svelte-package-dev";
 
-export default prismic
+const slices = []
+
+const routes = [
+  {
+    type: "page",
+    path: "/:uid",
+  }
+];
+
+const linkResolver = (doc) => `/${doc.type}/${doc.uid}`;
+
+const prismic = configurePrismic({ repositoryName, routes, linkResolver });
+
+export default prismic;

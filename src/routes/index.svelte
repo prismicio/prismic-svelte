@@ -1,18 +1,10 @@
 <script context="module" lang="ts">
   import type * as prismicT from "@prismicio/types"
   import * as slices from "./slices"
-
-	import { usePrismic } from "$lib";
-  import { PrismicEmbed, PrismicImage, PrismicLink, PrismicRichText, PrismicText, SliceZone } from "$lib";
-
-  import * as prismic from "@prismicio/client"
-  const repoName = "svelte-package-dev"
-  const endpoint = prismic.getEndpoint(repoName)
-  const client = prismic.createClient(endpoint)
-
+  import { SliceZone } from "$lib";
   
-  export async function load() {
-    // const { client } = usePrismic();
+  export async function load({ stuff, fetch }) {
+    const client = stuff.prismic.createClient(fetch)
     const document = await client.getSingle('homepage');
     return {
       props: {

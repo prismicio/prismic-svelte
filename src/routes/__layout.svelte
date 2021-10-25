@@ -1,13 +1,17 @@
-<script>
-	import * as prismic from "@prismicio/client";
+<script context="module" lang="ts">
 	import { PrismicProvider } from "$lib"; // @prismicio/svelte in production
+	import prismic from "./prismic";
 
-	const endpoint = prismic.getEndpoint("svelte-package-dev");
-	const client = prismic.createClient(endpoint);
-
-	const linkResolver = (doc) => `/${doc.type}/${doc.uid}`;
+	// Make client and helpers available server-side
+	export function load() {
+		return {
+			stuff: {
+				prismic
+			}
+		}
+	}
 </script>
 
-<PrismicProvider {client} {linkResolver}>
+<PrismicProvider {prismic}>
 	<slot />
 </PrismicProvider>
