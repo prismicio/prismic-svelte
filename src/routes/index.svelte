@@ -6,7 +6,7 @@
   export async function load({ stuff, fetch }) {
     const { prismic } = stuff
     
-    const client = prismic.client.withFetch(fetch)
+    const client = prismic.clientWithFetch(fetch)
     
     const document = await client.getSingle('homepage');
     return {
