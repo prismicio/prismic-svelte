@@ -4,7 +4,10 @@
   import { SliceZone } from "$lib";
   
   export async function load({ stuff, fetch }) {
-    const client = stuff.prismic.createClient(fetch)
+    const { prismic } = stuff
+    
+    const client = prismic.client.withFetch(fetch)
+    
     const document = await client.getSingle('homepage');
     return {
       props: {

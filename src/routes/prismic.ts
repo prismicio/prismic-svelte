@@ -1,8 +1,7 @@
 import { configurePrismic } from "$lib";
+import * as slices from "./slices"
 
 const repositoryName = "svelte-package-dev";
-
-const slices = []
 
 const routes = [
   {
@@ -13,6 +12,6 @@ const routes = [
 
 const linkResolver = (doc) => `/${doc.type}/${doc.uid}`;
 
-const prismic = configurePrismic({ repositoryName, routes, linkResolver });
+const prismic = configurePrismic({ repositoryName, routes, linkResolver, slices });
 
 export default prismic;
