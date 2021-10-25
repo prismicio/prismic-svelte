@@ -45,10 +45,10 @@
 	"devDependencies": {
 		"@prismicio/client": "^6.0.0-alpha.15",
 		"@prismicio/helpers": "^2.0.0-alpha.9",
+		"@prismicio/mock": "0.0.6",
 		"@prismicio/types": "^0.1.13",
 		"@rollup/plugin-inject": "^4.0.2",
-		"@prismicio/mock": "0.0.6",
-		"@sveltejs/kit": "next",
+		"@sveltejs/kit": "^1.0.0-next.189",
 		"@types/node": "^16.10.1",
 		"@typescript-eslint/eslint-plugin": "^4.32.0",
 		"@typescript-eslint/parser": "^4.32.0",

@@ -24,11 +24,9 @@ export const routes = [
 	// src/routes/preview.svelte
 	[/^\/preview\/?$/, [c[0], c[5]], [c[1]]],
 
-	// src/routes/prismic.ts
-	[/^\/prismic\/?$/],
+	,
 
-	// src/routes/slices/index.ts
-	[/^\/slices\/?$/],
+	,
 
 	// src/routes/slices/CodeSnippet.svelte
 	[/^\/slices\/CodeSnippet\/?$/, [c[0], c[6]], [c[1]]],

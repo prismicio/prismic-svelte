@@ -44,6 +44,8 @@ class Router {
 		this.base = base;
 		this.routes = routes;
 		this.trailing_slash = trailing_slash;
+		/** Keeps tracks of multiple navigations caused by redirects during rendering */
+		this.navigating = 0;
 
 		/** @type {import('./renderer').Renderer} */
 		this.renderer = renderer;
@@ -132,7 +134,8 @@ class Router {
 			if (!a.href) return;
 
 			const url = get_href(a);
-			if (url.toString() === location.href) {
+			const url_string = url.toString();
+			if (url_string === location.href) {
 				if (!location.hash) event.preventDefault();
 				return;
 			}
@@ -153,7 +156,14 @@ class Router {
 
 			const noscroll = a.hasAttribute('sveltekit:noscroll');
 
+			const i1 = url_string.indexOf('#');
+			const i2 = location.href.indexOf('#');
+			const u1 = i1 >= 0 ? url_string.substring(0, i1) : url_string;
+			const u2 = i2 >= 0 ? location.href.substring(0, i2) : location.href;
 			history.pushState({}, '', url.href);
+			if (u1 === u2) {
+				window.dispatchEvent(new HashChangeEvent('hashchange'));
+			}
 			this._navigate(url, noscroll ? scroll_state() : null, false, [], url.hash);
 			event.preventDefault();
 		});
@@ -250,6 +260,11 @@ class Router {
 			throw new Error('Attempted to navigate to a URL that does not belong to this app');
 		}
 
+		if (!this.navigating) {
+			dispatchEvent(new CustomEvent('sveltekit:navigation-start'));
+		}
+		this.navigating++;
+
 		// remove trailing slashes
 		if (info.path !== '/') {
 			const has_trailing_slash = info.path.endsWith('/');
@@ -266,27 +281,11 @@ class Router {
 			}
 		}
 
-		this.renderer.notify({
-			path: info.path,
-			query: info.query
-		});
+		await this.renderer.handle_navigation(info, chain, false, { hash, scroll, keepfocus });
 
-		await this.renderer.update(info, chain, false);
-
-		if (!keepfocus) {
-			document.body.focus();
-		}
-
-		const deep_linked = hash && document.getElementById(hash.slice(1));
-		if (scroll) {
-			scrollTo(scroll.x, scroll.y);
-		} else if (deep_linked) {
-			// Here we use `scrollIntoView` on the element instead of `scrollTo`
-			// because it natively supports the `scroll-margin` and `scroll-behavior`
-			// CSS properties.
-			deep_linked.scrollIntoView();
-		} else {
-			scrollTo(0, 0);
+		this.navigating--;
+		if (!this.navigating) {
+			dispatchEvent(new CustomEvent('sveltekit:navigation-end'));
 		}
 	}
 }
@@ -373,6 +372,14 @@ function normalize(loaded) {
 		}
 	}
 
+	// TODO remove before 1.0
+	if (/** @type {any} */ (loaded).context) {
+		throw new Error(
+			'You are returning "context" from a load function. ' +
+				'"context" was renamed to "stuff", please adjust your code accordingly.'
+		);
+	}
+
 	return /** @type {import('types/internal').NormalizedLoadOutput} */ (loaded);
 }
 
@@ -420,7 +427,7 @@ function page_store(value) {
 function initial_fetch(resource, opts) {
 	const url = typeof resource === 'string' ? resource : resource.url;
 
-	let selector = `script[data-type="svelte-data"][data-url="${url}"]`;
+	let selector = `script[data-type="svelte-data"][data-url=${JSON.stringify(url)}]`;
 
 	if (opts && typeof opts.body === 'string') {
 		selector += `[data-body="${hash(opts.body)}"]`;
@@ -436,13 +443,15 @@ function initial_fetch(resource, opts) {
 }
 
 class Renderer {
-	/** @param {{
+	/**
+	 * @param {{
 	 *   Root: CSRComponent;
 	 *   fallback: [CSRComponent, CSRComponent];
 	 *   target: Node;
 	 *   session: any;
 	 *   host: string;
-	 * }} opts */
+	 * }} opts
+	 */
 	constructor({ Root, fallback, target, session, host }) {
 		this.Root = Root;
 		this.fallback = fallback;
@@ -512,7 +521,7 @@ class Renderer {
 		const branch = [];
 
 		/** @type {Record<string, any>} */
-		let context = {};
+		let stuff = {};
 
 		/** @type {import('./types').NavigationResult | undefined} */
 		let result;
@@ -526,7 +535,7 @@ class Renderer {
 				const node = await this._load_node({
 					module: await nodes[i],
 					page,
-					context,
+					stuff,
 					status: is_leaf ? status : undefined,
 					error: is_leaf ? error : undefined
 				});
@@ -542,10 +551,10 @@ class Renderer {
 							path: page.path,
 							query: page.query
 						};
-					} else if (node.loaded.context) {
-						context = {
-							...context,
-							...node.loaded.context
+					} else if (node.loaded.stuff) {
+						stuff = {
+							...stuff,
+							...node.loaded.stuff
 						};
 					}
 				}
@@ -575,10 +584,13 @@ class Renderer {
 		this._init(result);
 	}
 
-	/** @param {{ path: string, query: URLSearchParams }} destination */
-	notify({ path, query }) {
-		dispatchEvent(new CustomEvent('sveltekit:navigation-start'));
-
+	/**
+	 * @param {import('./types').NavigationInfo} info
+	 * @param {string[]} chain
+	 * @param {boolean} no_cache
+	 * @param {{hash?: string, scroll: { x: number, y: number } | null, keepfocus: boolean}} [opts]
+	 */
+	async handle_navigation(info, chain, no_cache, opts) {
 		if (this.started) {
 			this.stores.navigating.set({
 				from: {
@@ -586,19 +598,22 @@ class Renderer {
 					query: this.current.page.query
 				},
 				to: {
-					path,
-					query
+					path: info.path,
+					query: info.query
 				}
 			});
 		}
+
+		await this.update(info, chain, no_cache, opts);
 	}
 
 	/**
 	 * @param {import('./types').NavigationInfo} info
 	 * @param {string[]} chain
 	 * @param {boolean} no_cache
+	 * @param {{hash?: string, scroll: { x: number, y: number } | null, keepfocus: boolean}} [opts]
 	 */
-	async update(info, chain, no_cache) {
+	async update(info, chain, no_cache, opts) {
 		const token = (this.token = {});
 		let navigation_result = await this._get_navigation_result(info, no_cache);
 
@@ -636,17 +651,37 @@ class Renderer {
 
 			this.root.$set(navigation_result.props);
 			this.stores.navigating.set(null);
-
-			await 0;
 		} else {
 			this._init(navigation_result);
 		}
 
-		dispatchEvent(new CustomEvent('sveltekit:navigation-end'));
+		if (opts) {
+			const { hash, scroll, keepfocus } = opts;
+
+			if (!keepfocus) {
+				document.body.focus();
+			}
+
+			const deep_linked = hash && document.getElementById(hash.slice(1));
+			if (scroll) {
+				scrollTo(scroll.x, scroll.y);
+			} else if (deep_linked) {
+				// Here we use `scrollIntoView` on the element instead of `scrollTo`
+				// because it natively supports the `scroll-margin` and `scroll-behavior`
+				// CSS properties.
+				deep_linked.scrollIntoView();
+			} else {
+				scrollTo(0, 0);
+			}
+		}
+
+		await 0;
+
 		this.loading.promise = null;
 		this.loading.id = null;
 
 		if (!this.router) return;
+
 		const leaf_node = navigation_result.state.branch[navigation_result.state.branch.length - 1];
 		if (leaf_node && leaf_node.module.router === false) {
 			this.router.disable();
@@ -714,21 +749,13 @@ class Renderer {
 		for (let i = 0; i < info.routes.length; i += 1) {
 			const route = info.routes[i];
 
-			// check if endpoint route
-			if (route.length === 1) {
-				return { reload: true, props: {}, state: this.current };
-			}
-
 			// load code for subsequent routes immediately, if they are as
 			// likely to match the current path/query as the current one
 			let j = i + 1;
 			while (j < info.routes.length) {
 				const next = info.routes[j];
 				if (next[0].toString() === route[0].toString()) {
-					// if it's a page route
-					if (next.length !== 1) {
-						next[1].forEach((loader) => loader());
-					}
+					next[1].forEach((loader) => loader());
 					j += 1;
 				} else {
 					break;
@@ -762,9 +789,11 @@ class Renderer {
 	 */
 	async _get_navigation_result_from_branch({ page, branch }) {
 		const filtered = /** @type {import('./types').BranchNode[] } */ (branch.filter(Boolean));
+		const redirect = filtered.find((f) => f.loaded && f.loaded.redirect);
 
 		/** @type {import('./types').NavigationResult} */
 		const result = {
+			redirect: redirect && redirect.loaded ? redirect.loaded.redirect : undefined,
 			state: {
 				page,
 				branch,
@@ -824,11 +853,11 @@ class Renderer {
 	 *   error?: Error;
 	 *   module: CSRComponent;
 	 *   page: import('types/page').Page;
-	 *   context: Record<string, any>;
+	 *   stuff: Record<string, any>;
 	 * }} options
 	 * @returns
 	 */
-	async _load_node({ status, error, module, page, context }) {
+	async _load_node({ status, error, module, page, stuff }) {
 		/** @type {import('./types').BranchNode} */
 		const node = {
 			module,
@@ -837,11 +866,11 @@ class Renderer {
 				path: false,
 				query: false,
 				session: false,
-				context: false,
+				stuff: false,
 				dependencies: []
 			},
 			loaded: null,
-			context
+			stuff
 		};
 
 		/** @type {Record<string, string>} */
@@ -879,9 +908,9 @@ class Renderer {
 					node.uses.session = true;
 					return session;
 				},
-				get context() {
-					node.uses.context = true;
-					return { ...context };
+				get stuff() {
+					node.uses.stuff = true;
+					return { ...stuff };
 				},
 				fetch(resource, info) {
 					const url = typeof resource === 'string' ? resource : resource.url;
@@ -903,7 +932,7 @@ class Renderer {
 			if (!loaded) return;
 
 			node.loaded = normalize(loaded);
-			if (node.loaded.context) node.context = node.loaded.context;
+			if (node.loaded.stuff) node.stuff = node.loaded.stuff;
 		}
 
 		return node;
@@ -942,8 +971,8 @@ class Renderer {
 		let branch = [];
 
 		/** @type {Record<string, any>} */
-		let context = {};
-		let context_changed = false;
+		let stuff = {};
+		let stuff_changed = false;
 
 		/** @type {number | undefined} */
 		let status = 200;
@@ -972,13 +1001,13 @@ class Renderer {
 					(changed.query && previous.uses.query) ||
 					(changed.session && previous.uses.session) ||
 					previous.uses.dependencies.some((dep) => this.invalid.has(dep)) ||
-					(context_changed && previous.uses.context);
+					(stuff_changed && previous.uses.stuff);
 
 				if (changed_since_last_render) {
 					node = await this._load_node({
 						module,
 						page,
-						context
+						stuff
 					});
 
 					const is_leaf = i === a.length - 1;
@@ -997,8 +1026,8 @@ class Renderer {
 							};
 						}
 
-						if (node.loaded.context) {
-							context_changed = true;
+						if (node.loaded.stuff) {
+							stuff_changed = true;
 						}
 					} else if (is_leaf && module.load) {
 						// if the leaf node has a `load` function
@@ -1031,7 +1060,7 @@ class Renderer {
 								error,
 								module: await b[i](),
 								page,
-								context: node_loaded.context
+								stuff: node_loaded.stuff
 							});
 
 							if (error_loaded && error_loaded.loaded && error_loaded.loaded.error) {
@@ -1053,10 +1082,10 @@ class Renderer {
 					query
 				});
 			} else {
-				if (node && node.loaded && node.loaded.context) {
-					context = {
-						...context,
-						...node.loaded.context
+				if (node && node.loaded && node.loaded.stuff) {
+					stuff = {
+						...stuff,
+						...node.loaded.stuff
 					};
 				}
 
@@ -1086,7 +1115,7 @@ class Renderer {
 		const node = await this._load_node({
 			module: await this.fallback[0],
 			page,
-			context: {}
+			stuff: {}
 		});
 
 		const branch = [
@@ -1096,7 +1125,7 @@ class Renderer {
 				error,
 				module: await this.fallback[1],
 				page,
-				context: (node && node.loaded && node.loaded.context) || {}
+				stuff: (node && node.loaded && node.loaded.stuff) || {}
 			})
 		];
 
@@ -1104,9 +1133,10 @@ class Renderer {
 	}
 }
 
-// @ts-expect-error - value will be replaced on build step
+// @ts-expect-error - doesn't exist yet. generated by Rollup
 
-/** @param {{
+/**
+ * @param {{
  *   paths: {
  *     assets: string;
  *     base: string;
@@ -1123,7 +1153,8 @@ class Renderer {
  *     nodes: Array<Promise<import('types/internal').CSRComponent>>;
  *     page: import('types/page').Page;
  *   };
- * }} opts */
+ * }} opts
+ */
 async function start({ paths, target, session, host, route, spa, trailing_slash, hydrate }) {
 	if (import.meta.env.DEV && !target) {
 		throw new Error('Missing target element. See https://kit.svelte.dev/docs#configuration-target');
