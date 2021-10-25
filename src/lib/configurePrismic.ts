@@ -1,6 +1,5 @@
 import * as prismic from "@prismicio/client";
 import * as prismicH from "@prismicio/helpers";
-// import type { PrismicConfig } from "./types";
 
 interface globalOptions {
 	repositoryName: string,
@@ -22,7 +21,8 @@ const configurePrismic = (globalOptions: globalOptions): any => {
 	const clientWithFetch = () =>
 		prismic.createClient(endpoint, { ...globalOptions, fetch });
 
-	return { ...prismicH,
+	return {
+		...prismicH,
 		client,
 		clientWithFetch,
 		htmlSerializer,

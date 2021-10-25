@@ -1,7 +1,6 @@
 <script context="module" lang="ts">
   import type * as prismicT from "@prismicio/types"
-  import * as slices from "./slices"
-  import { SliceZone } from "$lib";
+  import { SliceZone, PrismicLink, PrismicRichText } from "$lib";
   
   export async function load({ stuff, fetch }) {
     const { prismic } = stuff
@@ -23,6 +22,10 @@
 
 <main>
   <h1>Welcome to SvelteKit</h1>
+  <PrismicLink rel="doggo" field={document.data["test-link"]}>
+    This is a link.
+  </PrismicLink>
+  <PrismicRichText field={document.data["test-rich-text"]} />
   <SliceZone body={document.data.body} />
 </main>
 
