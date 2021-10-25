@@ -23,7 +23,7 @@
 
 <main>
   <h1>Welcome to SvelteKit</h1>
-  <SliceZone body={document.data.body} {slices} />
+  <SliceZone body={document.data.body} />
 </main>
 
 <style>

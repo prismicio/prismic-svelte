@@ -1,16 +1,15 @@
 <script lang="ts">
   import ErrorMessage from './ErrorMessage.svelte';
   import { pascalize } from 'sm-commons/utils/str'
-
+  
+  
   import type { SliceZone as SliceZoneType } from "@prismicio/types"
-  // import type SvelteComponent from 'svelte';
+  import { usePrismic } from "./..";
 
-  // interface SliceComponents {
-  //   [index: string]: SvelteComponent;
-  // }
+  let { slices } = usePrismic()
 
   export let body:SliceZoneType = []
-  export let slices:any = {}
+  export { slices }
   export let showErrors:boolean = true
 </script>
 

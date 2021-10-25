@@ -5,10 +5,10 @@
   import type { RichTextField as RichTextFieldType } from "@prismicio/types";
   import type { TitleField as TitleFieldType } from "@prismicio/types";
 
+  let { htmlSerializer, linkResolver } = usePrismic()
 
   export let field:TitleFieldType | RichTextFieldType
-  export let htmlSerializer:any = usePrismic().htmlSerializer
-  export let linkResolver:any = usePrismic().linkResolver
+  export { htmlSerializer, linkResolver }
 </script>
 
 {@html prismicH.asHTML(field, linkResolver, htmlSerializer)}
