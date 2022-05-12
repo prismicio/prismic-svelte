@@ -12,6 +12,6 @@
 	}
 </script>
 
-<PrismicProvider {prismic}>
+<!-- <PrismicProvider {prismic}> -->
 	<slot />
-</PrismicProvider>
+<!-- </PrismicProvider> -->

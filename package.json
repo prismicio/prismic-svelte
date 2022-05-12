@@ -65,7 +65,7 @@
 		"siroc": "^0.16.0",
 		"sm-commons": "^0.0.23",
 		"standard-version": "^9.3.1",
-		"svelte": "^3.43.1",
+		"svelte": "3.46",
 		"svelte-check": "^2.2.6",
 		"svelte-preprocess": "^4.9.7",
 		"svelte2tsx": "^0.4.7",

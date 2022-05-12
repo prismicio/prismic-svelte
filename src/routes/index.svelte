@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
   import type * as prismicT from "@prismicio/types"
   import { SliceZone, PrismicLink, PrismicRichText } from "$lib";
+  import * as components from "./slices"
   
   export async function load({ stuff, fetch }) {
     const { prismic } = stuff
@@ -26,7 +27,7 @@
     This is a link.
   </PrismicLink>
   <PrismicRichText field={document.data["test-rich-text"]} />
-  <SliceZone body={document.data.body} />
+  <SliceZone slices={document.data.body} {components} />
 </main>
 
 <style>
