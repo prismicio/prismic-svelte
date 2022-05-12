@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { PrismicRichText } from "$lib";
-  export let slice
+  import * as prismicH from "@prismicio/helpers"
+  import type * as prismicT from "@prismicio/types"
+
+  export let slice:prismicT.Slice
 </script>
 
-<PrismicRichText field={slice.primary.content} />
+{@html prismicH.asHTML(slice.primary.content)}
