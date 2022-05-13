@@ -10,11 +10,6 @@ const config = {
 		package: {
 			dir: "dist",
 		},
-		vite: {
-			optimizeDeps: {
-				include: "sm-commons/utils/str",
-			},
-		},
 	},
 };
 

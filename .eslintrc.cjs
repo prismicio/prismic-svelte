@@ -35,7 +35,7 @@ module.exports = {
 		"tsdoc/syntax": "warn",
 	},
 	settings: {
-		'svelte3/typescript': () => require('typescript')
+		"svelte3/typescript": () => require("typescript"),
 	},
 	overrides: [{ files: ["*.svelte"], processor: "svelte3/svelte3" }],
 };
