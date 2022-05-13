@@ -18,7 +18,7 @@ assignees: ""
 
 - @prismicio/svelte: <!-- ex: v0.1.0 -->
 - svelte: <!-- ex: v3.40.0 -->
-- node: <!-- ex: v12.14.0 -->
+- node: <!-- ex: v14.15.0 -->
 
 ### Reproduction
 
