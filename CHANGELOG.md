@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/prismicio/prismic-svelte/compare/v0.0.1...v0.0.2) (2022-05-13)
+
+
+### Chore
+
+* fix release script ([074d4fb](https://github.com/prismicio/prismic-svelte/commit/074d4fbdd6e3a7fd49b2e7fbe6b8a6b7b315491f))
+* fix release script ([026072a](https://github.com/prismicio/prismic-svelte/commit/026072ac3ff6fe08e161ac15c8776767af70f0d3))
+
 ### 0.0.1 (2022-05-13)
 
 
