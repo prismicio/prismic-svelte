@@ -1,55 +1,61 @@
 <script lang="ts">
-	import ErrorMessage from "./ErrorMessage.svelte";
+  import TodoSliceComponent from './TodoSliceComponent.svelte'; 
+  
+  import type * as prismicT from "@prismicio/types"
+  import type { SvelteComponent } from 'svelte';
 
-	// pascalise function
-	const pascalize = (str: string) => {
-		return str.replace(/(?:^|[-_])(\w)/g, (_, c) => (c ? c.toUpperCase() : ""));
-	};
+  type SliceComponents = Record<string, SvelteComponent | (new (...args: any[]) => SvelteComponent)>
 
-	import type { SliceZone as SliceZoneType } from "@prismicio/types";
-	import { usePrismic } from "./..";
+  /**
+   * The minimum required properties to represent a Prismic Slice from the Prismic
+   * Rest API V2 for the `<SliceZone>` component.
+   *
+   * If using Prismic's Rest API V2, use the `Slice` export from
+   * `@prismicio/types` for a full interface.
+   *
+   * @typeParam SliceType - Type name of the Slice.
+   */
+  type SliceLikeRestV2<SliceType extends string = string> = {
+    slice_type: prismicT.Slice<SliceType>["slice_type"];
+  };
 
-	let { slices } = usePrismic();
+  /**
+   * The minimum required properties to represent a Prismic Slice from the Prismic
+   * GraphQL API for the `<SliceZone>` component.
+   *
+   * @typeParam SliceType - Type name of the Slice.
+   */
+  type SliceLikeGraphQL<SliceType extends string = string> = {
+    type: prismicT.Slice<SliceType>["slice_type"];
+  };
 
-	export let body: SliceZoneType = [];
-	export { slices };
-	export let showErrors: boolean = true;
+  /**
+   * The minimum required properties to represent a Prismic Slice for the
+   * `<SliceZone>` component.
+   *
+   * If using Prismic's Rest API V2, use the `Slice` export from
+   * `@prismicio/types` for a full interface.
+   *
+   * @typeParam SliceType - Type name of the Slice.
+   */
+  type SliceLike<SliceType extends string = string> =
+    | SliceLikeRestV2<SliceType>
+    | SliceLikeGraphQL<SliceType>;
+
+
+  export let slices:SliceLike[] = []
+  export let components:SliceComponents = {}
+  export let context:any = {}
+  export let defaultComponent:SvelteComponent | (new (...args: any[]) => SvelteComponent) | undefined = undefined
+  export let dev:boolean = process.env.NODE_ENV === "development"
 </script>
 
-{#if Object.keys(slices).length}
-	{#each body as slice, i}
-		<div>
-			<svelte:component this={slices[pascalize(slice.slice_type)]} {slice} />
-		</div>
-	{:else}
-		<ErrorMessage {showErrors}>
-			<svelte:fragment slot="heading">Your SliceZone is empty</svelte:fragment>
-			<svelte:fragment slot="message"
-				>Add Slices to your document in Prismic.</svelte:fragment
-			>
-		</ErrorMessage>
-	{/each}
-{:else if body.length}
-	<ErrorMessage {showErrors}>
-		<svelte:fragment slot="heading"
-			>You haven't passed any Slice components</svelte:fragment
-		>
-		<svelte:fragment slot="message"
-			>Create an object of Slice components and pass them to your SliceZone with
-			the prop <code>slices</code>.</svelte:fragment
-		>
-	</ErrorMessage>
-{:else}
-	<ErrorMessage {showErrors}>
-		<svelte:fragment slot="heading"
-			>Your SliceZone is empty, and you haven't passed any Slice components</svelte:fragment
-		>
-		<svelte:fragment slot="message"
-			>Add Slices to your document in Prismic and pass your document's Slice
-			array (usually called <code>body</code>) to the SliceZone's
-			<code>body</code>
-			prop. Then, create an object of Slice components and pass them to your
-			SliceZone's <code>slices</code> prop.</svelte:fragment
-		>
-	</ErrorMessage>
-{/if}
+{#each slices as slice, index}
+  {@const type = "slice_type" in slice ? slice.slice_type : slice.type }
+  {@const Component = components[type] || defaultComponent}
+  {#if Component}
+    <svelte:component this={Component} {slice} {slices} {context} {index} />
+  {:else}
+    <TodoSliceComponent {slice} {dev} />
+  {/if}
+{/each}
