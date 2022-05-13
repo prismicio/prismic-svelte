@@ -4,26 +4,58 @@
   import type * as prismicT from "@prismicio/types"
   import type { SvelteComponent } from 'svelte';
 
-  interface SliceComponents {
-    [key: prismicT.Slice["slice_type"]]: SvelteComponent,
-  }
+  type SliceComponents = Record<string, SvelteComponent | (new (...args: any[]) => SvelteComponent)>
 
-  export let slices:prismicT.SliceZone = []
+  /**
+   * The minimum required properties to represent a Prismic Slice from the Prismic
+   * Rest API V2 for the `<SliceZone>` component.
+   *
+   * If using Prismic's Rest API V2, use the `Slice` export from
+   * `@prismicio/types` for a full interface.
+   *
+   * @typeParam SliceType - Type name of the Slice.
+   */
+  type SliceLikeRestV2<SliceType extends string = string> = {
+    slice_type: prismicT.Slice<SliceType>["slice_type"];
+  };
+
+  /**
+   * The minimum required properties to represent a Prismic Slice from the Prismic
+   * GraphQL API for the `<SliceZone>` component.
+   *
+   * @typeParam SliceType - Type name of the Slice.
+   */
+  type SliceLikeGraphQL<SliceType extends string = string> = {
+    type: prismicT.Slice<SliceType>["slice_type"];
+  };
+
+  /**
+   * The minimum required properties to represent a Prismic Slice for the
+   * `<SliceZone>` component.
+   *
+   * If using Prismic's Rest API V2, use the `Slice` export from
+   * `@prismicio/types` for a full interface.
+   *
+   * @typeParam SliceType - Type name of the Slice.
+   */
+  type SliceLike<SliceType extends string = string> =
+    | SliceLikeRestV2<SliceType>
+    | SliceLikeGraphQL<SliceType>;
+
+
+  export let slices:SliceLike[] = []
   export let components:SliceComponents = {}
   export let context:any = {}
-  export let defaultComponent:SvelteComponent = TodoSliceComponent
-  export let dev:Boolean = false
+  export let defaultComponent:SvelteComponent | (new (...args: any[]) => SvelteComponent) | undefined = undefined
+  export let dev:boolean = process.env.NODE_ENV === "development"
 </script>
 
-{#each slices as slice, i}
-  {@const {slice_type} = slice}
-  {@const component = components[slice_type]}
-  {#if component}
-    <svelte:component this={component} {slice} {slices} {context} {i} />
-  {:else if dev}
-    <svelte:component this={defaultComponent} {slice} />
+{#each slices as slice, index}
+  {@const type = "slice_type" in slice ? slice.slice_type : slice.type }
+  {@const Component = components[type] || defaultComponent}
+  {#if Component}
+    <svelte:component this={Component} {slice} {slices} {context} {index} />
+  {:else}
+    <TodoSliceComponent {slice} {dev} />
   {/if}
-{:else}
-  <p>No Slices found.</p>
 {/each}
-
