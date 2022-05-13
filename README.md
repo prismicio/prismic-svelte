@@ -19,6 +19,8 @@ Replace all on all files (README.md, CONTRIBUTING.md, bug_report.md, package.jso
 
 <!-- TODO: Replacing link to Prismic with [Prismic][prismic] is useful here -->
 
+> ⚠ &nbsp;This project is in an experimental state. Use it at your own risk or stay tuned for the official release!
+
 [Svelte][svelte] components and helpers to fetch and present [Prismic][prismic] content.
 
 - 📝 &nbsp;Display content from Prismic like [Rich Text][prismic-rich-text] and [Link][prismic-link] fields;
