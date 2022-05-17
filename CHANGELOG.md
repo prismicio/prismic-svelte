@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/prismicio/prismic-svelte/compare/v0.0.2...v0.0.3) (2022-05-17)
+
+
+### Bug Fixes
+
+* change dev default value to ([11903bc](https://github.com/prismicio/prismic-svelte/commit/11903bc0e11f86e57bdebee3888c8b7efcffac97))
+
+
+### Documentation
+
+* add experimental disclaimer ([3779ec1](https://github.com/prismicio/prismic-svelte/commit/3779ec199cbcbf5d04bacbf2274cf484c1eec0db))
+
+
+### Chore
+
+* **deps:** maintain lock file ([d7ab62f](https://github.com/prismicio/prismic-svelte/commit/d7ab62f28884c2734ef2ae96b6a2f094ef835211))
+
 ### [0.0.2](https://github.com/prismicio/prismic-svelte/compare/v0.0.1...v0.0.2) (2022-05-13)
 
 
