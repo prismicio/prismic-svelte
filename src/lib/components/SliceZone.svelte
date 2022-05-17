@@ -47,7 +47,7 @@
   export let components:SliceComponents = {}
   export let context:any = {}
   export let defaultComponent:SvelteComponent | (new (...args: any[]) => SvelteComponent) | undefined = undefined
-  export let dev:boolean = process.env.NODE_ENV === "development"
+  export let dev:boolean = false
 </script>
 
 {#each slices as slice, index}

@@ -1,6 +1,6 @@
 <script lang="ts">
   export let slice:{slice_type: string} | {type: string}
-  export let dev:boolean = process.env.NODE_ENV === "development"
+  export let dev:boolean = false
 
   const type = "slice_type" in slice ? slice.slice_type : slice.type
 
