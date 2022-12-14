@@ -1,21 +1,20 @@
-<script context="module" lang="ts">
-  import type * as prismicT from "@prismicio/types"
+<script lang="ts">
   import { SliceZone } from "$lib";
-  import {RichText, CodeSnippet} from "./slices"
+  import { RichText, CodeSnippet } from "$lib/slices"
+  import type { PageData } from './$types'
 
   const components = {
     rich_text: RichText,
     code_snippet: CodeSnippet
   }
-</script>
 
-<script lang="ts">
-  export let document:prismicT.PrismicDocument
+  export let data: PageData
+
 </script>
 
 <main>
   <h1>Welcome to SvelteKit</h1>
-  <SliceZone slices={document.data.body} {components} />
+  <SliceZone slices={data.document.data.body} {components} />
 </main>
 
 <style>
