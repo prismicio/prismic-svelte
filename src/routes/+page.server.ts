@@ -1,7 +1,8 @@
 import * as prismic from "@prismicio/client";
 import type * as prismicT from "@prismicio/types";
+import type { PageServerLoad } from "./$types";
 
-export async function load({ fetch }) {
+export const load = (async ({ fetch }) => {
 	const endpoint = prismic.getEndpoint("svelte-package-dev");
 	const client = prismic.createClient(endpoint, { fetch });
 
@@ -10,4 +11,4 @@ export async function load({ fetch }) {
 	return {
 		document,
 	};
-}
+}) satisfies PageServerLoad; // eslint-disable-line

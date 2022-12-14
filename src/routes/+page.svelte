@@ -1,14 +1,14 @@
 <script lang="ts">
   import { SliceZone } from "$lib";
   import { RichText, CodeSnippet } from "$lib/slices"
-  import type { PageData } from './$types'
+  // import type { PageData } from './$types'
 
   const components = {
     rich_text: RichText,
     code_snippet: CodeSnippet
   }
 
-  export let data: PageData
+  export let data: any
 
 </script>
 

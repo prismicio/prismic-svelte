@@ -22,7 +22,7 @@
 	"types": "index.d.ts",
 	"svelte": "./index.js",
 	"scripts": {
-		"build": "svelte-kit package && shx cp -r src dist/src",
+		"build": "svelte-package package && shx cp -r src dist/src",
 		"dev": "vite dev",
 		"format": "prettier --write .",
 		"prepare": "npm run build",
@@ -35,7 +35,7 @@
 		"unit:watch": "vitest watch",
 		"test": "npm run lint && npm run unit",
 		"preview": "svelte-kit preview",
-		"package": "svelte-kit package",
+		"package": "svelte-package package",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
 	},
@@ -47,7 +47,8 @@
 		"@prismicio/mock": "0.0.10",
 		"@prismicio/types": "^0.1.27",
 		"@rollup/plugin-inject": "^4.0.4",
-		"@sveltejs/kit": "^1.0.0-next.405",
+		"@sveltejs/kit": "^1.0.0-next.587",
+		"@sveltejs/package": "^1.0.0-next.6",
 		"@typescript-eslint/eslint-plugin": "^5.23.0",
 		"@typescript-eslint/parser": "^5.23.0",
 		"c8": "^7.11.2",
