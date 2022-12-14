@@ -11,4 +11,5 @@ export const load = (async ({ fetch }) => {
 	return {
 		document,
 	};
-}) satisfies PageServerLoad; // eslint-disable-line
+// eslint-disable-next-line prettier/prettier
+}) satisfies PageServerLoad;
