@@ -4,18 +4,21 @@
 	
 	export let field: prismicT.ImageField;
 	
-	let className: string;
-
 	// creates a `class` property, even
 	// though it is a reserved word
+	let className: string;
 	export { className as class };
+
+	if(!prismicH.isFilled.image(field)) {
+		console.warn("Invalid prop")
+	}
 </script>
 
 {#if prismicH.isFilled.image(field)}
 	{@const { alt, dimensions } = field}
 	{@const { width, height } = dimensions }
 	{@const { src, srcset } = prismicH.asImageWidthSrcSet(field)}
-	
+
 	<img {src} {srcset} {alt} {width} {height} class={className} />
 {:else}
 	<img alt={field.alt || ""} class={className} />
