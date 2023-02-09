@@ -1,7 +1,7 @@
 <script lang="ts">
 	import * as prismicH from "@prismicio/helpers";
 	import type * as prismicT from "@prismicio/types";
-	import { usePrismic } from "../usePrismic";
+	// import { usePrismic } from "../usePrismic";
 
 	type LinkFieldOrDocument = prismicT.LinkField | prismicT.PrismicDocument
 	type Rel = string | undefined
@@ -20,35 +20,35 @@
 	 * repository's content, a Link Resolver does not need to be provided.
 	 * @see Learn about Link Resolvers and Route Resolvers {@link https://prismic.io/docs/core-concepts/link-resolver-route-resolver}
 	 */
-	export let linkResolver: prismicH.LinkResolverFunction | null | undefined
+	export let linkResolver: prismicH.LinkResolverFunction | null | undefined = null
 
 	/**
 	 * The HTML `download` attribute
 	 * 
 	 * @see Learn about `a` tag attributes {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a}
 	 */
-	export let download: boolean | null | undefined
+	export let download: boolean | null | undefined = null
 
 	/**
 	 * The HTML `hreflang` attribute
 	 * 
 	 * @see Learn about `a` tag attributes {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a}
 	 */
-	export let hreflang: string | undefined
+	export let hreflang: string | null | undefined = null
 
 	/**
 	 * The HTML `referrerpolicy` attribute
 	 * 
 	 * @see Learn about `a` tag attributes {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a}
 	 */
-	export let referrerpolicy: ReferrerPolicy | null | undefined
+	export let referrerpolicy: ReferrerPolicy | null | undefined = null
 
 	/**
 	 * The HTML `rel` attribute
 	 * 
 	 * @see Learn about `a` tag attributes {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a}
 	 */
-	export let rel: string | undefined
+	export let rel: string | undefined = ""
 
 	/**
 	 * The HTML `target` attribute.
@@ -57,47 +57,48 @@
 	 * If `target` is `null` or `undefined`, `<PrismicLink>` will try check to see if a `target` attribute is set on the Link field. If not, `target` will be undefined.
 	 * @see Learn about `a` tag attributes {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a}
 	 */
-	export let target: string | undefined
+	export let target: string | undefined = ""
 
 	/**
 	 * The HTML `type` attribute
 	 * 
 	 * @see Learn about `a` tag attributes {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a}
 	 */
-	export let type: string | undefined
+	export let type: string | null | undefined = null
 		
 	/**
 	 * SvelteKit's `data-sveltekit-preload-data` attribute.
 	 * 
 	 * @see Learn about SvelteKit link options {@link https://kit.svelte.dev/docs/link-options}
 	 */
-	export let sveltekitPreloadData: true | "" | "hover" | "tap" | "off" | null | undefined
+	export let sveltekitPreloadData: true | "" | "hover" | "tap" | "off" | null | undefined = null
 
 	/**
 	 * SvelteKit's `data-sveltekit-preload-code` attribute.
 	 * 
 	 * @see Learn about SvelteKit link options {@link https://kit.svelte.dev/docs/link-options}
 	 */
-	export let sveltekitPreloadCode: true | "" | "eager" | "viewport" | "hover" | "tap" | null | undefined
+	export let sveltekitPreloadCode: true | "" | "eager" | "viewport" | "hover" | "tap" | null | undefined = null
 	
 	/**
 	 * SvelteKit's `data-sveltekit-reload` attribute.
 	 * 
 	 * @see Learn about SvelteKit link options {@link https://kit.svelte.dev/docs/link-options}
 	 */
-	export let sveltekitReload: true | "" | "off" | null | undefined
+	export let sveltekitReload: true | "" | "off" | null | undefined = null
 
 	/**
 	 * SvelteKit's `data-sveltekit-noscroll` attribute.
 	 * 
 	 * @see Learn about SvelteKit link options {@link https://kit.svelte.dev/docs/link-options}
 	 */
-	export let sveltekitNoscroll: true | "" | "off" | null | undefined
+	export let sveltekitNoscroll: true | "" | "off" | null | undefined = null
 
 	/**
-	 * HTML class attribute.
+	 * HTML class attribute. Use a `:global()` selector to target the class.
 	 */
-	let className: string
+	let className: string = ""
+
 	export { className as class }
 
 	function setRel(field: LinkFieldOrDocument, rel: Rel, target: Target) {
@@ -142,7 +143,7 @@
 	}
 
 	const attrs = {
-		className,
+		class: className,
 		download,
 		hreflang,
 		referrerpolicy,
@@ -152,7 +153,7 @@
 	};
 
 	const link: string | null = field
-		? prismicH.asLink(field, linkResolver || usePrismic().linkResolver)
+		? prismicH.asLink(field, linkResolver)
 		: "";
 	const href: string = link || "";
 </script>
