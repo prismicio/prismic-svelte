@@ -5,7 +5,7 @@ export {
 	// PrismicEmbed,
 	PrismicImage,
 	PrismicLink,
-	// PrismicText,
+	PrismicText,
 	PrismicRichText,
 	// Slice Zone
 	SliceZone,

@@ -1,12 +1,18 @@
 <script lang="ts">
   import * as prismicH from "@prismicio/helpers"
+  import type * as prismicT from "@prismicio/types";
 
-  import type { RichTextField as RichTextFieldType } from "@prismicio/types";
-  import type { TitleField as TitleFieldType } from "@prismicio/types";
+  /**
+	 * A Prismic Rich Text or Title field.
+	 */
+  export let field:prismicT.TitleField | prismicT.RichTextField
 
-  export let field:TitleFieldType | RichTextFieldType
-  export let separator:string
+  /**
+	 * The separator used between blocks. Defaults to `\n`.
+   * Newlines will not render unless `white-space: pre-line` is 
+   * applied with CSS.
+	 */
+  export let separator:string | undefined = `\n`;
 </script>
 
-<!-- TODO: Separator not working for newlines `\n\n` -->
 {@html prismicH.asText(field, separator)}

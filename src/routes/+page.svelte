@@ -1,6 +1,6 @@
 <script lang="ts">
   import type * as prismicT from "@prismicio/types"
-  import { SliceZone, PrismicLink, PrismicImage, PrismicRichText } from "$lib";
+  import { SliceZone, PrismicLink, PrismicImage, PrismicRichText, PrismicText } from "$lib";
   import { RichText, CodeSnippet } from "$lib/slices"
 	import type { PrismicDocumentHeader } from "@prismicio/types";
 
@@ -32,7 +32,11 @@
 
 <main>
   <h1>Example Fields</h1>
+  <hr />
+  <PrismicText field={data.exampleDocument.data.example_rich_text} />
+  <hr />
   <PrismicRichText field={data.exampleDocument.data.example_title} />
+  <hr />
   <PrismicRichText field={data.exampleDocument.data.example_rich_text} />
   <PrismicImage field={data.exampleDocument.data.example_image} imgixParams={{ sat: -100 }} />
   <PrismicLink field={data.exampleDocument.data.example_link}>Link</PrismicLink>
