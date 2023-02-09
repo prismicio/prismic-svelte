@@ -6,7 +6,7 @@ export {
 	PrismicImage,
 	PrismicLink,
 	// PrismicText,
-	// PrismicRichText,
+	PrismicRichText,
 	// Slice Zone
 	SliceZone,
 } from "./components";
