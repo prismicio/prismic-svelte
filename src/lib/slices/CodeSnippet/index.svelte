@@ -1,8 +1,9 @@
 <script lang="ts">
-  import * as prismicH from "@prismicio/helpers"
-  import type * as prismicT from "@prismicio/types"
+	import * as prismicH from "@prismicio/helpers";
+	import type { CodeSnippetSlice } from "../../../types/CodeSnippetSlice.type";
+	import type * as prismicT from "@prismicio/types";
 
-  export let slice:prismicT.Slice
+	export let slice: CodeSnippetSlice;
 </script>
 
 <pre>
@@ -10,10 +11,10 @@
 </pre>
 
 <style>
-  pre {
-    background: #222;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-  }
+	pre {
+		background: #222;
+		color: white;
+		padding: 10px;
+		border-radius: 10px;
+	}
 </style>

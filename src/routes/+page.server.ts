@@ -1,12 +1,12 @@
 import * as prismic from "@prismicio/client";
-import type * as prismicT from "@prismicio/types";
+import type { PageData } from "./../types/PageData.type"
 import type { PageServerLoad } from "./$types";
 
 export const load = (async ({ fetch }) => {
 	const endpoint = prismic.getEndpoint("svelte-package-dev");
 	const client = prismic.createClient(endpoint, { fetch });
 
-	const document: prismicT.PrismicDocument = await client.getSingle("homepage");
+	const document: PageData = await client.getSingle("homepage");
 
 	return {
 		document,

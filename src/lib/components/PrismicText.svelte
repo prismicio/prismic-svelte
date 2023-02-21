@@ -1,11 +1,11 @@
 <script lang="ts">
-  import * as prismicH from "@prismicio/helpers"
+	import * as prismicH from "@prismicio/helpers";
 
-  import type { RichTextField as RichTextFieldType } from "@prismicio/types";
-  import type { TitleField as TitleFieldType } from "@prismicio/types";
+	import type { RichTextField as RichTextFieldType } from "@prismicio/types";
+	import type { TitleField as TitleFieldType } from "@prismicio/types";
 
-  export let field:TitleFieldType | RichTextFieldType
-  export let separator:string
+	export let field: TitleFieldType | RichTextFieldType;
+	export let separator: string;
 </script>
 
 <!-- TODO: Separator not working for newlines `\n\n` -->

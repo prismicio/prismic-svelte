@@ -1,7 +1,7 @@
 import { hasContext, getContext } from "svelte";
 
 import { prismicKey } from "./injectionSymbols";
-import { PrismicContext } from "./types";
+import type { PrismicContext } from "../types/PrismicContext.type";
 
 export const usePrismic = (): PrismicContext => {
 	if (hasContext(prismicKey)) {
