@@ -75,5 +75,8 @@
 	},
 	"publishConfig": {
 		"access": "public"
+	},
+	"optionalDependencies": {
+		"@esbuild/android-arm": "^0.17.10"
 	}
 }
