@@ -1,7 +1,6 @@
 <script lang="ts">
 	import * as prismicH from "@prismicio/helpers";
 	import type { CodeSnippetSlice } from "../../../types/CodeSnippetSlice.type";
-	import type * as prismicT from "@prismicio/types";
 
 	export let slice: CodeSnippetSlice;
 </script>

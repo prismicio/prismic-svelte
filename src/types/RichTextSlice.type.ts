@@ -1,7 +1,7 @@
 import type * as prismicT from "@prismicio/types";
 
-export interface RichTextSlice extends prismicT.Slice {
-	primary: {
-		content: prismicT.RichTextField;
-	};
-}
+type PrimaryFields = {
+	content: prismicT.RichTextField;
+};
+
+export type RichTextSlice = prismicT.Slice<"rich_text", PrimaryFields>;

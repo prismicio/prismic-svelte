@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { SliceZone } from "$lib";
-	import { RichText, CodeSnippet } from "$lib/slices";
-	import type { PageData } from "./../types/PageData.type";
+	import { RichText, CodeSnippet } from "src/routes/slices";
+	import type { PageData } from "./$types";
 
 	const components = {
 		rich_text: RichText,
