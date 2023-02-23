@@ -1,9 +1,14 @@
-<!-- TODO: Why are embeds 200px wide? -->
-
 <script lang="ts">
-  import type * as prismicT from "@prismicio/types"
+	import * as prismicH from "@prismicio/helpers";
+	import type * as prismicT from "@prismicio/types";
 
-  export let field:prismicT.EmbedField
+	export let field: prismicT.EmbedField;
+
+	if (!prismicH.isFilled.embed(field)) {
+		console.warn("Invalid prop");
+	}
 </script>
 
-{@html field.html}
+{#if prismicH.isFilled.embed(field)}
+	{@html field.html}
+{/if}

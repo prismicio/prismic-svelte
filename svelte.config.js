@@ -6,10 +6,9 @@ import preprocess from "svelte-preprocess";
  */
 const config = {
 	preprocess: preprocess(),
-	kit: {
-		package: {
-			dir: "dist",
-		},
+	kit: {},
+	package: {
+		dir: "dist",
 	},
 };
 
