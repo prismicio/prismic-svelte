@@ -2,7 +2,7 @@
 	import { setContext } from "svelte";
 
 	import { prismicKey } from "./injectionSymbols";
-	import { PrismicContext } from "./types";
+	import type { PrismicContext } from "../types/PrismicContext.type";
 
 	// export let client: PrismicContext["client"] = undefined;
 	// export let linkResolver: PrismicContext["linkResolver"] = undefined;
@@ -13,13 +13,13 @@
 		prismic: undefined,
 		htmlSerializer: undefined,
 		slices: undefined,
-	}
+	};
 
 	setContext<PrismicContext>(prismicKey, {
 		client: prismic.client,
 		linkResolver: prismic.linkResolver,
 		htmlSerializer: prismic.htmlSerializer,
-		slices: prismic.slices
+		slices: prismic.slices,
 	});
 </script>
 
