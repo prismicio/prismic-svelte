@@ -1,5 +1,7 @@
 import type * as prismicT from "@prismicio/types";
 
-export type CodeSnippetSlice = prismicT.Slice<{
+type PrimaryFields = {
 	content: prismicT.RichTextField;
-}>;
+};
+
+export type CodeSnippetSlice = prismicT.Slice<"code_snippet", PrimaryFields>;
