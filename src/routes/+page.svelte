@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SliceZone } from "$lib";
+	import { SliceZone, PrismicLink } from "$lib";
 	import { RichText, CodeSnippet } from "./slices";
 	import type { PageData } from "./$types";
 
@@ -13,7 +13,18 @@
 
 <main>
 	<h1>Welcome to SvelteKit</h1>
-	<SliceZone slices={data.document.data.body} {components} />
+	<h2>Prismic Link</h2>
+	<PrismicLink
+		data-sveltekit-noscroll
+		data-sveltekit-preload-code
+		data-sveltekit-preload-data
+		data-sveltekit-reload
+		rel="external"
+		class="doggo"
+		field={data.exampleDocument.data.example_link}>Link</PrismicLink
+	>
+	<h2>Slice Zone</h2>
+	<SliceZone slices={data.pageDocument.data.body} {components} />
 </main>
 
 <style>
