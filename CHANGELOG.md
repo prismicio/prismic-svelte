@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/prismicio/prismic-svelte/compare/v0.0.5...v0.0.6) (2023-02-24)
+
+
+### Features
+
+* add `<PrismicLink>` component ([1db9dc0](https://github.com/prismicio/prismic-svelte/commit/1db9dc0cd6a24de87505b5e1486fe9458cb7be01))
+
+
+### Chore
+
+* fix slice typing ([16340b3](https://github.com/prismicio/prismic-svelte/commit/16340b320396f69127e89d26dae498baff8fa299))
+
 ### [0.0.5](https://github.com/prismicio/prismic-svelte/compare/v0.0.4...v0.0.5) (2023-02-23)
 
 ### Chore
