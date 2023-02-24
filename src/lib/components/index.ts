@@ -2,7 +2,7 @@
 
 // export { default as PrismicImage } from "./PrismicImage.svelte";
 
-// export { default as PrismicLink } from "./PrismicLink.svelte";
+export { default as PrismicLink } from "./PrismicLink.svelte";
 
 // export { default as PrismicText } from "./PrismicText.svelte";
 

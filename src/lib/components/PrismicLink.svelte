@@ -2,66 +2,51 @@
 	import * as prismicH from "@prismicio/helpers";
 	import type * as prismicT from "@prismicio/types";
 
-	import { usePrismic } from "../usePrismic";
+	type PrismicLinkProps = {
+		/**
+		 * A Prismic Link field, Content Relationship field, Link to Media field or Document.
+		 */
+		field: prismicT.LinkField | prismicT.PrismicDocument;
 
-	// const defaultBlankTargetRelAttribute = "noopener noreferrer";
-
-	export let field:
-			| prismicT.LinkField
-			| prismicT.PrismicDocument
-			| null
-			| undefined,
-		linkResolver: prismicH.LinkResolverFunction | null | undefined,
-		download: boolean | null | undefined,
-		hreflang: string | undefined,
-		referrerpolicy: string | undefined,
-		rel: string | undefined,
-		target: string | undefined,
-		type: string | undefined,
-		prefetch: true | undefined,
-		noscroll: true | undefined;
-
-	const setRel = () => {
-		let rels: string[] = [];
-		const defaultBlankTargetRelAttribute = ["noopener", "noreferrer"];
-		if (rel) rels.push(...rel?.split(" "));
-		if (
-			(field && "target" in field && field?.target === "_blank") ||
-			target === "_blank"
-		)
-			defaultBlankTargetRelAttribute.forEach((item) => {
-				if (!rels.includes(item)) rels.push(item);
-			});
-		if (
-			field &&
-			"link_type" in field &&
-			field?.link_type === "Web" &&
-			!rels.includes("external")
-		)
-			rels.push("external");
-		return rels.join(" ");
+		/**
+		 * The Link Resolver used to resolve links.
+		 *
+		 * @remarks
+		 * If your app uses Route Resolvers when querying for your Prismic
+		 * repository's content, a Link Resolver does not need to be provided.
+		 * @see Learn about Link Resolvers and Route Resolvers {@link https://prismic.io/docs/core-concepts/link-resolver-route-resolver}
+		 */
+		linkResolver?: prismicH.LinkResolverFunction | undefined;
 	};
 
-	const attrs = {
-		download,
-		hreflang,
-		referrerpolicy,
-		target: target || field?.target || undefined,
-		rel: setRel(),
-		type,
-	};
+	type $$Props = svelteHTML.IntrinsicElements["a"] & PrismicLinkProps;
 
-	const link: string | null = field
-		? prismicH.asLink(field, linkResolver || usePrismic().linkResolver)
-		: "";
-	const href: string = link || "";
+	export let field: $$Props["field"];
+	export let linkResolver: $$Props["linkResolver"] = undefined;
+
+	export let target: $$Props["target"] = undefined;
+	const resolvedTarget =
+		target || (field && "target" in field && field.target) || undefined;
+
+	export let rel: $$Props["rel"] = undefined;
+	const resolvedRel =
+		rel || (target === "_blank" ? "noopener noreferrer" : undefined);
+
+	const href = (field ? prismicH.asLink(field, linkResolver) : "") || "";
 </script>
 
-<a
-	{href}
-	{...attrs}
-	sveltekit:prefetch={prefetch}
-	sveltekit:noscroll={noscroll}
->
+<!-- 
+  @component
+  Component to render a Prismic Link, Link to Media, Content Relationship, or whole Document as an `a` tag.
+  
+  @example Rendering a Link field:
+	```svelte
+		<PrismicLink field={document.data.example_link}>
+			Example anchor text.
+		</PrismicLink>
+  ```
+-->
+
+<a {href} {...$$restProps} rel={resolvedRel} target={resolvedTarget}>
 	<slot />
 </a>
