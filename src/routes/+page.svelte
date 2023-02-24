@@ -1,45 +1,35 @@
 <script lang="ts">
-  import type prismicT from "@prismicio/types"
-  import { SliceZone, PrismicLink, PrismicImage } from "$lib";
-  import { RichText, CodeSnippet } from "$lib/slices"
-  // import type { PageData } from './$types'
+	import { SliceZone, PrismicLink } from "$lib";
+	import { RichText, CodeSnippet } from "./slices";
+	import type { PageData } from "./$types";
 
-  const components = {
-    rich_text: RichText,
-    code_snippet: CodeSnippet
-  }
+	const components = {
+		rich_text: RichText,
+		code_snippet: CodeSnippet,
+	};
 
-  
-  interface Data {
-    tutorialDocument: {
-      data: {
-        body: []
-      }
-    },
-		exampleDocument: {
-      data: {
-        example_rich_text: prismicT.RichTextField;
-				example_link: prismicT.LinkField;
-        example_image: prismicT.ImageField;
-			};
-		};
-	}
-  
-  export let data: Data
-
+	export let data: PageData;
 </script>
 
 <main>
-  <h1>Example Fields</h1>
-  <PrismicImage field={data.exampleDocument.data.example_image} imgixParams={{ sat: -100 }} />
-  <PrismicLink field={data.exampleDocument.data.example_link}>Link</PrismicLink>
-  <h1>Example Slice Zone</h1>
-  <SliceZone slices={data.tutorialDocument.data.body} {components} />
+	<h1>Welcome to SvelteKit</h1>
+	<h2>Prismic Link</h2>
+	<PrismicLink
+		data-sveltekit-noscroll
+		data-sveltekit-preload-code
+		data-sveltekit-preload-data
+		data-sveltekit-reload
+		rel="external"
+		class="doggo"
+		field={data.exampleDocument.data.example_link}>Link</PrismicLink
+	>
+	<h2>Slice Zone</h2>
+	<SliceZone slices={data.pageDocument.data.body} {components} />
 </main>
 
 <style>
-  main {
-    max-width: min(90%, 800px);
-    margin: auto;
-  }
+	main {
+		max-width: min(90%, 800px);
+		margin: auto;
+	}
 </style>
