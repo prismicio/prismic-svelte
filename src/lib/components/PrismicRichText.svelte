@@ -1,28 +1,32 @@
 <script lang="ts">
-  import * as prismicH from "@prismicio/helpers"
-  import type * as prismicT from "@prismicio/types"
+	import * as prismicH from "@prismicio/helpers";
+	import type * as prismicT from "@prismicio/types";
 
-  /**
+	/**
 	 * A Prismic Rich Text or Title field.
 	 */
-  export let field: prismicT.TitleField | prismicT.RichTextField;
+	export let field: prismicT.TitleField | prismicT.RichTextField;
 
 	/**
 	 * A function that maps a Rich Text block to a React component.
 	 *
 	 * @see Learn about HTML serializers {@link https://prismic.io/docs/core-concepts/html-serializer}
 	 */
-  export let htmlSerializer: prismicH.HTMLFunctionSerializer | null | undefined = null;
+	export let htmlSerializer:
+		| prismicH.HTMLFunctionSerializer
+		| null
+		| undefined = null;
 
 	/**
 	 * The Link Resolver used to resolve links.
 	 *
 	 * @remarks
-	 * If your Prismic client uses a Route Resolvers when querying for your Prismic
-	 * repository's content (recommended), a Link Resolver is unnecessary.
+	 * If your Prismic client uses a Route Resolvers when querying for your
+	 * Prismic repository's content (recommended), a Link Resolver is unnecessary.
 	 * @see Learn about Link Resolvers and Route Resolvers {@link https://prismic.io/docs/core-concepts/link-resolver-route-resolver}
 	 */
-  export let linkResolver: prismicH.LinkResolverFunction | null | undefined = null;
+	export let linkResolver: prismicH.LinkResolverFunction | null | undefined =
+		null;
 </script>
 
 <!-- 

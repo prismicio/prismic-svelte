@@ -1,19 +1,19 @@
 import * as prismic from "@prismicio/client";
-import type * as prismicT from "@prismicio/types";
+import type { PageDocument } from "../types/PageDocument.type"
 import type { PageServerLoad } from "./$types";
 
 export const load = (async ({ fetch }) => {
-	const tutorialEndpoint = prismic.getEndpoint("svelte-package-dev");
-	const tutorialClient = prismic.createClient(tutorialEndpoint, { fetch });
+	const endpoint = prismic.getRepositoryEndpoint("svelte-package-dev");
+	const client = prismic.createClient(endpoint, { fetch });
 
-	const tutorialDocument: prismicT.PrismicDocument = await tutorialClient.getSingle("homepage");
+	const pageDocument: PageDocument = await client.getSingle("homepage");
 
-	const exampleEndpoint = prismic.getEndpoint("example-prismic-repo")
-	const exampleClient = prismic.createClient(exampleEndpoint, {fetch})
-	const exampleDocument: prismicT.PrismicDocument = await exampleClient.getFirst()
+	const exampleClient = prismic.createClient("example-prismic-repo", { fetch })
+	const exampleDocument = exampleClient.getFirst()
+
 
 	return {
-		tutorialDocument,
+		pageDocument,
 		exampleDocument
 	};
 // eslint-disable-next-line prettier/prettier
