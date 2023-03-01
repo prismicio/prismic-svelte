@@ -9,7 +9,7 @@ export const load = (async ({ fetch }) => {
 	const pageDocument: PageDocument = await client.getSingle("homepage");
 
 	const exampleClient = prismic.createClient("example-prismic-repo", { fetch })
-	const exampleDocument = exampleClient.getFirst()
+	const exampleDocument = exampleClient.getFirst({ page: 11, pageSize: 1})
 
 
 	return {

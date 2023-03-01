@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as prismicH from "@prismicio/helpers";
 	import type { RichTextSlice } from "./../../../types/RichTextSlice.type";
+	import PrismicRichText from "$lib/components/PrismicRichText/PrismicRichText.svelte";
 
 	export let slice: RichTextSlice;
 </script>
 
-{@html prismicH.asHTML(slice.primary.content)}
+<PrismicRichText field={slice.primary.content} />
