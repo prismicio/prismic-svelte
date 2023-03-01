@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { SliceZone, PrismicLink, PrismicRichText } from "$lib";
 	import { RichText, CodeSnippet } from "./slices";
+
 	import type { PageData } from "./$types";
 
 	const components = {

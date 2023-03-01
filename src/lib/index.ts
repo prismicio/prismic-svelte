@@ -2,7 +2,7 @@
 
 export {
 	// Components
-	// PrismicEmbed,
+	PrismicEmbed,
 	PrismicImage,
 	PrismicLink,
 	// PrismicText,

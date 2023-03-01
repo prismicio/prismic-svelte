@@ -4,7 +4,10 @@
 	import type * as prismicT from "@prismicio/types";
 	import type { SvelteComponent } from "svelte";
 	import RichTextChild from "./RichTextChild.svelte";
-	import TestEm from "./TestEm.svelte";
+	import BasicElement from "./BasicElement.svelte";
+	import { PrismicLink, PrismicImage, PrismicEmbed } from "./../";
+
+	type ComponentsMap = { [index: string]: typeof SvelteComponent };
 
 	/**
 	 * A Prismic Rich Text or Title field.
@@ -12,17 +15,43 @@
 	export let field: prismicT.TitleField | prismicT.RichTextField;
 
 	/**
-	 * A function that maps a Rich Text block to a React component.
+	 * A function that accepts a Rich Text element and returns a string.
 	 *
-	 * @see Learn about HTML serializers {@link https://prismic.io/docs/core-concepts/html-serializer}
+	 * @see Learn about Rich Text serializing {@link https://prismic.io/docs/core-concepts/html-serializer}
 	 */
-	export let htmlSerializer: prismicH.HTMLFunctionSerializer | undefined;
+	export let functionSerializer: prismicH.HTMLFunctionSerializer | undefined =
+		undefined;
 
-	export let objectSerializer:
-		| { [index: string]: typeof SvelteComponent }
-		| undefined = {
-		em: TestEm,
-	};
+	/**
+	 * An objects that maps Rich Text elements to Svelte components
+	 *
+	 * @see Learn about Rich Text serializing {@link https://prismic.io/docs/core-concepts/html-serializer}
+	 */
+	export let components: ComponentsMap | undefined = undefined;
+
+	const defaultComponents = {
+		heading1: BasicElement,
+		heading2: BasicElement,
+		heading3: BasicElement,
+		heading4: BasicElement,
+		heading5: BasicElement,
+		heading6: BasicElement,
+		paragraph: BasicElement,
+		preformatted: BasicElement,
+		strong: BasicElement,
+		label: BasicElement,
+		em: BasicElement,
+		list: BasicElement,
+		oList: BasicElement,
+		listItem: BasicElement,
+		"list-item": BasicElement,
+		"o-list-item": BasicElement,
+		"grou-list-item": BasicElement,
+		"group-o-list-item": BasicElement,
+		hyperlink: PrismicLink,
+		image: PrismicImage,
+		embed: PrismicEmbed,
+	} as const;
 
 	/**
 	 * The Link Resolver used to resolve links.
@@ -46,12 +75,12 @@
   ```
 -->
 
-{#if objectSerializer}
+{#if components}
 	<RichTextChild
 		tree={prismicR.asTree(field)}
-		map={objectSerializer}
+		map={{ ...defaultComponents, ...components }}
 		{linkResolver}
 	/>
 {:else}
-	{@html prismicH.asHTML(field, linkResolver, htmlSerializer)}
+	{@html prismicH.asHTML(field, linkResolver, functionSerializer)}
 {/if}

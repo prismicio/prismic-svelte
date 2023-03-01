@@ -1,4 +1,4 @@
-// export { default as PrismicEmbed } from "./PrismicEmbed.svelte";
+export { default as PrismicEmbed } from "./PrismicEmbed.svelte";
 
 export { default as PrismicImage } from "./PrismicImage.svelte";
 

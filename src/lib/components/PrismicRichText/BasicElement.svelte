@@ -18,13 +18,15 @@
 		"o-list-item": "li",
 		"group-list-item": "li",
 		"group-o-list-item": "li",
+		label: "span",
 	} as const;
 
 	type PrismicElement = keyof typeof elements;
 
-	export let element: PrismicElement;
+	export let type: PrismicElement;
+	export let data: any;
 </script>
 
-<svelte:element this={elements[element]}>
+<svelte:element this={elements[type]} class={data?.label || undefined}>
 	<slot />
 </svelte:element>

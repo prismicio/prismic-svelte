@@ -1,65 +1,51 @@
 <script lang="ts">
 	import type * as prismicH from "@prismicio/helpers";
-	import Element from "./Element.svelte";
-	import RichTextChildren from "./RichTextChildren.svelte";
-	import { PrismicLink, PrismicImage } from "./../";
+	import type * as prismicT from "@prismicio/types";
+	import type * as prismicR from "@prismicio/richtext";
 
-	/**
-	 * The Link Resolver used to resolve links.
-	 *
-	 * @remarks
-	 * If your Prismic client uses a Route Resolvers when querying for your
-	 * Prismic repository's content (recommended), a Link Resolver is unnecessary.
-	 * @see Learn about Link Resolvers and Route Resolvers {@link https://prismic.io/docs/core-concepts/link-resolver-route-resolver}
-	 */
+	type RichTextTree = ReturnType<typeof prismicR.asTree>;
+	type RichTextBranch = RichTextTree["children"][number];
+
 	export let linkResolver: prismicH.LinkResolverFunction | undefined =
 		undefined;
 
-	export let tree: any;
+	/**
+	 * A Rich Text tree from prismicR.asTree()
+	 */
+	export let tree: RichTextTree | RichTextBranch;
 
+	/**
+	 * Svelte components mapped to Prismic Rich Text node types
+	 */
 	export let map: any = {};
 
-	const elements = [
-		"heading1",
-		"heading2",
-		"heading3",
-		"heading4",
-		"heading5",
-		"heading6",
-		"paragraph",
-		"preformatted",
-		"strong",
-		"em",
-		"list",
-		"oList",
-		"listItem",
-		"list-item",
-		"o-list-item",
-		"grou-list-item",
-		"group-o-list-item",
-	];
+	function getFieldData(tree: prismicT.RTAnyNode) {
+		if (tree.type === "image") return tree;
+		if (tree.type === "hyperlink") return tree.data;
+		if (tree.type === "embed") return tree.oembed;
+		return;
+	}
 </script>
 
-{#if map[tree.type]}
-	<svelte:component this={map[tree.type]} {...tree.node} {linkResolver}>
-		<RichTextChildren {map} {tree} />
+{#if "type" in tree && map[tree.type]}
+	<svelte:component
+		this={map[tree.type]}
+		{...tree.node}
+		linkResolver={tree.type === "hyperlink" ? linkResolver : undefined}
+		field={getFieldData(tree.node)}
+	>
+		{#each tree.children as child}
+			<svelte:self {map} tree={child} />
+		{:else}
+			{tree.text}
+		{/each}
 	</svelte:component>
-{:else if elements.includes(tree.type)}
-	<Element type={tree.type}>
-		<RichTextChildren {map} {tree} />
-	</Element>
-{:else if tree.type === "image"}
-	<PrismicImage field={tree.node} />
-{:else if tree.type === "embed"}
-	{@html tree.node.oembed.html}
-{:else if tree.type === "hyperlink"}
-	<PrismicLink field={tree.node.data} {linkResolver}>
-		<RichTextChildren {map} {tree} />
-	</PrismicLink>
-{:else if tree.type === "label"}
-	<span class={tree.node.data.label}>
-		<RichTextChildren {map} {tree} />
-	</span>
 {:else}
-	<RichTextChildren {map} {tree} />
+	{#each tree.children as child}
+		<svelte:self {map} tree={child} />
+	{:else}
+		{#if "text" in tree}
+			{tree.text}
+		{/if}
+	{/each}
 {/if}
