@@ -1,9 +1,5 @@
 <script lang="ts">
-	type Elements = {
-		[index: string]: TypeType;
-	};
-
-	const elements: Elements = {
+	const elements = {
 		heading1: "h1",
 		heading2: "h2",
 		heading3: "h3",
@@ -22,16 +18,13 @@
 		"o-list-item": "li",
 		"group-list-item": "li",
 		"group-o-list-item": "li",
-		span: "span",
-	};
+	} as const;
 
-	const types = Object.keys(elements);
+	type PrismicElement = keyof typeof elements;
 
-	type TypeType = (typeof types)[number];
-
-	export let type: TypeType;
+	export let element: PrismicElement;
 </script>
 
-<svelte:element this={elements[type]}>
+<svelte:element this={elements[element]}>
 	<slot />
 </svelte:element>
