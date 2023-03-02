@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as prismicH from "@prismicio/helpers";
 	import type * as prismicT from "@prismicio/types";
+	// import { usePrismic } from "../usePrismic";
 
 	type PrismicLinkProps = {
 		/**
