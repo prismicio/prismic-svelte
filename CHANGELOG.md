@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/prismicio/prismic-svelte/compare/v0.0.6...v0.0.7) (2023-03-02)
+
+
+### Features
+
+* create `<PrismicImage>` component ([#5](https://github.com/prismicio/prismic-svelte/issues/5)) ([9b29b58](https://github.com/prismicio/prismic-svelte/commit/9b29b58d771ae0d6cf6960a28d35035c7fff23b0))
+
 ### [0.0.6](https://github.com/prismicio/prismic-svelte/compare/v0.0.5...v0.0.6) (2023-02-24)
 
 
