@@ -14,7 +14,12 @@
 <main>
 	<h1>Welcome to SvelteKit</h1>
 	<h2><code>PrismicImage</code></h2>
-	<PrismicImage field={data.exampleDocument.data.example_image} />
+	<PrismicImage
+		field={data.exampleDocument.data.example_image}
+		pixelDensities="defaults"
+		height="200"
+		alt=""
+	/>
 	<h2><code>PrismicLink</code></h2>
 	<PrismicLink
 		data-sveltekit-noscroll
@@ -33,5 +38,10 @@
 	main {
 		max-width: min(90%, 800px);
 		margin: auto;
+	}
+
+	:global(img) {
+		/* width: 100%; */
+		height: auto;
 	}
 </style>

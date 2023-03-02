@@ -3,7 +3,7 @@
 	import type * as prismicT from "@prismicio/types";
 	import { __PRODUCTION__ } from "$lib/__PRODUCTION__";
 
-	type PrismicLinkProps = {
+	type PrismicImageProps = {
 		/**
 		 * A Prismic Image field.
 		 */
@@ -44,7 +44,7 @@
 		 * See:
 		 * https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/alt#decorative_images
 		 */
-		// alt: undefined;
+		alt?: "";
 		/**
 		 * Declare an image as decorative only if the Image field does not have
 		 * alternative text by providing `fallbackAlt=""`.
@@ -52,11 +52,11 @@
 		 * See:
 		 * https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/alt#decorative_images
 		 */
-		// fallbackAlt?: "";
+		fallbackAlt?: "";
 	};
 
 	type $$Props = Omit<svelteHTML.IntrinsicElements["img"], "alt"> &
-		PrismicLinkProps;
+		PrismicImageProps;
 
 	export let field: $$Props["field"];
 
@@ -70,11 +70,54 @@
 
 	export let height: $$Props["height"] = undefined;
 
-	// export let alt: $$Props["alt"] = undefined;
+	export let alt: $$Props["alt"] = undefined;
 
-	// export let fallbackAlt: $$Props["fallbackAlt"] = undefined;
+	export let fallbackAlt: $$Props["fallbackAlt"] = undefined;
 
-	const defaultWidths = [640, 750, 828, 1080, 1200, 1920, 2048, 3840];
+	const castInt = (
+		input: string | number | null | undefined,
+	): number | undefined | null => {
+		if (
+			typeof input === "number" ||
+			typeof input === "undefined" ||
+			input === null
+		) {
+			return input;
+		} else {
+			const parsed = Number.parseInt(input);
+
+			if (Number.isNaN(parsed)) {
+				return undefined;
+			} else {
+				return parsed;
+			}
+		}
+	};
+
+	const ar =
+		field.dimensions && field.dimensions.width / field.dimensions.height;
+
+	const castedWidth = castInt(width);
+	const castedHeight = castInt(height);
+
+	let resolvedWidth =
+		castedWidth ?? (field.dimensions && field.dimensions.width);
+	let resolvedHeight =
+		castedHeight ?? (field.dimensions && field.dimensions.height);
+
+	if (
+		ar &&
+		castedWidth != null &&
+		(castedHeight == null || typeof castedWidth !== "undefined")
+	) {
+		resolvedHeight = castedWidth / ar;
+	} else if (
+		ar &&
+		castedHeight != null &&
+		(castedWidth == null || typeof castedWidth !== "undefined")
+	) {
+		resolvedWidth = castedHeight * ar;
+	}
 
 	if (!__PRODUCTION__) {
 		if (widths && pixelDensities) {
@@ -83,17 +126,17 @@
 			);
 		}
 
-		// if (typeof alt === "string" && alt !== "") {
-		// 	console.warn(
-		// 		`[PrismicImage] The "alt" prop can only be used to declare an image as decorative by passing an empty string (alt="") but was provided a non-empty string. You can resolve this warning by removing the "alt" prop or changing it to alt="".`,
-		// 	);
-		// }
+		if (typeof alt === "string" && alt !== "") {
+			console.warn(
+				`[PrismicImage] The "alt" prop can only be used to declare an image as decorative by passing an empty string (alt="") but was provided a non-empty string. You can resolve this warning by removing the "alt" prop or changing it to alt="".`,
+			);
+		}
 
-		// if (typeof fallbackAlt === "string" && fallbackAlt !== "") {
-		// 	console.warn(
-		// 		`[PrismicImage] The "fallbackAlt" prop can only be used to declare an image as decorative by passing an empty string (fallbackAlt="") but was provided a non-empty string. You can resolve this warning by removing the "fallbackAlt" prop or changing it to fallbackAlt="".`,
-		// 	);
-		// }
+		if (typeof fallbackAlt === "string" && fallbackAlt !== "") {
+			console.warn(
+				`[PrismicImage] The "fallbackAlt" prop can only be used to declare an image as decorative by passing an empty string (fallbackAlt="") but was provided a non-empty string. You can resolve this warning by removing the "fallbackAlt" prop or changing it to fallbackAlt="".`,
+			);
+		}
 	}
 </script>
 
@@ -115,20 +158,20 @@
 		pixelDensities && !widths
 			? prismicH.asImagePixelDensitySrcSet(field, {
 					pixelDensities:
-						pixelDensities === "defaults" ? [1, 2, 3] : pixelDensities,
+						pixelDensities === "defaults" ? undefined : pixelDensities,
 					...imgixParams,
 			  })
 			: prismicH.asImageWidthSrcSet(field, {
-					widths: widths === "defaults" ? defaultWidths : widths,
+					widths: widths === "defaults" ? undefined : widths,
 					...imgixParams,
 			  })}
 
 	<img
 		{src}
 		{srcset}
-		alt={field.alt}
-		width={width || (!height ? field.dimensions.width : undefined)}
-		height={height || (!width ? field.dimensions.height : undefined)}
+		alt={alt ?? field.alt ?? fallbackAlt}
+		width={width || height ? resolvedWidth : field.dimensions.width}
+		height={height || width ? resolvedHeight : field.dimensions.height}
 		{...$$restProps}
 	/>
 {:else}
