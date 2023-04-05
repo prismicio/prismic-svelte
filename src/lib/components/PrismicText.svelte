@@ -5,8 +5,7 @@
 	import type { TitleField as TitleFieldType } from "@prismicio/types";
 
 	export let field: TitleFieldType | RichTextFieldType;
-	export let separator: string;
+	export let separator: string | undefined = undefined;
 </script>
 
-<!-- TODO: Separator not working for newlines `\n\n` -->
 {@html prismicH.asText(field, separator)}

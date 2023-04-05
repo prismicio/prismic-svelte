@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PrismicImage } from "$lib/components";
+	import { PrismicImage, PrismicEmbed, PrismicLink } from "$lib/components";
 	import type { RTAnyNode } from "@prismicio/types";
 
 	export let node: RTAnyNode;
@@ -35,23 +35,19 @@
 	<ol><slot /></ol>
 {:else if node.type === "image"}
 	<p class="block-img">
-		<!-- TODO: Handle images with `<PrismicImage>` (maybe). -->
-		<img src={node.url} alt={node.alt} data-copyright={node.copyright} />
+		<PrismicImage field={node} />
 	</p>
 {:else if node.type === "embed"}
-	<div
-		data-oembed={node.oembed.embed_url}
-		data-oembed-type={node.oembed.type}
-		data-oembed-provider={node.oembed.provider_name}
-	>
-		{@html node.oembed.html}
-	</div>
+	<PrismicEmbed field={node.oembed} />
 {:else if node.type === "hyperlink"}
-	<!-- TODO: Handle links with `<PrismicLink>`. -->
-	<a href="#"><slot /></a>
+	<PrismicLink field={node.data}><slot /></PrismicLink>
 {:else if node.type === "label"}
 	<span class={node.data.label}><slot /></span>
 {:else}
-	<!-- TODO: Replace `\n` with `<br/>`. Don't use @html since the content is not safe. -->
-	{node.text}
+	{#each node.text.split("\n") as line, index}
+		{#if index > 0}
+			<br />
+		{/if}
+		{line}
+	{/each}
 {/if}

@@ -6,5 +6,11 @@
 </script>
 
 {#if prismicH.isFilled.embed(field)}
-	{@html field.html}
+	<div
+		data-oembed={field.embed_url}
+		data-oembed-type={field.type}
+		data-oembed-provider={field.provider_name}
+	>
+		{@html field.html}
+	</div>
 {/if}
