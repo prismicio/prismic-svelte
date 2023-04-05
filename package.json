@@ -42,7 +42,7 @@
 	"dependencies": {
 		"@prismicio/client": "^6.7.3",
 		"@prismicio/helpers": "^2.3.9",
-		"@prismicio/richtext": "^2.1.4",
+		"@prismicio/richtext": "^2.2.0-alpha.0",
 		"@sveltejs/kit": "^1.8.3",
 		"svelte": "^3.55.1"
 	},
