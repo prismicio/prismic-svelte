@@ -165,7 +165,6 @@
 					widths: widths === "defaults" ? undefined : widths,
 					...imgixParams,
 			  })}
-
 	<img
 		{src}
 		{srcset}

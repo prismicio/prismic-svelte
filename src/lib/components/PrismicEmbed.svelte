@@ -2,8 +2,21 @@
 	import * as prismicH from "@prismicio/helpers";
 	import type * as prismicT from "@prismicio/types";
 
+	/**
+	 * An Embed field from Prismic.
+	 */
 	export let field: prismicT.EmbedField;
 </script>
+
+<!-- 
+  @component
+  Component to render a Prismic Embed field.
+  
+  @example Rendering an Embed field:
+	```svelte
+		<PrismicEmbed field={document.data.example_embed} />
+  ```
+-->
 
 {#if prismicH.isFilled.embed(field)}
 	<div

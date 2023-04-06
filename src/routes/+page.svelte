@@ -21,16 +21,14 @@
 </script>
 
 <main>
-	<h2>PrismicText</h2>
-	<PrismicText field={data.exampleDocument.data.example_rich_text} />
-	<SliceZone slices={data.pageDocument.data.body} {components} />
 	<h1>Welcome to SvelteKit</h1>
-	<h2>Prismic Rich Text</h2>
+	<h2><code>PrismicText</code></h2>
+	<PrismicText field={data.exampleDocument.data.example_rich_text} />
+	<h2><code>PrismicRichText</code></h2>
 	<PrismicRichText field={data.exampleDocument.data.example_rich_text} />
 	<h2><code>PrismicImage</code></h2>
 	<PrismicImage
 		field={data.exampleDocument.data.example_image}
-		pixelDensities="defaults"
 		height="200px"
 		alt=""
 	/>
@@ -44,18 +42,20 @@
 		class="doggo"
 		field={data.exampleDocument.data.example_link}>Link</PrismicLink
 	>
+	<h2><code>PrismicEmbed</code></h2>
+	<PrismicEmbed field={data.exampleDocument.data.example_embed} />
 	<h2><code>SliceZone</code></h2>
 	<SliceZone slices={data.pageDocument.data.body} {components} />
 </main>
 
 <style>
 	main {
-		max-width: min(90%, 800px);
+		max-width: min(90%, 700px);
 		margin: auto;
 	}
 
 	:global(img) {
-		width: auto;
 		height: auto;
+		max-width: 100%;
 	}
 </style>

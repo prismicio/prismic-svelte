@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { PrismicImage, PrismicEmbed, PrismicLink } from "$lib/components";
+	import type { LinkResolverFunction } from "@prismicio/helpers";
 	import type { RTAnyNode } from "@prismicio/types";
 
 	export let node: RTAnyNode;
+
+	export let linkResolver: LinkResolverFunction | undefined = undefined;
 </script>
 
 {#if node.type === "heading1"}
@@ -40,7 +43,7 @@
 {:else if node.type === "embed"}
 	<PrismicEmbed field={node.oembed} />
 {:else if node.type === "hyperlink"}
-	<PrismicLink field={node.data}><slot /></PrismicLink>
+	<PrismicLink {linkResolver} field={node.data}><slot /></PrismicLink>
 {:else if node.type === "label"}
 	<span class={node.data.label}><slot /></span>
 {:else}
