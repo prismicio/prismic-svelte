@@ -4,7 +4,8 @@
 	"description": "Svelte plugin, components, and composables to fetch and present Prismic content",
 	"keywords": [
 		"typescript",
-		"prismic"
+		"prismic",
+		"svelte"
 	],
 	"repository": {
 		"type": "git",
@@ -15,78 +16,9 @@
 	"type": "module",
 	"exports": {
 		"./package.json": "./package.json",
-		".": "./dist/index.js",
-		"./PrismicProvider.svelte": {
-			"types": "./dist/PrismicProvider.svelte.d.ts",
-			"svelte": "./dist/PrismicProvider.svelte",
-			"default": "./dist/PrismicProvider.svelte"
-		},
-		"./components/PrismicEmbed.svelte": {
-			"types": "./dist/components/PrismicEmbed.svelte.d.ts",
-			"svelte": "./dist/components/PrismicEmbed.svelte",
-			"default": "./dist/components/PrismicEmbed.svelte"
-		},
-		"./components/PrismicImage.svelte": {
-			"types": "./dist/components/PrismicImage.svelte.d.ts",
-			"svelte": "./dist/components/PrismicImage.svelte",
-			"default": "./dist/components/PrismicImage.svelte"
-		},
-		"./components/PrismicLink.svelte": {
-			"types": "./dist/components/PrismicLink.svelte.d.ts",
-			"svelte": "./dist/components/PrismicLink.svelte",
-			"default": "./dist/components/PrismicLink.svelte"
-		},
-		"./components/PrismicPreview.svelte": {
-			"types": "./dist/components/PrismicPreview.svelte.d.ts",
-			"svelte": "./dist/components/PrismicPreview.svelte",
-			"default": "./dist/components/PrismicPreview.svelte"
-		},
-		"./components/PrismicRichText/DefaultComponent.svelte": {
-			"types": "./dist/components/PrismicRichText/DefaultComponent.svelte.d.ts",
-			"svelte": "./dist/components/PrismicRichText/DefaultComponent.svelte",
-			"default": "./dist/components/PrismicRichText/DefaultComponent.svelte"
-		},
-		"./components/PrismicRichText/PrismicRichText.svelte": {
-			"types": "./dist/components/PrismicRichText/PrismicRichText.svelte.d.ts",
-			"svelte": "./dist/components/PrismicRichText/PrismicRichText.svelte",
-			"default": "./dist/components/PrismicRichText/PrismicRichText.svelte"
-		},
-		"./components/PrismicRichText/Serialize.svelte": {
-			"types": "./dist/components/PrismicRichText/Serialize.svelte.d.ts",
-			"svelte": "./dist/components/PrismicRichText/Serialize.svelte",
-			"default": "./dist/components/PrismicRichText/Serialize.svelte"
-		},
-		"./components/PrismicText.svelte": {
-			"types": "./dist/components/PrismicText.svelte.d.ts",
-			"svelte": "./dist/components/PrismicText.svelte",
-			"default": "./dist/components/PrismicText.svelte"
-		},
-		"./components/SliceZone.svelte": {
-			"types": "./dist/components/SliceZone.svelte.d.ts",
-			"svelte": "./dist/components/SliceZone.svelte",
-			"default": "./dist/components/SliceZone.svelte"
-		},
-		"./components/TodoSliceComponent.svelte": {
-			"types": "./dist/components/TodoSliceComponent.svelte.d.ts",
-			"svelte": "./dist/components/TodoSliceComponent.svelte",
-			"default": "./dist/components/TodoSliceComponent.svelte"
-		},
-		"./components": {
-			"types": "./dist/components/index.d.ts",
-			"svelte": "./dist/components/index.js",
-			"default": "./dist/components/index.js"
-		},
-		"./configurePrismic": {
-			"types": "./dist/configurePrismic.d.ts",
-			"default": "./dist/configurePrismic.js"
-		},
-		"./injectionSymbols": {
-			"types": "./dist/injectionSymbols.d.ts",
-			"default": "./dist/injectionSymbols.js"
-		},
-		"./usePrismic": {
-			"types": "./dist/usePrismic.d.ts",
-			"default": "./dist/usePrismic.js"
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
 		}
 	},
 	"main": "index.js",

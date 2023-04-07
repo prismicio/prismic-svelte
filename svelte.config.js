@@ -7,6 +7,6 @@ import preprocess from "svelte-preprocess";
 const config = {
 	preprocess: preprocess(),
 	kit: {},
-	};
+};
 
 export default config;
