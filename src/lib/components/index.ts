@@ -8,6 +8,4 @@ export { default as PrismicText } from "./PrismicText.svelte";
 
 export { default as PrismicRichText } from "./PrismicRichText/PrismicRichText.svelte";
 
-// export { default as PrismicPreview } from "./PrismicPreview.svelte";
-
 export { default as SliceZone } from "./SliceZone.svelte";
