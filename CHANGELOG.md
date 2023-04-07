@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8-dev.1](https://github.com/prismicio/prismic-svelte/compare/v0.0.8-dev.0...v0.0.8-dev.1) (2023-04-07)
+
+
+### Refactor
+
+* remove unnecessary types ([aa6a13d](https://github.com/prismicio/prismic-svelte/commit/aa6a13d6f28152cb8013225639a25d92009dbb39))
+
+
+### Chore
+
+* add explicit dist/index.d.ts export to package.json ([4ed3863](https://github.com/prismicio/prismic-svelte/commit/4ed38639bd92c75886bfa304ec41e99c5bd69afc))
+
 ### [0.0.8-dev.0](https://github.com/prismicio/prismic-svelte/compare/v0.0.7...v0.0.8-dev.0) (2023-04-07)
 
 
