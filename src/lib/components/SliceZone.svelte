@@ -6,7 +6,7 @@
 
 	type SliceComponents = Record<
 		string,
-		SvelteComponent | (new (...args: any[]) => SvelteComponent)
+		new (...args: any[]) => SvelteComponent
 	>;
 
 	/**
