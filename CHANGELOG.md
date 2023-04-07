@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8-dev.0](https://github.com/prismicio/prismic-svelte/compare/v0.0.7...v0.0.8-dev.0) (2023-04-07)
+
+
+### Features
+
+* add  component ([7e9e93d](https://github.com/prismicio/prismic-svelte/commit/7e9e93dd69f9cfb2670bfd4e2a34e4b4ceedf487))
+* all richtext to accept components ([65a6bb2](https://github.com/prismicio/prismic-svelte/commit/65a6bb21b2a823a031338a04b6658c046cc6c1e4))
+* create prismicimage component ([61a2bd1](https://github.com/prismicio/prismic-svelte/commit/61a2bd124f3540f6d421c9e44e3b36fd5601f51d))
+* create prismicrichtext component ([52d72e0](https://github.com/prismicio/prismic-svelte/commit/52d72e0340afd4b42510e405e5f6db0c9e90e761))
+
+
+### Bug Fixes
+
+* fix typescript error in slicezone ([5db0a12](https://github.com/prismicio/prismic-svelte/commit/5db0a12d7b9eecb6828160156a5293cd22a64dfe))
+* improve PrismicLink and PrismicImage typings ([85ee910](https://github.com/prismicio/prismic-svelte/commit/85ee91059496ca352cf06e2dd56224d5074f1147))
+
+
+### Chore
+
+* clean up package.json exports ([77f2deb](https://github.com/prismicio/prismic-svelte/commit/77f2debb6ad43410c49aa9cfaa12865875b35ac8))
+* improve component types ([1fcf76f](https://github.com/prismicio/prismic-svelte/commit/1fcf76f5b4fc92f934ee2c1a313c09f23d123ab5))
+* merge ([7c6b788](https://github.com/prismicio/prismic-svelte/commit/7c6b788063fe41380d457f9bc151481e60566cd5))
+* refactor richtext ([57f90eb](https://github.com/prismicio/prismic-svelte/commit/57f90eb54a59693bd0b2ff34d6787cdbca61c11d))
+* run ([4b002ce](https://github.com/prismicio/prismic-svelte/commit/4b002ce66983002e49f6340bdb27378f7d7427a9))
+* type element component ([cf8813a](https://github.com/prismicio/prismic-svelte/commit/cf8813a5354f353708d2712b29df7b6c9b62ee1a))
+* update prismiccontext type ([47a997b](https://github.com/prismicio/prismic-svelte/commit/47a997b9b231c532f566ad689f91bf8a2530c734))
+* upgrade sveltekit to v1.0.0-next-405 ([986884b](https://github.com/prismicio/prismic-svelte/commit/986884bb2c61899960e7f67d866d5523fca3ceca))
+* upgrade to @sveltejs/kit@1.0.0-next.587 ([970e10f](https://github.com/prismicio/prismic-svelte/commit/970e10fb5c1eed7bc410d9cd006bf8e3669e0559))
+* upgrade typescript ([985c334](https://github.com/prismicio/prismic-svelte/commit/985c33430dfb147f02198a8a1bb52ac62e96bb08))
+
+
+### Refactor
+
+* implement angelo's richtext design ([0205d8f](https://github.com/prismicio/prismic-svelte/commit/0205d8f455e03627a5c6e5e5012570efd735c96b))
+* refactor Embed and Image components ([80f132b](https://github.com/prismicio/prismic-svelte/commit/80f132b5a6ced21da9a7fdbe481c041a58971430))
+* remove unnecessary types ([a7fea24](https://github.com/prismicio/prismic-svelte/commit/a7fea2470cd399f3965f3f76b82cae4be5daf2b6))
+* remove unused components ([63b8862](https://github.com/prismicio/prismic-svelte/commit/63b8862595f3234b7a2d51452a633102355a761f))
+
 ### [0.0.7](https://github.com/prismicio/prismic-svelte/compare/v0.0.6...v0.0.7) (2023-03-02)
 
 
