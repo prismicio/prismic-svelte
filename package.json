@@ -14,15 +14,87 @@
 	"author": "Prismic <contact@prismic.io> (https://prismic.io)",
 	"type": "module",
 	"exports": {
-		".": "./index.js",
-		"./package.json": "./package.json"
+		"./package.json": "./package.json",
+		".": "./dist/index.js",
+		"./PrismicProvider.svelte": {
+			"types": "./dist/PrismicProvider.svelte.d.ts",
+			"svelte": "./dist/PrismicProvider.svelte",
+			"default": "./dist/PrismicProvider.svelte"
+		},
+		"./components/PrismicEmbed.svelte": {
+			"types": "./dist/components/PrismicEmbed.svelte.d.ts",
+			"svelte": "./dist/components/PrismicEmbed.svelte",
+			"default": "./dist/components/PrismicEmbed.svelte"
+		},
+		"./components/PrismicImage.svelte": {
+			"types": "./dist/components/PrismicImage.svelte.d.ts",
+			"svelte": "./dist/components/PrismicImage.svelte",
+			"default": "./dist/components/PrismicImage.svelte"
+		},
+		"./components/PrismicLink.svelte": {
+			"types": "./dist/components/PrismicLink.svelte.d.ts",
+			"svelte": "./dist/components/PrismicLink.svelte",
+			"default": "./dist/components/PrismicLink.svelte"
+		},
+		"./components/PrismicPreview.svelte": {
+			"types": "./dist/components/PrismicPreview.svelte.d.ts",
+			"svelte": "./dist/components/PrismicPreview.svelte",
+			"default": "./dist/components/PrismicPreview.svelte"
+		},
+		"./components/PrismicRichText/DefaultComponent.svelte": {
+			"types": "./dist/components/PrismicRichText/DefaultComponent.svelte.d.ts",
+			"svelte": "./dist/components/PrismicRichText/DefaultComponent.svelte",
+			"default": "./dist/components/PrismicRichText/DefaultComponent.svelte"
+		},
+		"./components/PrismicRichText/PrismicRichText.svelte": {
+			"types": "./dist/components/PrismicRichText/PrismicRichText.svelte.d.ts",
+			"svelte": "./dist/components/PrismicRichText/PrismicRichText.svelte",
+			"default": "./dist/components/PrismicRichText/PrismicRichText.svelte"
+		},
+		"./components/PrismicRichText/Serialize.svelte": {
+			"types": "./dist/components/PrismicRichText/Serialize.svelte.d.ts",
+			"svelte": "./dist/components/PrismicRichText/Serialize.svelte",
+			"default": "./dist/components/PrismicRichText/Serialize.svelte"
+		},
+		"./components/PrismicText.svelte": {
+			"types": "./dist/components/PrismicText.svelte.d.ts",
+			"svelte": "./dist/components/PrismicText.svelte",
+			"default": "./dist/components/PrismicText.svelte"
+		},
+		"./components/SliceZone.svelte": {
+			"types": "./dist/components/SliceZone.svelte.d.ts",
+			"svelte": "./dist/components/SliceZone.svelte",
+			"default": "./dist/components/SliceZone.svelte"
+		},
+		"./components/TodoSliceComponent.svelte": {
+			"types": "./dist/components/TodoSliceComponent.svelte.d.ts",
+			"svelte": "./dist/components/TodoSliceComponent.svelte",
+			"default": "./dist/components/TodoSliceComponent.svelte"
+		},
+		"./components": {
+			"types": "./dist/components/index.d.ts",
+			"svelte": "./dist/components/index.js",
+			"default": "./dist/components/index.js"
+		},
+		"./configurePrismic": {
+			"types": "./dist/configurePrismic.d.ts",
+			"default": "./dist/configurePrismic.js"
+		},
+		"./injectionSymbols": {
+			"types": "./dist/injectionSymbols.d.ts",
+			"default": "./dist/injectionSymbols.js"
+		},
+		"./usePrismic": {
+			"types": "./dist/usePrismic.d.ts",
+			"default": "./dist/usePrismic.js"
+		}
 	},
 	"main": "index.js",
 	"module": "index.js",
 	"types": "index.d.ts",
-	"svelte": "./index.js",
+	"svelte": "./dist/index.js",
 	"scripts": {
-		"build": "svelte-package package && shx cp -r src dist/src",
+		"build": "svelte-package -o dist package && shx cp -r src dist/src",
 		"dev": "vite dev",
 		"format": "prettier --write .",
 		"prepare": "npm run build",
@@ -35,7 +107,7 @@
 		"unit:watch": "vitest watch",
 		"test": "npm run lint && npm run unit",
 		"preview": "svelte-kit preview",
-		"package": "svelte-package package",
+		"package": "svelte-package -o dist package",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
 	},
@@ -50,7 +122,7 @@
 		"@prismicio/mock": "^0.2.0",
 		"@prismicio/types": "^0.2.7",
 		"@rollup/plugin-inject": "^5.0.3",
-		"@sveltejs/package": "^2.0.2",
+		"@sveltejs/package": "^2.0.0",
 		"@typescript-eslint/eslint-plugin": "^5.53.0",
 		"@typescript-eslint/parser": "^5.53.0",
 		"@vitest/coverage-c8": "^0.28.5",
@@ -80,5 +152,60 @@
 	},
 	"optionalDependencies": {
 		"@esbuild/android-arm": "^0.17.10"
+	},
+	"files": [
+		"dist"
+	],
+	"typesVersions": {
+		">4.0": {
+			"PrismicProvider.svelte": [
+				"./dist/PrismicProvider.svelte.d.ts"
+			],
+			"components/PrismicEmbed.svelte": [
+				"./dist/components/PrismicEmbed.svelte.d.ts"
+			],
+			"components/PrismicImage.svelte": [
+				"./dist/components/PrismicImage.svelte.d.ts"
+			],
+			"components/PrismicLink.svelte": [
+				"./dist/components/PrismicLink.svelte.d.ts"
+			],
+			"components/PrismicPreview.svelte": [
+				"./dist/components/PrismicPreview.svelte.d.ts"
+			],
+			"components/PrismicRichText/DefaultComponent.svelte": [
+				"./dist/components/PrismicRichText/DefaultComponent.svelte.d.ts"
+			],
+			"components/PrismicRichText/PrismicRichText.svelte": [
+				"./dist/components/PrismicRichText/PrismicRichText.svelte.d.ts"
+			],
+			"components/PrismicRichText/Serialize.svelte": [
+				"./dist/components/PrismicRichText/Serialize.svelte.d.ts"
+			],
+			"components/PrismicText.svelte": [
+				"./dist/components/PrismicText.svelte.d.ts"
+			],
+			"components/SliceZone.svelte": [
+				"./dist/components/SliceZone.svelte.d.ts"
+			],
+			"components/TodoSliceComponent.svelte": [
+				"./dist/components/TodoSliceComponent.svelte.d.ts"
+			],
+			"components": [
+				"./dist/components/index.d.ts"
+			],
+			"configurePrismic": [
+				"./dist/configurePrismic.d.ts"
+			],
+			"index": [
+				"./dist/index.d.ts"
+			],
+			"injectionSymbols": [
+				"./dist/injectionSymbols.d.ts"
+			],
+			"usePrismic": [
+				"./dist/usePrismic.d.ts"
+			]
+		}
 	}
 }
