@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8-dev.2](https://github.com/prismicio/prismic-svelte/compare/v0.0.8-dev.1...v0.0.8-dev.2) (2023-04-10)
+
+
+### Chore
+
+* replace svelteHTML with svelte/elements ([c1a5e1a](https://github.com/prismicio/prismic-svelte/commit/c1a5e1a3f1b55d67398087a2ee21c33a16e8d510))
+
 ### [0.0.8-dev.1](https://github.com/prismicio/prismic-svelte/compare/v0.0.8-dev.0...v0.0.8-dev.1) (2023-04-07)
 
 
