@@ -40,7 +40,6 @@
 		data-sveltekit-reload
 		rel="external"
 		class="doggo"
-		href="5"
 		field={data.exampleDocument.data.example_link}>Link</PrismicLink
 	>
 	<h2><code>PrismicEmbed</code></h2>

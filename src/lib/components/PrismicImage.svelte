@@ -54,9 +54,20 @@
 		 * https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/alt#decorative_images
 		 */
 		fallbackAlt?: "";
+		/**
+		 * PrismicImage will ignore any provided `src` property. The `src` property
+		 * is generated based on the provided `field`.
+		 */
+		src?: undefined;
+		/**
+		 * PrismicImage will ignore any provided `srcset` property. The `srcset`
+		 * property is generated based on the provided `field`.
+		 */
+		srcset?: undefined;
 	};
 
-	type $$Props = Omit<HTMLImgAttributes, "alt"> & PrismicImageProps;
+	type $$Props = Omit<HTMLImgAttributes, "alt" | "src" | "srcset"> &
+		PrismicImageProps;
 
 	export let field: $$Props["field"];
 
@@ -73,6 +84,9 @@
 	export let alt: $$Props["alt"] = undefined;
 
 	export let fallbackAlt: $$Props["fallbackAlt"] = undefined;
+
+	delete $$restProps.src;
+	delete $$restProps.srcset;
 
 	const castInt = (
 		input: string | number | null | undefined,
