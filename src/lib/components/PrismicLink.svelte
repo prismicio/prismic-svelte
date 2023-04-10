@@ -19,9 +19,16 @@
 		 * @see Learn about Link Resolvers and Route Resolvers {@link https://prismic.io/docs/core-concepts/link-resolver-route-resolver}
 		 */
 		linkResolver?: prismicH.LinkResolverFunction | undefined;
+
+		/**
+		 * PrismicLink does not accept an `href` property. The `href` attribute is
+		 * generated based on the field provided. If an `href` attribute is
+		 * provided, it will be ignored.
+		 */
+		href?: undefined;
 	};
 
-	type $$Props = HTMLAnchorAttributes & PrismicLinkProps;
+	type $$Props = Omit<HTMLAnchorAttributes, "href"> & PrismicLinkProps;
 
 	export let field: $$Props["field"];
 	export let linkResolver: $$Props["linkResolver"] = undefined;
@@ -35,6 +42,8 @@
 		rel || (target === "_blank" ? "noopener noreferrer" : undefined);
 
 	const href = (field ? prismicH.asLink(field, linkResolver) : "") || "";
+
+	delete $$restProps.href;
 </script>
 
 <!-- 
