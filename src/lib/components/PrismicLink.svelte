@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as prismicH from "@prismicio/helpers";
 	import type * as prismicT from "@prismicio/types";
+	import type { HTMLAnchorAttributes } from "svelte/elements";
 	// import { usePrismic } from "../usePrismic";
 
 	type PrismicLinkProps = {
@@ -20,7 +21,7 @@
 		linkResolver?: prismicH.LinkResolverFunction | undefined;
 	};
 
-	type $$Props = svelteHTML.IntrinsicElements["a"] & PrismicLinkProps;
+	type $$Props = HTMLAnchorAttributes & PrismicLinkProps;
 
 	export let field: $$Props["field"];
 	export let linkResolver: $$Props["linkResolver"] = undefined;

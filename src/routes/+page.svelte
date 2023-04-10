@@ -29,7 +29,7 @@
 	<h2><code>PrismicImage</code></h2>
 	<PrismicImage
 		field={data.exampleDocument.data.example_image}
-		height="200px"
+		height="200"
 		alt=""
 	/>
 	<h2><code>PrismicLink</code></h2>

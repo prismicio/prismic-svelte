@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as prismicH from "@prismicio/helpers";
 	import type * as prismicT from "@prismicio/types";
+	import type { HTMLImgAttributes } from "svelte/elements";
 	import { __PRODUCTION__ } from "$lib/__PRODUCTION__";
 
 	type PrismicImageProps = {
@@ -55,8 +56,7 @@
 		fallbackAlt?: "";
 	};
 
-	type $$Props = Omit<svelteHTML.IntrinsicElements["img"], "alt"> &
-		PrismicImageProps;
+	type $$Props = Omit<HTMLImgAttributes, "alt"> & PrismicImageProps;
 
 	export let field: $$Props["field"];
 
