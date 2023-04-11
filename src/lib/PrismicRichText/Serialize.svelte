@@ -20,7 +20,10 @@
 		this={(serializer &&
 			serializer(node.type, node.node, node.text, node.children, node.key)) ||
 			Default}
-		{...node}
+		type={node.type}
+		node={node.node}
+		text={node.text}
+		key={node.key}
 		{linkResolver}
 	>
 		{#if node.children.length > 0}

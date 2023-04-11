@@ -2,7 +2,7 @@
 	import * as prismicH from "@prismicio/helpers";
 	import type * as prismicT from "@prismicio/types";
 	import type { HTMLImgAttributes } from "svelte/elements";
-	import { __PRODUCTION__ } from "$lib/__PRODUCTION__";
+	import { DEV } from "esm-env";
 
 	type PrismicImageProps = {
 		/**
@@ -133,7 +133,7 @@
 		resolvedWidth = castedHeight * ar;
 	}
 
-	if (!__PRODUCTION__) {
+	if (DEV) {
 		if (widths && pixelDensities) {
 			console.warn(
 				`[PrismicImage] Only one of "widths" or "pixelDensities" props can be provided. You can resolve this warning by removing either the "widths" or "pixelDensities" prop. "widths" will be used in this case.`,
@@ -154,14 +154,14 @@
 	}
 </script>
 
-<!-- 
+<!--
   @component
   Component to render a Prismic Image field as an `img` element with `width`, `height`, `alt`, `src`, and `srcset` attributes.
-  
+
   @example Rendering an Image field:
 	```svelte
-		<PrismicImage 
-			field={document.data.example_image} 
+		<PrismicImage
+			field={document.data.example_image}
 			imgixParams={{ sat: -100 }}
 		/>
   ```

@@ -30,6 +30,9 @@
 	/**
 	 * An object that maps Rich Text blocks to functions.
 	 *
+	 * **Important**: Your components must be wrapped in a function. For example:
+	 * `{ heading1: () => Heading }`, not: `{ heading1: Heading }`.
+	 *
 	 * @example A serializer that modififes `h1` and `em` elements:
 	 *
 	 * ```js
@@ -43,23 +46,21 @@
 	 * };
 	 * ```
 	 */
-	export let richTextSerializer:
+	export let components:
 		| RichTextMapSerializer<typeof SvelteComponent, TreeNode>
 		| RichTextFunctionSerializer<typeof SvelteComponent, TreeNode>
 		| undefined = undefined;
 
-	const resolvedSerializer =
-		typeof richTextSerializer === "object"
-			? wrapMapSerializer(richTextSerializer)
-			: richTextSerializer;
+	let resolvedSerializer =
+		typeof components === "object" ? wrapMapSerializer(components) : components;
 
 	const nodes = asTree(field).children;
 </script>
 
-<!-- 
+<!--
   @component
   Component to render a Prismic Rich Text or Title field as HTML.
-  
+
   @example Rendering a Link field:
 	```svelte
 		<PrismicRichText field={document.data.example_rich_text} />

@@ -1,7 +1,13 @@
 import { sveltekit } from "@sveltejs/kit/vite";
+import { defineConfig } from "vitest/config";
 
-const config = {
+export default defineConfig({
 	plugins: [sveltekit()],
-};
-
-export default config;
+	test: {
+		coverage: {
+			provider: "c8",
+			reporter: ["lcovonly", "text"],
+		},
+		include: ["src/**/*.{test,spec}.{js,ts}"],
+	},
+});

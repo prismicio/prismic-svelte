@@ -1,9 +1,21 @@
 <script lang="ts">
-	import { PrismicImage, PrismicEmbed, PrismicLink } from "$lib/components";
 	import type { LinkResolverFunction } from "@prismicio/helpers";
-	import type { RTAnyNode } from "@prismicio/types";
+	import type { TreeNode } from "@prismicio/richtext";
 
-	export let node: RTAnyNode;
+	import PrismicEmbed from "../PrismicEmbed.svelte";
+	import PrismicImage from "../PrismicImage.svelte";
+	import PrismicLink from "../PrismicLink.svelte";
+
+	export let node: TreeNode["node"];
+	export let key: TreeNode["key"];
+	export let text: TreeNode["text"];
+	export let type: TreeNode["type"];
+
+	// These variables are not used in the component, but we need to
+	// superficially use them to supress development warnings.
+	key;
+	text;
+	type;
 
 	export let linkResolver: LinkResolverFunction | undefined = undefined;
 </script>
