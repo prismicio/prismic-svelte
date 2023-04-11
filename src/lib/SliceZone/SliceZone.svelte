@@ -46,7 +46,8 @@
 		| SliceLikeGraphQL<SliceType>;
 
 	/**
-	 * An array of Prismic Slices, such as the `slices` property from a Prismic document.
+	 * An array of Prismic Slices, such as the `slices` property from a Prismic
+	 * document.
 	 */
 	export let slices: SliceLike[] = [];
 

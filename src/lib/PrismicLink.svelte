@@ -6,7 +6,8 @@
 
 	type PrismicLinkProps = {
 		/**
-		 * A Prismic Link field, Content Relationship field, Link to Media field or Document.
+		 * A Prismic Link field, Content Relationship field, Link to Media field or
+		 * Document.
 		 */
 		field: prismicT.LinkField | prismicT.PrismicDocument;
 
