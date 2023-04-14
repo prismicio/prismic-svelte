@@ -84,5 +84,6 @@
 	},
 	"publishConfig": {
 		"access": "public"
-	}
+	},
+	"prepare": "svelte-kit sync"
 }
