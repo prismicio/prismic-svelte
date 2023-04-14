@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://github.com/prismicio/prismic-svelte/compare/v0.0.7...v0.0.8) (2023-04-14)
+
+
+### Features
+
+* add PrismicRichText, PrismicText, and PrismicEmbed ([764f8fa](https://github.com/prismicio/prismic-svelte/commit/764f8fa65c52c367a3764f35f34b17c3b28a5bb6)), closes [#9](https://github.com/prismicio/prismic-svelte/issues/9)
+
+
+### Chore
+
+* add vitest config ([ae9d9c5](https://github.com/prismicio/prismic-svelte/commit/ae9d9c5e055496987fc1e4440ffecfca491d6add))
+
 ### [0.0.8-dev.2](https://github.com/prismicio/prismic-svelte/compare/v0.0.8-dev.1...v0.0.8-dev.2) (2023-04-10)
 
 
