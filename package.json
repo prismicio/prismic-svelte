@@ -31,7 +31,7 @@
 		"build": "svelte-package -o dist package && shx cp -r src dist/src",
 		"dev": "vite dev",
 		"format": "prettier --write .",
-		"prepare": "svelte-kit sync && npm run build",
+		"prepare": "npm run build && svelte-kit sync",
 		"release": "npm run build && npm run test && standard-version && git push --follow-tags && npm run build && npm publish",
 		"release:dry": "standard-version --dry-run",
 		"release:alpha": "npm run build && npm run test && standard-version --release-as major --prerelease alpha && git push --follow-tags && npm run build && npm publish --tag alpha",
