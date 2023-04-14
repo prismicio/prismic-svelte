@@ -46,7 +46,8 @@
 		| SliceLikeGraphQL<SliceType>;
 
 	/**
-	 * An array of Prismic Slices, such as the `slices` property from a Prismic document.
+	 * An array of Prismic Slices, such as the `slices` property from a Prismic
+	 * document.
 	 */
 	export let slices: SliceLike[] = [];
 
@@ -80,18 +81,12 @@
 		| SvelteComponent
 		| (new (...args: any[]) => SvelteComponent)
 		| undefined = undefined;
-
-	/**
-	 * Whether the app is in development mode. When true, the SliceZone may
-	 * display error messages in the UI.
-	 */
-	export let dev: boolean = false;
 </script>
 
-<!-- 
+<!--
   @component
   Component to render an array of Prismic Slices.
-  
+
   @example Rendering a Rich Text field:
 	```svelte
 		<SliceZone slices={document.data.slices} components={{
@@ -107,6 +102,6 @@
 	{#if Component}
 		<svelte:component this={Component} {slice} {slices} {context} {index} />
 	{:else}
-		<TodoSliceComponent {slice} {dev} />
+		<TodoSliceComponent {slice} />
 	{/if}
 {/each}

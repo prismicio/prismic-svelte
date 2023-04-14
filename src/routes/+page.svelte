@@ -7,10 +7,11 @@
 		PrismicText,
 		PrismicEmbed,
 	} from "$lib";
-	import { RichText, CodeSnippet } from "./slices";
 
 	import type { PageData } from "./$types";
-	import { page } from "$app/stores";
+
+	import CodeSnippet from "./slices/CodeSnippet.svelte";
+	import RichText from "./slices/RichText.svelte";
 
 	const components = {
 		rich_text: RichText,
