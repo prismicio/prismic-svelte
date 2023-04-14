@@ -1,18 +1,6 @@
-// export { default as configurePrismic } from "./configurePrismic";
-
-export {
-	// Components
-	// PrismicEmbed,
-	PrismicImage,
-	PrismicLink,
-	// PrismicText,
-	// PrismicRichText,
-	// Slice Zone
-	SliceZone,
-} from "./components";
-
-// export { default as PrismicProvider } from "./PrismicProvider.svelte";
-
-// export { usePrismic } from "./usePrismic";
-
-// export type { PrismicContext } from "./types";
+export { default as PrismicEmbed } from "./PrismicEmbed.svelte";
+export { default as PrismicImage } from "./PrismicImage.svelte";
+export { default as PrismicLink } from "./PrismicLink.svelte";
+export { default as PrismicRichText } from "./PrismicRichText/PrismicRichText.svelte";
+export { default as PrismicText } from "./PrismicText.svelte";
+export { default as SliceZone } from "./SliceZone/SliceZone.svelte";

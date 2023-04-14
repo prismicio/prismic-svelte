@@ -6,7 +6,7 @@
 
 	type SliceComponents = Record<
 		string,
-		SvelteComponent | (new (...args: any[]) => SvelteComponent)
+		new (...args: any[]) => SvelteComponent
 	>;
 
 	/**
@@ -45,15 +45,56 @@
 		| SliceLikeRestV2<SliceType>
 		| SliceLikeGraphQL<SliceType>;
 
+	/**
+	 * An array of Prismic Slices, such as the `slices` property from a Prismic
+	 * document.
+	 */
 	export let slices: SliceLike[] = [];
+
+	/**
+	 * An object that maps Slice components to their corresponding API IDs
+	 *
+	 * @example An example map:
+	 *
+	 * ```js
+	 * import BlockQuote from "./BlockQuote.svelte";
+	 * import HeroImage from "./HeroImage.svelte";
+	 *
+	 * const components = {
+	 * 	block_quote: BlockQuote,
+	 * 	hero_image: HeroImage,
+	 * };
+	 * ```
+	 */
 	export let components: SliceComponents = {};
+
+	/**
+	 * Arbitrary data passed to all Slice components as a `context` prop.
+	 */
 	export let context: any = {};
+
+	/**
+	 * The Svelte component rendered if a component mapping from the `components`
+	 * prop cannot be found.
+	 */
 	export let defaultComponent:
 		| SvelteComponent
 		| (new (...args: any[]) => SvelteComponent)
 		| undefined = undefined;
-	export let dev: boolean = false;
 </script>
+
+<!--
+  @component
+  Component to render an array of Prismic Slices.
+
+  @example Rendering a Rich Text field:
+	```svelte
+		<SliceZone slices={document.data.slices} components={{
+			block_quote: BlockQuote,
+			hero_image: HeroImage
+		}} />
+  ```
+-->
 
 {#each slices as slice, index}
 	{@const type = "slice_type" in slice ? slice.slice_type : slice.type}
@@ -61,6 +102,6 @@
 	{#if Component}
 		<svelte:component this={Component} {slice} {slices} {context} {index} />
 	{:else}
-		<TodoSliceComponent {slice} {dev} />
+		<TodoSliceComponent {slice} />
 	{/if}
 {/each}

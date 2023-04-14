@@ -1,5 +1,5 @@
 import * as prismic from "@prismicio/client";
-import type { PageDocument } from "../types/PageDocument.type"
+import type { PageDocument } from "../types/PageDocument.type";
 import type { PageServerLoad } from "./$types";
 
 export const load = (async ({ fetch }) => {
@@ -8,13 +8,12 @@ export const load = (async ({ fetch }) => {
 
 	const pageDocument: PageDocument = await client.getSingle("homepage");
 
-	const exampleClient = prismic.createClient("example-prismic-repo", { fetch })
-	const exampleDocument = exampleClient.getFirst()
-
+	const exampleClient = prismic.createClient("example-prismic-repo", { fetch });
+	const exampleDocument = exampleClient.getFirst({ page: 11, pageSize: 1 });
 
 	return {
 		pageDocument,
-		exampleDocument
+		exampleDocument,
 	};
-// eslint-disable-next-line prettier/prettier
+	// eslint-disable-next-line prettier/prettier
 }) satisfies PageServerLoad;

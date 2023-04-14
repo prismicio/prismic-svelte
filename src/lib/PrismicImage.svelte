@@ -1,7 +1,8 @@
 <script lang="ts">
 	import * as prismicH from "@prismicio/helpers";
 	import type * as prismicT from "@prismicio/types";
-	import { __PRODUCTION__ } from "$lib/__PRODUCTION__";
+	import type { HTMLImgAttributes } from "svelte/elements";
+	import { DEV } from "esm-env";
 
 	type PrismicImageProps = {
 		/**
@@ -53,9 +54,19 @@
 		 * https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/alt#decorative_images
 		 */
 		fallbackAlt?: "";
+		/**
+		 * PrismicImage will ignore any provided `src` property. The `src` property
+		 * is generated based on the provided `field`.
+		 */
+		src?: undefined;
+		/**
+		 * PrismicImage will ignore any provided `srcset` property. The `srcset`
+		 * property is generated based on the provided `field`.
+		 */
+		srcset?: undefined;
 	};
 
-	type $$Props = Omit<svelteHTML.IntrinsicElements["img"], "alt"> &
+	type $$Props = Omit<HTMLImgAttributes, "alt" | "src" | "srcset"> &
 		PrismicImageProps;
 
 	export let field: $$Props["field"];
@@ -73,6 +84,9 @@
 	export let alt: $$Props["alt"] = undefined;
 
 	export let fallbackAlt: $$Props["fallbackAlt"] = undefined;
+
+	delete $$restProps.src;
+	delete $$restProps.srcset;
 
 	const castInt = (
 		input: string | number | null | undefined,
@@ -119,7 +133,7 @@
 		resolvedWidth = castedHeight * ar;
 	}
 
-	if (!__PRODUCTION__) {
+	if (DEV) {
 		if (widths && pixelDensities) {
 			console.warn(
 				`[PrismicImage] Only one of "widths" or "pixelDensities" props can be provided. You can resolve this warning by removing either the "widths" or "pixelDensities" prop. "widths" will be used in this case.`,
@@ -140,14 +154,14 @@
 	}
 </script>
 
-<!-- 
+<!--
   @component
   Component to render a Prismic Image field as an `img` element with `width`, `height`, `alt`, `src`, and `srcset` attributes.
-  
+
   @example Rendering an Image field:
 	```svelte
-		<PrismicImage 
-			field={document.data.example_image} 
+		<PrismicImage
+			field={document.data.example_image}
 			imgixParams={{ sat: -100 }}
 		/>
   ```
@@ -165,13 +179,12 @@
 					widths: widths === "defaults" ? undefined : widths,
 					...imgixParams,
 			  })}
-
 	<img
 		{src}
 		{srcset}
 		alt={alt ?? field.alt ?? fallbackAlt}
 		width={width || height ? resolvedWidth : field.dimensions.width}
-		height={height || width ? resolvedHeight : field.dimensions.height}
+		height={height || (width ? resolvedHeight : field.dimensions.height)}
 		{...$$restProps}
 	/>
 {:else}

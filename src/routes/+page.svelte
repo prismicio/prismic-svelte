@@ -1,7 +1,17 @@
 <script lang="ts">
-	import { SliceZone, PrismicLink, PrismicImage } from "$lib";
-	import { RichText, CodeSnippet } from "./slices";
+	import {
+		SliceZone,
+		PrismicLink,
+		PrismicImage,
+		PrismicRichText,
+		PrismicText,
+		PrismicEmbed,
+	} from "$lib";
+
 	import type { PageData } from "./$types";
+
+	import CodeSnippet from "./slices/CodeSnippet.svelte";
+	import RichText from "./slices/RichText.svelte";
 
 	const components = {
 		rich_text: RichText,
@@ -13,10 +23,13 @@
 
 <main>
 	<h1>Welcome to SvelteKit</h1>
+	<h2><code>PrismicText</code></h2>
+	<PrismicText field={data.exampleDocument.data.example_rich_text} />
+	<h2><code>PrismicRichText</code></h2>
+	<PrismicRichText field={data.exampleDocument.data.example_rich_text} />
 	<h2><code>PrismicImage</code></h2>
 	<PrismicImage
 		field={data.exampleDocument.data.example_image}
-		pixelDensities="defaults"
 		height="200"
 		alt=""
 	/>
@@ -30,18 +43,20 @@
 		class="doggo"
 		field={data.exampleDocument.data.example_link}>Link</PrismicLink
 	>
+	<h2><code>PrismicEmbed</code></h2>
+	<PrismicEmbed field={data.exampleDocument.data.example_embed} />
 	<h2><code>SliceZone</code></h2>
 	<SliceZone slices={data.pageDocument.data.body} {components} />
 </main>
 
 <style>
 	main {
-		max-width: min(90%, 800px);
+		max-width: min(90%, 700px);
 		margin: auto;
 	}
 
 	:global(img) {
-		/* width: 100%; */
 		height: auto;
+		max-width: 100%;
 	}
 </style>
