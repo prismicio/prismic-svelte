@@ -28,21 +28,18 @@
 	export let linkResolver: LinkResolverFunction | undefined = undefined;
 
 	/**
-	 * An object that maps Rich Text blocks to functions.
+	 * An object that maps Rich Text blocks to Svelte components.
 	 *
 	 * **Important**: Your components must be wrapped in a function. For example:
 	 * `{ heading1: () => Heading }`, not: `{ heading1: Heading }`.
 	 *
-	 * @example A serializer that modififes `h1` and `em` elements:
+	 * @example A serializer that modififes `h1` elements:
 	 *
 	 * ```js
 	 * import Title from "./Title.svelte";
 	 *
-	 * const field = exampleRichText;
-	 *
 	 * const richTextSerializer = {
 	 * 	h1: () => Title,
-	 * 	em: ({ children }) => `<mark>${children}</mark>`,
 	 * };
 	 * ```
 	 */
