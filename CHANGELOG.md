@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/prismicio/prismic-svelte/compare/v0.0.9...v0.0.10) (2023-07-17)
+
+
+### Documentation
+
+* update rich text components prop definition ([f22dfeb](https://github.com/prismicio/prismic-svelte/commit/f22dfeb8ba1c4f3a4662db33a365cb3b444c93b8))
+
 ### [0.0.9](https://github.com/prismicio/prismic-svelte/compare/v0.0.7...v0.0.9) (2023-04-14)
 
 
