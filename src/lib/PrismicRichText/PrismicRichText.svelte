@@ -48,10 +48,10 @@
 		| RichTextFunctionSerializer<typeof SvelteComponent, TreeNode>
 		| undefined = undefined;
 
-	let resolvedSerializer =
+	$: resolvedSerializer =
 		typeof components === "object" ? wrapMapSerializer(components) : components;
 
-	const nodes = asTree(field).children;
+	$: nodes = asTree(field).children;
 </script>
 
 <!--
