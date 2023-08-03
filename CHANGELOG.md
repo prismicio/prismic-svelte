@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.11](https://github.com/prismicio/prismic-svelte/compare/v0.0.10...v0.0.11) (2023-08-03)
+
+
+### Bug Fixes
+
+* **PrismicRichText:** support reactive props ([2507f70](https://github.com/prismicio/prismic-svelte/commit/2507f70b45ad30895da9b2866e3e015ff060f4e9))
+
 ### [0.0.10](https://github.com/prismicio/prismic-svelte/compare/v0.0.9...v0.0.10) (2023-07-17)
 
 
