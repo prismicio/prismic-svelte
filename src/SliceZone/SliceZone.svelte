@@ -4,7 +4,10 @@
 	import type * as prismic from "@prismicio/client";
 	import type { SvelteComponent } from "svelte";
 
-	type SvelteSliceComponent = new (...args: any[]) => SvelteComponent<{
+	type SvelteSliceComponent = new (
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		...args: any[]
+	) => SvelteComponent<{
 		slice: SliceLike;
 		slices: SliceLike[];
 		context: unknown;
@@ -75,6 +78,7 @@
 	/**
 	 * Arbitrary data passed to all Slice components as a `context` prop.
 	 */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	export let context: any = {};
 
 	/**

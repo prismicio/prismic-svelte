@@ -24,6 +24,7 @@
 		data-oembed-type={field.type}
 		data-oembed-provider={field.provider_name}
 	>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		{@html field.html}
 	</div>
 {/if}
