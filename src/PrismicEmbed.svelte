@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { EmbedField, isFilled } from "@prismicio/client";
+	import type { EmbedField } from "@prismicio/client";
+	import { isFilled } from "@prismicio/client";
 
 	/**
 	 * An Embed field from Prismic.

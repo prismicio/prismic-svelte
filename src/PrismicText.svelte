@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { RichTextField, asText } from "@prismicio/client";
+	import type { RichTextField } from "@prismicio/client";
+	import { asText } from "@prismicio/client";
 
 	/**
 	 * A Rich Text or Title field from Prismic.

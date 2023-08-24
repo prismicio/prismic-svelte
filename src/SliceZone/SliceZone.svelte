@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TodoSliceComponent from "./TodoSliceComponent.svelte";
+	import TodoComponent from "./TodoComponent.svelte";
 
 	import type * as prismic from "@prismicio/client";
 	import type { SvelteComponent } from "svelte";
@@ -102,6 +102,6 @@
 	{#if Component}
 		<svelte:component this={Component} {slice} {slices} {context} {index} />
 	{:else}
-		<TodoSliceComponent {slice} />
+		<TodoComponent {slice} />
 	{/if}
 {/each}
