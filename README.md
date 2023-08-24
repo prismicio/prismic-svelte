@@ -1,16 +1,4 @@
-<!--
-
-TODO: Go through all "TODO" comments in the project
-
-TODO: Replace all on all files (README.md, CONTRIBUTING.md, bug_report.md, package.json):
-- package_name
-- package_description
-- github_org_slash_github_repo
-- github_repo
-
--->
-
-# package_name
+# @prismicio/svelte
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -19,9 +7,12 @@ TODO: Replace all on all files (README.md, CONTRIBUTING.md, bug_report.md, packa
 [![Conventional Commits][conventional-commits-src]][conventional-commits-href]
 [![License][license-src]][license-href]
 
-<!-- TODO: Replacing link to Prismic with [Prismic][prismic] is useful here -->
+> ⚠ &nbsp;This project is in an experimental state. Use it at your own risk or stay tuned for the official release!
 
-package_description.
+[Svelte][svelte] components to present [Prismic][prismic] content.
+
+- 📝 &nbsp;Display content from Prismic like [Rich Text][prismic-rich-text] and [Link][prismic-link] fields;
+- 🍡 &nbsp;Render Prismic [Slice Zones][prismic-slices] declaratively with Svelte components;
 
 <!--
 
@@ -38,7 +29,7 @@ Non-breaking space: &nbsp; are here on purpose to fix emoji rendering on certain
 ## Install
 
 ```bash
-npm install package_name
+npm install @prismicio/svelte
 ```
 
 ## Documentation
@@ -80,6 +71,10 @@ limitations under the License.
 <!-- Links -->
 
 [prismic]: https://prismic.io
+[svelte]: https://svelte.dev
+[prismic-rich-text]: https://prismic.io/docs/core-concepts/rich-text-title
+[prismic-link]: https://prismic.io/docs/core-concepts/link-content-relationship
+[prismic-slices]: https://prismic.io/docs/core-concepts/slices
 
 <!-- TODO: Replace link with a more useful one if available -->
 
@@ -90,21 +85,21 @@ limitations under the License.
 <!-- TODO: Replace link with a more useful one if available -->
 
 [forum-question]: https://community.prismic.io
-[repo-bug-report]: https://github.com/github_org_slash_github_repo/issues/new?assignees=&labels=bug&template=bug_report.md&title=
-[repo-feature-request]: https://github.com/github_org_slash_github_repo/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=
-[repo-pull-requests]: https://github.com/github_org_slash_github_repo/pulls
+[repo-bug-report]: https://github.com/prismicio/prismic-svelte/issues/new?assignees=&labels=bug&template=bug_report.md&title=
+[repo-feature-request]: https://github.com/prismicio/prismic-svelte/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=
+[repo-pull-requests]: https://github.com/prismicio/prismic-svelte/pulls
 
 <!-- Badges -->
 
-[npm-version-src]: https://img.shields.io/npm/v/package_name/latest.svg
-[npm-version-href]: https://npmjs.com/package/package_name
-[npm-downloads-src]: https://img.shields.io/npm/dm/package_name.svg
-[npm-downloads-href]: https://npmjs.com/package/package_name
-[github-actions-ci-src]: https://github.com/github_org_slash_github_repo/workflows/ci/badge.svg
-[github-actions-ci-href]: https://github.com/github_org_slash_github_repo/actions?query=workflow%3Aci
-[codecov-src]: https://img.shields.io/codecov/c/github/github_org_slash_github_repo.svg
-[codecov-href]: https://codecov.io/gh/github_org_slash_github_repo
+[npm-version-src]: https://img.shields.io/npm/v/@prismicio/svelte/latest.svg
+[npm-version-href]: https://npmjs.com/package/@prismicio/svelte
+[npm-downloads-src]: https://img.shields.io/npm/dm/@prismicio/svelte.svg
+[npm-downloads-href]: https://npmjs.com/package/@prismicio/svelte
+[github-actions-ci-src]: https://github.com/prismicio/prismic-svelte/workflows/ci/badge.svg
+[github-actions-ci-href]: https://github.com/prismicio/prismic-svelte/actions?query=workflow%3Aci
+[codecov-src]: https://img.shields.io/codecov/c/github/prismicio/prismic-svelte.svg
+[codecov-href]: https://codecov.io/gh/prismicio/prismic-svelte
 [conventional-commits-src]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white
 [conventional-commits-href]: https://conventionalcommits.org
-[license-src]: https://img.shields.io/npm/l/package_name.svg
-[license-href]: https://npmjs.com/package/package_name
+[license-src]: https://img.shields.io/npm/l/@prismicio/svelte.svg
+[license-href]: https://npmjs.com/package/@prismicio/svelte

@@ -12,7 +12,7 @@ For the latter, the [Quick Start](#quick-start) section below can help you. You 
 # First, fork the repository to your GitHub account if you aren't an existing maintainer
 
 # Clone your fork
-git clone git@github.com:<your-username>/github_repo.git
+git clone git@github.com:<your-username>/prismic-svelte.git
 
 # Create a feature branch with your initials and feature name
 git checkout -b <your-initials>/<feature-or-fix-description> # e.g. `lh/fix-win32-paths`
@@ -191,7 +191,7 @@ Ideally, all opened feature requests are discussed each month and implemented if
 
 We actively maintain a [TypeScript template][template] with Prismic's latest open-source standards. Keeping every project in sync with this template is nearly impossible so we're not trying to immediately reflect changes to the template in every project. Instead we consider a best practice to manually pull changes from the template into the project whenever someone is doing project maintenance and has time for it, or wants to enjoy the latest standards from it.
 
-## `package_name` in Prismic's Open-Source Ecosystem
+## `@prismicio/svelte` in Prismic's Open-Source Ecosystem
 
 Prismic's Open-Source ecosystem is built around a 3-stage pyramid:
 
@@ -445,5 +445,5 @@ The minimum Node version supported by the project is stated under the `engines` 
 [template-issue]: https://github.com/prismicio/prismic-typescript-template/issues/new/choose
 [changelog]: ./CHANGELOG.md
 [forum-question]: https://community.prismic.io
-[repo-issue]: https://github.com/github_org_slash_github_repo/issues/new/choose
-[repo-pull-requests]: https://github.com/github_org_slash_github_repo/pulls
+[repo-issue]: https://github.com/prismicio/prismic-svelte/issues/new/choose
+[repo-pull-requests]: https://github.com/prismicio/prismic-svelte/pulls
