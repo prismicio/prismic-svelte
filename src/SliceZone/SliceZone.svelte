@@ -4,15 +4,14 @@
 	import type * as prismic from "@prismicio/client";
 	import type { SvelteComponent } from "svelte";
 
-	type SliceComponents = Record<
-		string,
-		typeof SvelteComponent<{
-			slice: SliceLike;
-			slices: SliceLike[];
-			context: unknown;
-			index: number;
-		}>
-	>;
+	type SvelteSliceComponent = new (...args: any[]) => SvelteComponent<{
+		slice: SliceLike;
+		slices: SliceLike[];
+		context: unknown;
+		index: number;
+	}>;
+
+	type SliceComponents = Record<string, SvelteSliceComponent>;
 
 	/**
 	 * The minimum required properties to represent a Prismic Slice from the
@@ -82,7 +81,7 @@
 	 * The Svelte component rendered if a component mapping from the `components`
 	 * prop cannot be found.
 	 */
-	export let defaultComponent: typeof SvelteComponent | undefined = undefined;
+	export let defaultComponent: SvelteSliceComponent | undefined = undefined;
 </script>
 
 <!--
