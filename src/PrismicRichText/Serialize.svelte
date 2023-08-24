@@ -27,6 +27,7 @@
 		this={components[rewrittenNodeTypes[child.type] || child.type] ||
 			DefaultComponent}
 		node={child.node}
+		key={child.key}
 	>
 		{#if child.children.length > 0}
 			<svelte:self children={child.children} {components} />
