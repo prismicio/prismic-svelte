@@ -1,64 +1,60 @@
 <script lang="ts">
-	import * as prismic from "@prismicio/client";
+	import {
+		asLinkAttrs,
+		type AsLinkAttrsConfig,
+		type LinkField,
+		type PrismicDocument,
+	} from "@prismicio/client";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
-	// import { usePrismic } from "../usePrismic";
 
-	type PrismicLinkProps = {
+	type $$Props = Omit<HTMLAnchorAttributes, "rel" | "href"> & {
 		/**
-		 * A Prismic Link field, Content Relationship field, Link to Media field or
-		 * Document.
+		 * The `rel` attribute for the link. By default, `"noreferrer"` is provided
+		 * if the link's URL is external. This prop can be provided a function to
+		 * use the link's metadata to determine the `rel` value.
 		 */
-		field: prismic.LinkField | prismic.PrismicDocument;
+		rel?: string | AsLinkAttrsConfig["rel"];
+	} & (
+			| {
+					/**
+					 * A Prismic link field, content relationship field, or link to media
+					 * field.
+					 */
+					field: LinkField;
+					document?: never;
+			  }
+			| {
+					/**
+					 * A Prismic document.
+					 */
+					document: PrismicDocument;
+					field?: never;
+			  }
+		);
 
-		/**
-		 * The Link Resolver used to resolve links.
-		 *
-		 * @remarks
-		 * If your app uses Route Resolvers when querying for your Prismic
-		 * repository's content, a Link Resolver does not need to be provided.
-		 *
-		 * @see Learn about Link Resolvers and Route Resolvers {@link https://prismic.io/docs/core-concepts/link-resolver-route-resolver}
-		 */
-		linkResolver?: prismic.LinkResolverFunction | undefined;
-
-		/**
-		 * PrismicLink does not accept an `href` property. The `href` attribute is
-		 * generated based on the field provided. If an `href` attribute is
-		 * provided, it will be ignored.
-		 */
-		href?: undefined;
-	};
-
-	type $$Props = Omit<HTMLAnchorAttributes, "href"> & PrismicLinkProps;
-
-	export let field: $$Props["field"];
-	export let linkResolver: $$Props["linkResolver"] = undefined;
-
-	export let target: $$Props["target"] = undefined;
-	const resolvedTarget =
-		target || (field && "target" in field && field.target) || undefined;
-
+	export let field: $$Props["field"] = undefined;
+	export let document: $$Props["document"] = undefined;
 	export let rel: $$Props["rel"] = undefined;
-	const resolvedRel =
-		rel || (target === "_blank" ? "noopener noreferrer" : undefined);
 
-	const href = (field ? prismic.asLink(field, linkResolver) : "") || "";
+	$: linkAttrs = asLinkAttrs(field ?? document, {
+		rel: typeof rel === "function" ? rel : undefined,
+	});
 
-	delete $$restProps.href;
+	$: resolvedRel = typeof rel === "string" ? rel : linkAttrs.rel;
 </script>
 
 <!--
   @component
-  Component to render a Prismic Link, Link to Media, Content Relationship, or whole Document as an `a` tag.
+  Component to render a Prismic link, link to media, content relationship, or whole document as an `a` tag.
 
   @example Rendering a Link field:
 	```svelte
 		<PrismicLink field={document.data.example_link}>
 			Example anchor text.
 		</PrismicLink>
-  ```
+	```
 -->
 
-<a {href} {...$$restProps} rel={resolvedRel} target={resolvedTarget}>
+<a {...linkAttrs} rel={resolvedRel} href={linkAttrs.href} {...$$restProps}>
 	<slot />
 </a>
