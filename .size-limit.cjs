@@ -24,6 +24,12 @@ module.exports = [
 			modifyEsbuildConfig(config) {
 				config.platform = "node";
 
+				// Add basic `*.svelte` support.
+				config.loader = {
+					...config.loader,
+					".svelte": "text",
+				};
+
 				return config;
 			},
 		};
