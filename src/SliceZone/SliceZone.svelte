@@ -6,7 +6,12 @@
 
 	type SliceComponents = Record<
 		string,
-		new (...args: any[]) => SvelteComponent
+		typeof SvelteComponent<{
+			slice: SliceLike;
+			slices: SliceLike[];
+			context: unknown;
+			index: number;
+		}>
 	>;
 
 	/**
@@ -52,7 +57,7 @@
 	export let slices: SliceLike[] = [];
 
 	/**
-	 * An object that maps Slice components to their corresponding API IDs
+	 * An object that maps Slice components to their corresponding API IDs.
 	 *
 	 * @example An example map:
 	 *
@@ -77,23 +82,23 @@
 	 * The Svelte component rendered if a component mapping from the `components`
 	 * prop cannot be found.
 	 */
-	export let defaultComponent:
-		| SvelteComponent
-		| (new (...args: any[]) => SvelteComponent)
-		| undefined = undefined;
+	export let defaultComponent: typeof SvelteComponent | undefined = undefined;
 </script>
 
 <!--
   @component
-  Component to render an array of Prismic Slices.
+  Component to render an array of Prismic slices.
 
-  @example Rendering a Rich Text field:
+  @example Rendering a Slice Zone:
 	```svelte
-		<SliceZone slices={document.data.slices} components={{
-			block_quote: BlockQuote,
-			hero_image: HeroImage
-		}} />
-  ```
+		<SliceZone
+			slices={document.data.slices}
+			components={{
+				block_quote: BlockQuote,
+				hero_image: HeroImage
+			}}
+		/>
+	```
 -->
 
 {#each slices as slice, index}
