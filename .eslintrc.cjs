@@ -7,10 +7,12 @@ module.exports = {
 	parserOptions: {
 		parser: "@typescript-eslint/parser",
 		ecmaVersion: 2020,
+		extraFileExtensions: [".svelte"],
 	},
 	extends: [
 		"plugin:@typescript-eslint/eslint-recommended",
 		"plugin:@typescript-eslint/recommended",
+		"plugin:svelte/recommended",
 		"plugin:prettier/recommended",
 	],
 	plugins: ["eslint-plugin-tsdoc"],
@@ -35,4 +37,13 @@ module.exports = {
 		"@typescript-eslint/explicit-module-boundary-types": "error",
 		"tsdoc/syntax": "warn",
 	},
+	overrides: [
+		{
+			files: ["*.svelte"],
+			parser: "svelte-eslint-parser",
+			parserOptions: {
+				parser: "@typescript-eslint/parser",
+			},
+		},
+	],
 };
