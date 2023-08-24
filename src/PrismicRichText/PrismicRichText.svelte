@@ -7,12 +7,12 @@
 	import Serialize from "./Serialize.svelte";
 
 	/**
-	 * The Prismic Rich Text field to render.
+	 * The Prismic rich text field to render.
 	 */
 	export let field: RichTextField;
 
 	/**
-	 * An object that maps a Rich Text block type to a Svelte component.
+	 * An object that maps a rich text block type to a Svelte component.
 	 */
 	export let components: SvelteRichTextSerializer = {};
 
