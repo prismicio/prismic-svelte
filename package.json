@@ -48,11 +48,11 @@
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"dependencies": {
-		"@prismicio/client": "^6.7.3",
+		"@prismicio/client": "^7.1.1",
 		"@prismicio/helpers": "^2.3.9",
-		"@prismicio/richtext": "^2.2.0-alpha.0",
+		"@prismicio/richtext": "^2.1.5",
 		"@sveltejs/kit": "^1.8.3",
-		"svelte": "^3.55.1"
+		"svelte": "^4.0.5"
 	},
 	"devDependencies": {
 		"@prismicio/mock": "^0.2.0",
@@ -76,7 +76,6 @@
 		"standard-version": "^9.3.2",
 		"svelte-check": "^3.0.3",
 		"svelte-preprocess": "^5.0.1",
-		"svelte2tsx": "^0.6.1",
 		"tslib": "^2.5.0",
 		"typescript": "^4.9.5",
 		"vitest": "^0.28.5"

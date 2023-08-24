@@ -1,33 +1,34 @@
 <script lang="ts">
-	import type { SvelteComponent } from "svelte";
-	import type {
-		RichTextFunctionSerializer,
-		TreeNode,
-	} from "@prismicio/richtext";
-	import type { LinkResolverFunction } from "@prismicio/helpers";
+	import type { RichTextNodeType } from "@prismicio/client";
+	import type { asTree } from "@prismicio/richtext";
 
-	import Default from "./DefaultComponent.svelte";
+	import type { SvelteRichTextMapSerializer } from "./types";
+	import DefaultComponent from "./DefaultComponent.svelte";
 
-	export let serializer:
-		| RichTextFunctionSerializer<typeof SvelteComponent, TreeNode>
-		| undefined;
-	export let nodes: TreeNode[] = [];
-	export let linkResolver: LinkResolverFunction | undefined = undefined;
+	export let components: SvelteRichTextMapSerializer = {};
+	export let children: ReturnType<typeof asTree>["children"];
+
+	const rewrittenNodeTypes: Partial<
+		Record<
+			(typeof RichTextNodeType)[keyof typeof RichTextNodeType],
+			keyof typeof RichTextNodeType
+		>
+	> = {
+		"list-item": "listItem",
+		"o-list-item": "oListItem",
+		"group-list-item": "list",
+		"group-o-list-item": "oList",
+	};
 </script>
 
-{#each nodes as node}
+{#each children as child}
 	<svelte:component
-		this={(serializer &&
-			serializer(node.type, node.node, node.text, node.children, node.key)) ||
-			Default}
-		type={node.type}
-		node={node.node}
-		text={node.text}
-		key={node.key}
-		{linkResolver}
+		this={components[rewrittenNodeTypes[child.type] || child.type] ||
+			DefaultComponent}
+		node={child.node}
 	>
-		{#if node.children.length > 0}
-			<svelte:self nodes={node.children} {serializer} />
+		{#if child.children.length > 0}
+			<svelte:self children={child.children} {components} />
 		{/if}
 	</svelte:component>
 {/each}
