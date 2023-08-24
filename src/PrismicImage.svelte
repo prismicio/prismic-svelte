@@ -143,6 +143,19 @@
 	}
 </script>
 
+<!--
+  @component
+  Component to render a Prismic image field as an `img` element with `width`, `height`, `alt`, `src`, and `srcset` attributes.
+
+  @example Rendering an image field:
+	```svelte
+		<PrismicImage
+			field={document.data.example_image}
+			imgixParams={{ sat: -100 }}
+		/>
+	```
+-->
+
 {#if isFilled.imageThumbnail(field)}
 	<img
 		{src}

@@ -19,4 +19,14 @@
 	$: children = asTree(field).children;
 </script>
 
+<!--
+  @component
+  Component to render a Prismic rich text field.
+
+  @example Rendering a rich text field:
+	```svelte
+		<PrismicRichText field={document.data.example_rich_text} />
+	```
+-->
+
 <Serialize {children} {components} />
