@@ -10,12 +10,12 @@
 
 <!--
   @component
-  Component to render a Prismic Embed field.
+  Component to render a Prismic embed field.
 
-  @example Rendering an Embed field:
+  @example Rendering an embed field:
 	```svelte
 		<PrismicEmbed field={document.data.example_embed} />
-  ```
+	```
 -->
 
 {#if isFilled.embed(field)}
