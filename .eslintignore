@@ -3,7 +3,6 @@
 # custom
 dist
 examples/**/package-lock.json
-.svelte-kit
 
 # os
 .DS_Store
