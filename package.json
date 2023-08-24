@@ -15,18 +15,13 @@
 	"type": "module",
 	"exports": {
 		".": {
-			"require": {
-				"types": "./dist/index.d.ts",
-				"default": "./dist/index.cjs"
-			},
-			"import": {
-				"types": "./dist/index.d.ts",
-				"default": "./dist/index.js"
-			}
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js",
+			"default": "./dist/index.js"
 		},
 		"./package.json": "./package.json"
 	},
-	"main": "./dist/index.cjs",
+	"main": "./dist/index.js",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"files": [
@@ -34,24 +29,31 @@
 		"./src"
 	],
 	"scripts": {
-		"build": "vite build",
-		"dev": "vite build --watch",
+		"build": "svelte-package --input ./src",
+		"dev": "svelte-package --input ./src --watch",
 		"format": "prettier --write .",
+		"lint": "eslint --ext .js,.ts .",
 		"prepare": "npm run build",
 		"release": "npm run test && standard-version && git push --follow-tags && npm run build && npm publish",
-		"release:dry": "standard-version --dry-run",
 		"release:alpha": "npm run test && standard-version --release-as major --prerelease alpha && git push --follow-tags && npm run build && npm publish --tag alpha",
 		"release:alpha:dry": "standard-version --release-as major --prerelease alpha --dry-run",
-		"lint": "eslint --ext .js,.ts .",
+		"release:dry": "standard-version --dry-run",
+		"size": "size-limit",
+		"test": "npm run lint && npm run types && npm run unit && npm run build && npm run size",
 		"types": "vitest typecheck --run && tsc --noEmit",
 		"types:watch": "vitest typecheck",
 		"unit": "vitest run --coverage",
-		"unit:watch": "vitest watch",
-		"size": "size-limit",
-		"test": "npm run lint && npm run types && npm run unit && npm run build && npm run size"
+		"unit:watch": "vitest watch"
+	},
+	"dependencies": {
+		"@prismicio/richtext": "^2.1.5",
+		"esm-env": "^1.0.0"
 	},
 	"devDependencies": {
+		"@prismicio/client": "^7.1.1",
 		"@size-limit/preset-small-lib": "^8.2.6",
+		"@sveltejs/package": "^2.2.1",
+		"@sveltejs/vite-plugin-svelte": "^2.4.5",
 		"@trivago/prettier-plugin-sort-imports": "^4.2.0",
 		"@typescript-eslint/eslint-plugin": "^6.4.1",
 		"@typescript-eslint/parser": "^6.4.1",
@@ -62,12 +64,16 @@
 		"eslint-plugin-tsdoc": "^0.2.17",
 		"prettier": "^3.0.2",
 		"prettier-plugin-jsdoc": "^1.0.1",
+		"prettier-plugin-svelte": "^3.0.3",
 		"size-limit": "^8.2.6",
 		"standard-version": "^9.5.0",
+		"svelte": "^4.2.0",
 		"typescript": "^5.1.6",
-		"vite": "^4.4.9",
-		"vite-plugin-sdk": "^0.1.1",
 		"vitest": "^0.34.2"
+	},
+	"peerDependencies": {
+		"@prismicio/client": ">=7",
+		"svelte": ">=4"
 	},
 	"engines": {
 		"node": ">=14.15.0"

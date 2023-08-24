@@ -1,8 +1,9 @@
-import { defineConfig } from "vite";
-import sdk from "vite-plugin-sdk";
+import { defineConfig } from "vitest/config";
+
+import { svelte } from "@sveltejs/vite-plugin-svelte";
 
 export default defineConfig({
-	plugins: [sdk()],
+	plugins: [svelte({ hot: false })],
 	test: {
 		coverage: {
 			provider: "v8",
