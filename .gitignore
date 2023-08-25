@@ -1,7 +1,5 @@
 # custom
 dist
-build
-package
 examples/**/package-lock.json
 .svelte-kit
 
@@ -23,9 +21,6 @@ yarn.lock
 
 # npm
 npm-debug.log*
-
-# sveltekit
-/.svelte-kit
 
 # tests
 coverage

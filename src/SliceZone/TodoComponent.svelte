@@ -5,11 +5,12 @@
 
 	const type = "slice_type" in slice ? slice.slice_type : slice.type;
 
-	if (DEV)
+	if (DEV) {
 		console.warn(
 			`[SliceZone] Could not find a component for Slice type "${type}"`,
 			slice,
 		);
+	}
 </script>
 
 {#if DEV}

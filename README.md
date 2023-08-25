@@ -1,13 +1,3 @@
-<!--
-
-Replace all on all files (README.md, CONTRIBUTING.md, bug_report.md, package.json):
-- @prismicio/svelte
-- Svelte components and helpers to fetch and present Prismic content
-- prismicio/prismic-svelte
-- prismic-svelte
-
--->
-
 # @prismicio/svelte
 
 [![npm version][npm-version-src]][npm-version-href]
@@ -17,15 +7,24 @@ Replace all on all files (README.md, CONTRIBUTING.md, bug_report.md, package.jso
 [![Conventional Commits][conventional-commits-src]][conventional-commits-href]
 [![License][license-src]][license-href]
 
-<!-- TODO: Replacing link to Prismic with [Prismic][prismic] is useful here -->
-
 > ⚠ &nbsp;This project is in an experimental state. Use it at your own risk or stay tuned for the official release!
 
-[Svelte][svelte] components and helpers to fetch and present [Prismic][prismic] content.
+[Svelte][svelte] components to present [Prismic][prismic] content.
 
 - 📝 &nbsp;Display content from Prismic like [Rich Text][prismic-rich-text] and [Link][prismic-link] fields;
 - 🍡 &nbsp;Render Prismic [Slice Zones][prismic-slices] declaratively with Svelte components;
-- 🎣 &nbsp;Fetch Prismic content.
+
+<!--
+
+TODO: Create a small list of package features:
+
+- 🤔 &nbsp;A useful feature;
+- 🥴 &nbsp;Another useful feature;
+- 🙃 &nbsp;A final useful feature.
+
+Non-breaking space: &nbsp; are here on purpose to fix emoji rendering on certain systems.
+
+-->
 
 ## Install
 
@@ -54,34 +53,34 @@ For more clarity on this project and its structure you can also check out the de
 ## License
 
 ```
-   Copyright 2013-2022 Prismic <contact@prismic.io> (https://prismic.io)
+Copyright 2013-2023 Prismic <contact@prismic.io> (https://prismic.io)
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```
 
 <!-- Links -->
 
 [prismic]: https://prismic.io
-
-<!-- TODO: Replace link with a more useful one if available -->
-
-[prismic-docs]: https://prismic.io/docs/technical-reference/prismicio-svelte
-[changelog]: ./CHANGELOG.md
-[contributing]: ./CONTRIBUTING.md
 [svelte]: https://svelte.dev
 [prismic-rich-text]: https://prismic.io/docs/core-concepts/rich-text-title
 [prismic-link]: https://prismic.io/docs/core-concepts/link-content-relationship
 [prismic-slices]: https://prismic.io/docs/core-concepts/slices
+
+<!-- TODO: Replace link with a more useful one if available -->
+
+[prismic-docs]: https://prismic.io/docs
+[changelog]: ./CHANGELOG.md
+[contributing]: ./CONTRIBUTING.md
 
 <!-- TODO: Replace link with a more useful one if available -->
 
@@ -100,7 +99,7 @@ For more clarity on this project and its structure you can also check out the de
 [github-actions-ci-href]: https://github.com/prismicio/prismic-svelte/actions?query=workflow%3Aci
 [codecov-src]: https://img.shields.io/codecov/c/github/prismicio/prismic-svelte.svg
 [codecov-href]: https://codecov.io/gh/prismicio/prismic-svelte
-[conventional-commits-src]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
+[conventional-commits-src]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white
 [conventional-commits-href]: https://conventionalcommits.org
 [license-src]: https://img.shields.io/npm/l/@prismicio/svelte.svg
 [license-href]: https://npmjs.com/package/@prismicio/svelte

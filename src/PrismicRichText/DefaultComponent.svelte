@@ -1,23 +1,11 @@
 <script lang="ts">
-	import type { LinkResolverFunction } from "@prismicio/helpers";
-	import type { TreeNode } from "@prismicio/richtext";
+	import type { RTAnyNode } from "@prismicio/client";
 
 	import PrismicEmbed from "../PrismicEmbed.svelte";
 	import PrismicImage from "../PrismicImage.svelte";
 	import PrismicLink from "../PrismicLink.svelte";
 
-	export let node: TreeNode["node"];
-	export let key: TreeNode["key"];
-	export let text: TreeNode["text"];
-	export let type: TreeNode["type"];
-
-	// These variables are not used in the component, but we need to
-	// superficially use them to supress development warnings.
-	key;
-	text;
-	type;
-
-	export let linkResolver: LinkResolverFunction | undefined = undefined;
+	export let node: RTAnyNode;
 </script>
 
 {#if node.type === "heading1"}
@@ -55,7 +43,7 @@
 {:else if node.type === "embed"}
 	<PrismicEmbed field={node.oembed} />
 {:else if node.type === "hyperlink"}
-	<PrismicLink {linkResolver} field={node.data}><slot /></PrismicLink>
+	<PrismicLink field={node.data}><slot /></PrismicLink>
 {:else if node.type === "label"}
 	<span class={node.data.label}><slot /></span>
 {:else}

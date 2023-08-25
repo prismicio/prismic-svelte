@@ -1,13 +1,20 @@
 <script lang="ts">
-	import TodoSliceComponent from "./TodoSliceComponent.svelte";
+	import TodoComponent from "./TodoComponent.svelte";
 
-	import type * as prismicT from "@prismicio/types";
+	import type * as prismic from "@prismicio/client";
 	import type { SvelteComponent } from "svelte";
 
-	type SliceComponents = Record<
-		string,
-		new (...args: any[]) => SvelteComponent
-	>;
+	type SvelteSliceComponent = new (
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		...args: any[]
+	) => SvelteComponent<{
+		slice: SliceLike;
+		slices: SliceLike[];
+		context: unknown;
+		index: number;
+	}>;
+
+	type SliceComponents = Record<string, SvelteSliceComponent>;
 
 	/**
 	 * The minimum required properties to represent a Prismic Slice from the
@@ -19,7 +26,7 @@
 	 * @typeParam SliceType - Type name of the Slice.
 	 */
 	type SliceLikeRestV2<SliceType extends string = string> = {
-		slice_type: prismicT.Slice<SliceType>["slice_type"];
+		slice_type: prismic.Slice<SliceType>["slice_type"];
 	};
 
 	/**
@@ -29,7 +36,7 @@
 	 * @typeParam SliceType - Type name of the Slice.
 	 */
 	type SliceLikeGraphQL<SliceType extends string = string> = {
-		type: prismicT.Slice<SliceType>["slice_type"];
+		type: prismic.Slice<SliceType>["slice_type"];
 	};
 
 	/**
@@ -52,7 +59,7 @@
 	export let slices: SliceLike[] = [];
 
 	/**
-	 * An object that maps Slice components to their corresponding API IDs
+	 * An object that maps Slice components to their corresponding API IDs.
 	 *
 	 * @example An example map:
 	 *
@@ -71,29 +78,30 @@
 	/**
 	 * Arbitrary data passed to all Slice components as a `context` prop.
 	 */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	export let context: any = {};
 
 	/**
 	 * The Svelte component rendered if a component mapping from the `components`
 	 * prop cannot be found.
 	 */
-	export let defaultComponent:
-		| SvelteComponent
-		| (new (...args: any[]) => SvelteComponent)
-		| undefined = undefined;
+	export let defaultComponent: SvelteSliceComponent | undefined = undefined;
 </script>
 
 <!--
   @component
-  Component to render an array of Prismic Slices.
+  Component to render an array of Prismic slices.
 
-  @example Rendering a Rich Text field:
+  @example Rendering a Slice Zone:
 	```svelte
-		<SliceZone slices={document.data.slices} components={{
-			block_quote: BlockQuote,
-			hero_image: HeroImage
-		}} />
-  ```
+		<SliceZone
+			slices={document.data.slices}
+			components={{
+				block_quote: BlockQuote,
+				hero_image: HeroImage
+			}}
+		/>
+	```
 -->
 
 {#each slices as slice, index}
@@ -102,6 +110,6 @@
 	{#if Component}
 		<svelte:component this={Component} {slice} {slices} {context} {index} />
 	{:else}
-		<TodoSliceComponent {slice} />
+		<TodoComponent {slice} />
 	{/if}
 {/each}
