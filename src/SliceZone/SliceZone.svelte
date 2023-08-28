@@ -8,10 +8,10 @@
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		...args: any[]
 	) => SvelteComponent<{
-		slice: SliceLike;
-		slices: SliceLike[];
-		context: unknown;
-		index: number;
+		slice?: SliceLike;
+		slices?: SliceLike[];
+		context?: unknown;
+		index?: number;
 	}>;
 
 	type SliceComponents = Record<string, SvelteSliceComponent>;
