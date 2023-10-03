@@ -48,7 +48,6 @@
 	<span class={node.data.label}><slot /></span>
 {:else}
 	{#each node.text.split("\n") as line, index}
-		<!-- This formatting is intentional to prevent unwanted whitespace between elements. -->
 		{#if index > 0}<br />{/if}{line}
 	{/each}
 {/if}
