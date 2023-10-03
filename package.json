@@ -29,6 +29,16 @@
 	"main": "./dist/index.js",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
+	"typesVersions": {
+		"*": {
+			"*": [
+				"dist/index.d.ts"
+			],
+			"kit": [
+				"dist/kit/index.d.ts"
+			]
+		}
+	},
 	"files": [
 		"./dist",
 		"./src"
