@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/prismicio/prismic-svelte/compare/v1.0.0...v1.0.1) (2023-10-03)
+
+
+### Bug Fixes
+
+* prevent flash of unwanted whitespace in `<PrismicRichText>` ([#15](https://github.com/prismicio/prismic-svelte/issues/15)) ([82b224a](https://github.com/prismicio/prismic-svelte/commit/82b224a184413dfe60c8b78180bae01814c9c55e))
+
 ## [1.0.0](https://github.com/prismicio/prismic-svelte/compare/v0.1.2...v1.0.0) (2023-10-03)
 
 
