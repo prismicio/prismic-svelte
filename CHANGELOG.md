@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/prismicio/prismic-svelte/compare/v0.1.2...v1.0.0) (2023-10-03)
+
+
+### Features
+
+* SvelteKit previews ([#14](https://github.com/prismicio/prismic-svelte/issues/14)) ([3460881](https://github.com/prismicio/prismic-svelte/commit/346088109a53d4021d6d722141069cc3d0107f23))
+
 ### [0.1.2](https://github.com/prismicio/prismic-svelte/compare/v0.1.1...v0.1.2) (2023-08-30)
 
 

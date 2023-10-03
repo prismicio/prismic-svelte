@@ -1,6 +1,6 @@
 {
 	"name": "@prismicio/svelte",
-	"version": "0.1.2",
+	"version": "1.0.0",
 	"description": "Svelte components to present Prismic content.",
 	"keywords": [
 		"typescript",
