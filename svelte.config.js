@@ -1,7 +1,10 @@
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
-// eslint-disable-next-line tsdoc/syntax
-/** @type {import('@sveltejs/kit').Config} */
+/* eslint-disable tsdoc/syntax */
+/**
+ * @type {import("@sveltejs/kit").Config}
+ */
+/* eslint-enable tsdoc/syntax */
 const config = {
 	preprocess: vitePreprocess(),
 };
