@@ -1,5 +1,4 @@
 import * as prismic from "@prismicio/client";
-import { redirect } from "@sveltejs/kit";
 
 export type RedirectToPreviewURLConfig = {
 	/**
@@ -27,10 +26,25 @@ export type RedirectToPreviewURLConfig = {
 /**
  * Redirects a visitor to the URL of a previewed Prismic document from within a
  * SvelteKit `+server` file.
+ *
+ * Return the created `Response` in your `+server` file.
+ *
+ * @example
+ *
+ * ```typescript
+ * import { createClient } from "$lib/prismicio.js";
+ * import { redirectToPreviewURL } from "@prismicio/svelte/kit";
+ *
+ * export async function GET({ fetch, request }) {
+ * 	const client = createClient({ fetch });
+ *
+ * 	return await redirectToPreviewURL({ client, request });
+ * }
+ * ```
  */
 export const redirectToPreviewURL = async (
 	config: RedirectToPreviewURLConfig,
-): Promise<never> => {
+): Promise<Response> => {
 	const previewToken =
 		new URL(config.request.url).searchParams.get("token") ?? undefined;
 	const documentID =
@@ -42,5 +56,10 @@ export const redirectToPreviewURL = async (
 		defaultURL: config.defaultURL || "/",
 	});
 
-	throw redirect(307, previewURL);
+	return new Response(undefined, {
+		status: 307,
+		headers: {
+			Location: previewURL,
+		},
+	});
 };
