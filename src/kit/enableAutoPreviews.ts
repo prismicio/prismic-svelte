@@ -19,6 +19,12 @@ export type EnableAutoPreviewsConfig = {
 	cookies?: Cookies;
 };
 
+/**
+ * Configures a Prismic client to automatically query draft content during a
+ * preview session.
+ *
+ * @param config - Configuration for the function.
+ */
 export const enableAutoPreviews = (config: EnableAutoPreviewsConfig): void => {
 	if (!config.cookies) {
 		return;
