@@ -35,29 +35,37 @@
 	onMount(() => {
 		const controller = new AbortController();
 
-		window.addEventListener("prismicPreviewUpdate", (event) => {
-			event.preventDefault();
-			invalidateAll();
-		});
-		window.addEventListener("prismicPreviewEnd", (event) => {
-			event.preventDefault();
+		window.addEventListener(
+			"prismicPreviewUpdate",
+			(event) => {
+				event.preventDefault();
+				invalidateAll();
+			},
+			{ signal: controller.signal },
+		);
+		window.addEventListener(
+			"prismicPreviewEnd",
+			(event) => {
+				event.preventDefault();
 
-			endingPreview = true;
+				endingPreview = true;
 
-			goto(
-				new URL(
-					window.location.pathname.replace(
-						new RegExp(`^(\/${routePrefix}\/?$|\/${routePrefix}\/)`),
-						"/",
+				goto(
+					new URL(
+						window.location.pathname.replace(
+							new RegExp(`^(\/${routePrefix}\/?$|\/${routePrefix}\/)`),
+							"/",
+						),
+						window.location.origin,
 					),
-					window.location.origin,
-				),
-				{
-					invalidateAll: true,
-					noScroll: true,
-				},
-			);
-		});
+					{
+						invalidateAll: true,
+						noScroll: true,
+					},
+				);
+			},
+			{ signal: controller.signal },
+		);
 
 		return () => {
 			controller.abort();
