@@ -1,4 +1,5 @@
 import * as prismic from "@prismicio/client";
+import { Cookies } from "@sveltejs/kit";
 
 export type RedirectToPreviewURLConfig = {
 	/**
@@ -17,10 +18,22 @@ export type RedirectToPreviewURLConfig = {
 	request: Request;
 
 	/**
+	 * The `cookies` object from a `+server` file.
+	 *
+	 * @see SvelteKit `+server` docs: \<https://kit.svelte.dev/docs/routing#server\>
+	 */
+	cookies: Cookies;
+
+	/**
 	 * The default redirect URL if a URL cannot be determined for the previewed
 	 * document.
 	 */
 	defaultURL?: string;
+
+	/**
+	 * The route parameter prefixed during preview sessions.
+	 */
+	routePrefix?: string;
 };
 
 /**
@@ -49,6 +62,7 @@ export const redirectToPreviewURL = async (
 		new URL(config.request.url).searchParams.get("token") ?? undefined;
 	const documentID =
 		new URL(config.request.url).searchParams.get("documentId") ?? undefined;
+	const routePrefix = config.routePrefix ?? "preview";
 
 	const previewURL = await config.client.resolvePreviewURL({
 		previewToken,
@@ -56,10 +70,19 @@ export const redirectToPreviewURL = async (
 		defaultURL: config.defaultURL || "/",
 	});
 
+	// Prevent a flash of non-preview content by setting the preview token
+	// on the initial page load.
+	if (previewToken) {
+		config.cookies.set(prismic.cookie.preview, previewToken, {
+			path: "/",
+			httpOnly: false,
+		});
+	}
+
 	return new Response(undefined, {
 		status: 307,
 		headers: {
-			Location: previewURL,
+			Location: "/" + routePrefix + previewURL,
 		},
 	});
 };
