@@ -13,8 +13,8 @@ export type EnableAutoPreviewsConfig = {
 	client: Pick<prismic.Client, "queryContentFromRef">;
 
 	/**
-	 * The `cookies` object provided to a route's `load()` function. This parmeter
-	 * is required to load previews.
+	 * The `cookies` object provided to a route's `load()` function. This
+	 * parameter is required to load previews.
 	 */
 	cookies?: Cookies;
 };
