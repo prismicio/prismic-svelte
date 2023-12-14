@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/prismicio/prismic-svelte/compare/v1.0.2...v1.0.3) (2023-12-14)
+
+
+### Documentation
+
+* fix typo ([b62b2cb](https://github.com/prismicio/prismic-svelte/commit/b62b2cb35e056567839e5967f26520031e0ff398))
+
+
+### Chore
+
+* **deps:** update dependencies ([#17](https://github.com/prismicio/prismic-svelte/issues/17)) ([c32ea15](https://github.com/prismicio/prismic-svelte/commit/c32ea151ede14ece69ee809ac0b3476dd772a4fe))
+
 ### [1.0.2](https://github.com/prismicio/prismic-svelte/compare/v1.0.1...v1.0.2) (2023-10-13)
 
 
