@@ -7,8 +7,6 @@
 [![Conventional Commits][conventional-commits-src]][conventional-commits-href]
 [![License][license-src]][license-href]
 
-> ⚠ &nbsp;This project is in an experimental state. Use it at your own risk or stay tuned for the official release!
-
 [Svelte][svelte] components to present [Prismic][prismic] content.
 
 - 📝 &nbsp;Display content from Prismic like [Rich Text][prismic-rich-text] and [Link][prismic-link] fields;
