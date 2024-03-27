@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/prismicio/prismic-svelte/compare/v1.0.3...v1.1.0) (2024-03-27)
+
+
+### Features
+
+* **SliceZone:** add support for mapped Slice Zones created with `@prismicio/client`'s `unstable_mapSliceZone()` ([#19](https://github.com/prismicio/prismic-svelte/issues/19)) ([f9d1162](https://github.com/prismicio/prismic-svelte/commit/f9d116206e0585a58056d8e9f3039134eb42d064))
+
+
+### Documentation
+
+* remove experimental message from README ([8c00747](https://github.com/prismicio/prismic-svelte/commit/8c00747bc2b34bd15db78cd75aa4cb7c00af785e))
+
 ### [1.0.3](https://github.com/prismicio/prismic-svelte/compare/v1.0.2...v1.0.3) (2023-12-14)
 
 
