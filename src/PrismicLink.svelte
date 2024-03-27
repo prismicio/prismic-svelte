@@ -55,6 +55,12 @@
 	```
 -->
 
-<a {...linkAttrs} rel={resolvedRel} href={linkAttrs.href} {...$$restProps}>
+<a
+	{...linkAttrs}
+	rel={resolvedRel}
+	href={linkAttrs.href}
+	on:click
+	{...$$restProps}
+>
 	<slot />
 </a>
