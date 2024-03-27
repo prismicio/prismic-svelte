@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/prismicio/prismic-svelte/compare/v1.1.0...v1.1.1) (2024-03-27)
+
+
+### Bug Fixes
+
+* **PrismicLink:** forward `on:click` ([#20](https://github.com/prismicio/prismic-svelte/issues/20)) ([7ba9031](https://github.com/prismicio/prismic-svelte/commit/7ba903131c2fc4454da9d560558d3ac448275af6))
+
 ## [1.1.0](https://github.com/prismicio/prismic-svelte/compare/v1.0.3...v1.1.0) (2024-03-27)
 
 
