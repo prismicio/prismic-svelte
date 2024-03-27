@@ -48,9 +48,18 @@
 	 *
 	 * @typeParam SliceType - Type name of the Slice.
 	 */
-	type SliceLike<SliceType extends string = string> =
+	type SliceLike<SliceType extends string = string> = (
 		| SliceLikeRestV2<SliceType>
-		| SliceLikeGraphQL<SliceType>;
+		| SliceLikeGraphQL<SliceType>
+	) & {
+		/**
+		 * If `true`, this Slice has been modified from its original value using a
+		 * mapper and `@prismicio/client`'s `mapSliceZone()`.
+		 *
+		 * @internal
+		 */
+		__mapped?: true;
+	};
 
 	/**
 	 * An array of Prismic Slices, such as the `slices` property from a Prismic
@@ -108,7 +117,12 @@
 	{@const type = "slice_type" in slice ? slice.slice_type : slice.type}
 	{@const Component = components[type] || defaultComponent}
 	{#if Component}
-		<svelte:component this={Component} {slice} {slices} {context} {index} />
+		{#if slice.__mapped}
+			{@const { __mapped, ...mappedProps } = slice}
+			<svelte:component this={Component} {...mappedProps} />
+		{:else}
+			<svelte:component this={Component} {slice} {slices} {context} {index} />
+		{/if}
 	{:else}
 		<TodoComponent {slice} />
 	{/if}
