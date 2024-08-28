@@ -41,6 +41,9 @@
 	});
 
 	$: resolvedRel = typeof rel === "string" ? rel : linkAttrs.rel;
+
+	$: resolvedText = field && "text" in field ? field.text : undefined;
+	$: hasSlotContent = $$slots.default;
 </script>
 
 <!--
@@ -62,5 +65,9 @@
 	on:click
 	{...$$restProps}
 >
-	<slot />
+	{#if hasSlotContent}
+		<slot />
+	{:else}
+		{resolvedText}
+	{/if}
 </a>
