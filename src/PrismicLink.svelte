@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {
 		asLinkAttrs,
+		isFilled,
 		type AsLinkAttrsConfig,
 		type LinkField,
 		type PrismicDocument,
@@ -41,9 +42,7 @@
 	});
 
 	$: resolvedRel = typeof rel === "string" ? rel : linkAttrs.rel;
-
-	$: resolvedText = field && "text" in field ? field.text : undefined;
-	$: hasSlotContent = $$slots.default;
+	$: resolvedText = isFilled.link(field) ? field.text : undefined;
 </script>
 
 <!--
@@ -52,9 +51,7 @@
 
   @example Rendering a Link field:
 	```svelte
-		<PrismicLink field={document.data.example_link}>
-			Example anchor text.
-		</PrismicLink>
+		<PrismicLink field={document.data.example_link} />
 	```
 -->
 
@@ -65,9 +62,5 @@
 	on:click
 	{...$$restProps}
 >
-	{#if hasSlotContent}
-		<slot />
-	{:else}
-		{resolvedText}
-	{/if}
+	<slot>{resolvedText}</slot>
 </a>
