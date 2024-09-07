@@ -42,7 +42,7 @@
 	});
 
 	$: resolvedRel = typeof rel === "string" ? rel : linkAttrs.rel;
-	$: resolvedText = isFilled.link(field) ? field.text : undefined;
+	$: resolvedText = field?.text;
 </script>
 
 <!--
