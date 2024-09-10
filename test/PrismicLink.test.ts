@@ -23,7 +23,7 @@ it("renders the given children, overriding the link's text", (ctx) => {
 		allowText: true,
 		allowTargetBlank: false,
 	});
-	const field = ctx.mock.value.link({ type: "Web", model });
+	const field = ctx.mock.value.link({ type: "Web", model, withText: true });
 	const children = ctx.mock.value.keyText();
 	const { container } = render(PrismicLinkTestWrapper, { field, children });
 
