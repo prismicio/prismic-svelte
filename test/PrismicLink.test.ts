@@ -6,8 +6,11 @@ import { render } from "@testing-library/svelte";
 import PrismicLinkTestWrapper from "./PrismicLinkTestWrapper.svelte";
 
 it("renders the link's text if no children are provided", (ctx) => {
-	const model = ctx.mock.model.link({ text: true, allowTargetBlank: false });
-	const field = ctx.mock.value.link({ type: "Web", model });
+	const model = ctx.mock.model.link({
+		allowText: true,
+		allowTargetBlank: false,
+	});
+	const field = ctx.mock.value.link({ type: "Web", model, withText: true });
 	const { container } = render(PrismicLinkTestWrapper, { field });
 
 	expect(container.innerHTML).toBe(
@@ -16,7 +19,10 @@ it("renders the link's text if no children are provided", (ctx) => {
 });
 
 it("renders the given children, overriding the link's text", (ctx) => {
-	const model = ctx.mock.model.link({ text: true, allowTargetBlank: false });
+	const model = ctx.mock.model.link({
+		allowText: true,
+		allowTargetBlank: false,
+	});
 	const field = ctx.mock.value.link({ type: "Web", model });
 	const children = ctx.mock.value.keyText();
 	const { container } = render(PrismicLinkTestWrapper, { field, children });
