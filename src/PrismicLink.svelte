@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {
 		asLinkAttrs,
-		isFilled,
 		type AsLinkAttrsConfig,
 		type LinkField,
 		type PrismicDocument,
@@ -42,7 +41,6 @@
 	});
 
 	$: resolvedRel = typeof rel === "string" ? rel : linkAttrs.rel;
-	$: resolvedText = field?.text;
 </script>
 
 <!--
@@ -62,5 +60,5 @@
 	on:click
 	{...$$restProps}
 >
-	<slot>{resolvedText}</slot>
+	<slot>{field?.text}</slot>
 </a>
