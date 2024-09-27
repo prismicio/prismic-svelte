@@ -49,9 +49,7 @@
 
   @example Rendering a Link field:
 	```svelte
-		<PrismicLink field={document.data.example_link}>
-			Example anchor text.
-		</PrismicLink>
+		<PrismicLink field={document.data.example_link} />
 	```
 -->
 
@@ -62,5 +60,5 @@
 	on:click
 	{...$$restProps}
 >
-	<slot />
+	<slot>{field?.text}</slot>
 </a>
