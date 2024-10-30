@@ -6,22 +6,24 @@
 	import PrismicLink from "../PrismicLink.svelte";
 
 	export let node: RTAnyNode;
+
+	$: dir = "direction" in node && node.direction === "rtl" ? "rtl" : undefined
 </script>
 
 {#if node.type === "heading1"}
-	<h1><slot /></h1>
+	<h1 {dir}><slot /></h1>
 {:else if node.type === "heading2"}
-	<h2><slot /></h2>
+	<h2 {dir}><slot /></h2>
 {:else if node.type === "heading3"}
-	<h3><slot /></h3>
+	<h3 {dir}><slot /></h3>
 {:else if node.type === "heading4"}
-	<h4><slot /></h4>
+	<h4 {dir}><slot /></h4>
 {:else if node.type === "heading5"}
-	<h5><slot /></h5>
+	<h5 {dir}><slot /></h5>
 {:else if node.type === "heading6"}
-	<h6><slot /></h6>
+	<h6 {dir}><slot /></h6>
 {:else if node.type === "paragraph"}
-	<p><slot /></p>
+	<p {dir}><slot /></p>
 {:else if node.type === "preformatted"}
 	<pre><slot /></pre>
 {:else if node.type === "strong"}
@@ -29,9 +31,9 @@
 {:else if node.type === "em"}
 	<em><slot /></em>
 {:else if node.type === "list-item"}
-	<li><slot /></li>
+	<li {dir}><slot /></li>
 {:else if node.type === "o-list-item"}
-	<li><slot /></li>
+	<li {dir}><slot /></li>
 {:else if node.type === "group-list-item"}
 	<ul><slot /></ul>
 {:else if node.type === "group-o-list-item"}
