@@ -22,6 +22,10 @@
 	 */
 	export let fallback: ComponentType | undefined = undefined;
 
+	/**
+	 * This function creates the needed table components, prioritizing any user
+	 * provided custom components and falling back to the default components.
+	 */
 	const createComponent = (type: keyof TableComponents) => {
 		const Component: ComponentType = components[type] ?? DefaultComponent;
 		return {
@@ -40,24 +44,24 @@
 
 <!-- This formatting is intentional to prevent unwanted whitespace between elements. -->
 {#if isFilled.table(field)}
-	<Table {...tableProps}>
+	<Table {...tableProps} table={field}>
 		{#if field?.head}
-			<Thead {...theadProps}>
+			<Thead {...theadProps} head={field.head}>
 				{#each field.head.rows as row}
-					<Tr {...trProps}>
+					<Tr {...trProps} {row}>
 						{#each row.cells as cell}
-							<Th {...thProps}>
+							<Th {...thProps} {cell}>
 								<PrismicRichText field={cell.content} {components} /></Th
 							>{/each}</Tr
 					>{/each}</Thead
-			>{/if}<Tbody {...tbodyProps}>
+			>{/if}<Tbody {...tbodyProps} body={field.body}>
 			{#each field.body.rows as row}
-				<Tr {...trProps}>
+				<Tr {...trProps} {row}>
 					{#each row.cells as cell}
 						{#if cell.type === "header"}
-							<Th {...thProps}>
+							<Th {...thProps} {cell}>
 								<PrismicRichText field={cell.content} {components} /></Th
-							>{:else}<Td {...tdProps}>
+							>{:else}<Td {...tdProps} {cell}>
 								<PrismicRichText field={cell.content} {components} /></Td
 							>{/if}{/each}</Tr
 				>
