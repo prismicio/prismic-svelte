@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/prismicio/prismic-svelte/compare/v1.3.1...v1.4.0) (2025-03-03)
+
+
+### Features
+
+* add PrismicTable component ([d2002a0](https://github.com/prismicio/prismic-svelte/commit/d2002a0a5bcfa7c761814b0341523f5dda060e48))
+* add PrismicTable component ([7011681](https://github.com/prismicio/prismic-svelte/commit/701168187b0396099268913d9a4c4d24a85cd11d))
+
+
+### Refactor
+
+* simplify default components ([5b89192](https://github.com/prismicio/prismic-svelte/commit/5b8919278aa7bb47e194efd3877cf24068f2b482))
+
+
+### Chore
+
+* improve typing ([9b5e56c](https://github.com/prismicio/prismic-svelte/commit/9b5e56c70f017007ad0292d217ae0063e021a057))
+* misc review changes ([89abcc3](https://github.com/prismicio/prismic-svelte/commit/89abcc321123e5b0b9bfea41189d64f21153de65))
+* update deps ([b0db7d5](https://github.com/prismicio/prismic-svelte/commit/b0db7d542563744e7d90b239423ec1935c7ad3e4))
+
 ### [1.3.1](https://github.com/prismicio/prismic-svelte/compare/v1.3.0...v1.3.1) (2024-10-30)
 
 
