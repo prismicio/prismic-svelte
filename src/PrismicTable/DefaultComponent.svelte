@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { TableComponents } from "../types";
+	import type { TableComponents } from "../types";
 	export let type: keyof TableComponents;
 </script>
 

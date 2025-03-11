@@ -3,7 +3,7 @@
 	import { type ComponentType } from "svelte";
 
 	import PrismicRichText from "../PrismicRichText/PrismicRichText.svelte";
-	import { SvelteRichTextSerializer, type TableComponents } from "../types";
+	import type { SvelteRichTextSerializer, TableComponents } from "../types";
 	import DefaultComponent from "./DefaultComponent.svelte";
 
 	/**
