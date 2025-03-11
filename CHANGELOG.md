@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/prismicio/prismic-svelte/compare/v1.4.0...v1.4.1) (2025-03-11)
+
+
+### Bug Fixes
+
+* PrismicTable types issue ([f513b8d](https://github.com/prismicio/prismic-svelte/commit/f513b8d5e61b5a09d18ca9027e3ba88da7053089))
+
 ## [1.4.0](https://github.com/prismicio/prismic-svelte/compare/v1.3.1...v1.4.0) (2025-03-03)
 
 
