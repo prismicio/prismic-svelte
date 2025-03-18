@@ -47,17 +47,17 @@
 	<Table {...tableProps} table={field}>
 		{#if field?.head}
 			<Thead {...theadProps} head={field.head}>
-				{#each field.head.rows as row}
+				{#each field.head.rows as row (row.key)}
 					<Tr {...trProps} {row}>
-						{#each row.cells as cell}
+						{#each row.cells as cell (cell.key)}
 							<Th {...thProps} {cell}>
 								<PrismicRichText field={cell.content} {components} /></Th
 							>{/each}</Tr
 					>{/each}</Thead
 			>{/if}<Tbody {...tbodyProps} body={field.body}>
-			{#each field.body.rows as row}
+			{#each field.body.rows as row (row.key)}
 				<Tr {...trProps} {row}>
-					{#each row.cells as cell}
+					{#each row.cells as cell (cell.key)}
 						{#if cell.type === "header"}
 							<Th {...thProps} {cell}>
 								<PrismicRichText field={cell.content} {components} /></Th
