@@ -6,32 +6,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 ### Features
-
-* add PrismicTable component ([d2002a0](https://github.com/prismicio/prismic-svelte/commit/d2002a0a5bcfa7c761814b0341523f5dda060e48))
-* add PrismicTable component ([7011681](https://github.com/prismicio/prismic-svelte/commit/701168187b0396099268913d9a4c4d24a85cd11d))
 * support key for table field content ([#26](https://github.com/prismicio/prismic-svelte/issues/26)) ([63b1518](https://github.com/prismicio/prismic-svelte/commit/63b1518dd14cd71749d9f64561414e6c7c5bfe7a))
 
-
-### Bug Fixes
-
-* **helpers:** add missing `dir` attribute for right-to-left languages ([#24](https://github.com/prismicio/prismic-svelte/issues/24)) ([ecfabf2](https://github.com/prismicio/prismic-svelte/commit/ecfabf273ec686e793f41a7e47497ee96afd8b14))
-* PrismicTable types issue ([f513b8d](https://github.com/prismicio/prismic-svelte/commit/f513b8d5e61b5a09d18ca9027e3ba88da7053089))
-
-
-### Refactor
-
-* simplify default components ([5b89192](https://github.com/prismicio/prismic-svelte/commit/5b8919278aa7bb47e194efd3877cf24068f2b482))
-
-
-### Chore
-
-* improve typing ([9b5e56c](https://github.com/prismicio/prismic-svelte/commit/9b5e56c70f017007ad0292d217ae0063e021a057))
-* misc review changes ([89abcc3](https://github.com/prismicio/prismic-svelte/commit/89abcc321123e5b0b9bfea41189d64f21153de65))
-* **release:** 1.3.0 ([a65b333](https://github.com/prismicio/prismic-svelte/commit/a65b333f892c253643d1cac6adffc693f279ec60))
-* **release:** 1.3.1 ([d1287b2](https://github.com/prismicio/prismic-svelte/commit/d1287b243685301631e5b5f51ef0e4955b3c806a))
-* **release:** 1.4.0 ([5c8c589](https://github.com/prismicio/prismic-svelte/commit/5c8c589b59deab0926fedc39b078ef0280d8e22f))
-* **release:** 1.4.1 ([a7557e1](https://github.com/prismicio/prismic-svelte/commit/a7557e174809d7ca77ba52e6f1d4b388d308101a))
-* update deps ([b0db7d5](https://github.com/prismicio/prismic-svelte/commit/b0db7d542563744e7d90b239423ec1935c7ad3e4))
 
 ### [1.4.1](https://github.com/prismicio/prismic-svelte/compare/v1.4.0...v1.4.1) (2025-03-11)
 
