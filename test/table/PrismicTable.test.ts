@@ -19,12 +19,15 @@ const filledTableField: TableField = {
 	head: {
 		rows: [
 			{
+				key: "0",
 				cells: [
 					{
+						key: "0",
 						type: "header",
 						content: [{ type: "paragraph", text: "Method", spans: [] }],
 					},
 					{
+						key: "1",
 						type: "header",
 						content: [{ type: "paragraph", text: "Usage", spans: [] }],
 					},
@@ -35,12 +38,15 @@ const filledTableField: TableField = {
 	body: {
 		rows: [
 			{
+				key: "0",
 				cells: [
 					{
+						key: "0",
 						type: "header",
 						content: [{ type: "paragraph", text: "GET", spans: [] }],
 					},
 					{
+						key: "1",
 						type: "data",
 						content: [
 							{
@@ -59,12 +65,15 @@ const filledTableField: TableField = {
 				],
 			},
 			{
+				key: "1",
 				cells: [
 					{
+						key: "0",
 						type: "header",
 						content: [{ type: "paragraph", text: "DELETE", spans: [] }],
 					},
 					{
+						key: "1",
 						type: "data",
 						content: [
 							{
