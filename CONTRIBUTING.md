@@ -157,6 +157,10 @@ Those scripts will:
 
 Once a script has been run successfully, a new version of the package should have been published to npm. To complete the publishing process you only need to head to the repository's releases tab on GitHub to publish the new version tag that was created.
 
+1. Go to the repository's [Tags page](https://github.com/prismicio/prismic-svelte/tags).
+2. Open the options for the tag you just published to NPM and select "Create release."
+3. Ensure that the "Set as the latest release" box is checked, then publish the release.
+
 If you ran any of those commands but happen not to have access to the related npm package, you can still ask a collaborator of the said package to publish it for you.
 
 Appending `:dry` (e.g. `release:dry`) to any of the above commands will dry-run the targeted release script and output the new changelog to the console.
