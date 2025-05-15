@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { asTree } from "@prismicio/richtext";
+	import type { asTree } from "@prismicio/client/richtext";
 
 	import type { SvelteRichTextSerializer } from "../types";
 

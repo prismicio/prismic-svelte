@@ -1,6 +1,8 @@
 <script lang="ts">
 	import TodoComponent from "./TodoComponent.svelte";
 
+	import { ComponentCompat } from "../types";
+
 	import type * as prismic from "@prismicio/client";
 	import type { SvelteComponent } from "svelte";
 
@@ -82,7 +84,7 @@
 	 * };
 	 * ```
 	 */
-	export let components: SliceComponents = {};
+	export let components: Record<string, ComponentCompat<any>> = {};
 
 	/**
 	 * Arbitrary data passed to all Slice components as a `context` prop.
