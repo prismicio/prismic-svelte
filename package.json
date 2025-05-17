@@ -55,7 +55,7 @@
 		"release:dry": "standard-version --release-as patch --dry-run",
 		"size": "size-limit",
 		"test": "npm run lint && npm run types && npm run unit && npm run build && npm run size",
-		"types": "vitest --typecheck.only --run && tsc --noEmit",
+		"types": "tsc --noEmit",
 		"types:watch": "vitest watch --typecheck.only",
 		"unit": "vitest run --coverage",
 		"unit:watch": "vitest watch"
