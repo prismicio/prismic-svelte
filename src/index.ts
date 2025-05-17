@@ -6,4 +6,4 @@ export { default as PrismicTable } from "./PrismicTable/PrismicTable.svelte";
 export { default as PrismicText } from "./PrismicText.svelte";
 export { default as SliceZone } from "./SliceZone/SliceZone.svelte";
 
-export type { SvelteRichTextSerializer } from "./types";
+export type { SvelteRichTextSerializer, SliceComponentProps } from "./types";

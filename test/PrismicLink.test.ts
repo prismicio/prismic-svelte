@@ -14,7 +14,7 @@ it("renders the link's text if no children are provided", (ctx) => {
 	const { container } = render(PrismicLinkTestWrapper, { field });
 
 	expect(container.innerHTML).toBe(
-		`<div><a href="${field.url}" rel="noreferrer">${field.text}</a></div>`,
+		`<!----><a href="${field.url}" rel="noreferrer">${field.text}<!----></a>`,
 	);
 });
 
@@ -28,6 +28,6 @@ it("renders the given children, overriding the link's text", (ctx) => {
 	const { container } = render(PrismicLinkTestWrapper, { field, children });
 
 	expect(container.innerHTML).toBe(
-		`<div><a href="${field.url}" rel="noreferrer">${children}</a></div>`,
+		`<!----><a href="${field.url}" rel="noreferrer"><!---->${children}<!----></a>`,
 	);
 });

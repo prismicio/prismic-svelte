@@ -1,6 +1,14 @@
 <script lang="ts">
+	import { Snippet } from "svelte";
+
 	import type { TableComponents } from "../types";
-	export let type: keyof TableComponents;
+
+	type Props = {
+		type: keyof TableComponents;
+		children?: Snippet;
+	};
+
+	const { type, children }: Props = $props();
 </script>
 
-<svelte:element this={type}><slot /></svelte:element>
+<svelte:element this={type}>{@render children?.()}</svelte:element>

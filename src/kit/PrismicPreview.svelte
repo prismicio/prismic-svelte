@@ -1,35 +1,43 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import { getToolbarSrc } from "@prismicio/client";
 	import { beforeNavigate, goto, invalidateAll } from "$app/navigation";
+	import { getToolbarSrc } from "@prismicio/client";
+	import { onMount } from "svelte";
 
-	/**
-	 * The name of your Prismic repository. A Prismic Toolbar will be registered
-	 * using this repository.
-	 */
-	export let repositoryName: string;
+	type Props = {
+		/**
+		 * The name of your Prismic repository. A Prismic Toolbar will be registered
+		 * using this repository.
+		 */
+		repositoryName: string;
 
-	/**
-	 * The route parameter prefixed during preview sessions.
-	 */
-	export let routePrefix: string = "preview";
+		/**
+		 * The route parameter prefixed during preview sessions.
+		 */
+		routePrefix?: string;
 
-	/**
-	 * The name of the preview-specific route parameter prefixed during preview
-	 * sessions.
-	 *
-	 * Only set this value if the route parameter's name differs from the
-	 * parameter's value.
-	 */
-	export let routePrefixName: string = routePrefix;
+		/**
+		 * The name of the preview-specific route parameter prefixed during preview
+		 * sessions.
+		 *
+		 * Only set this value if the route parameter's name differs from the
+		 * parameter's value.
+		 */
+		routePrefixName?: string;
+	};
 
-	$: toolbarSrc = getToolbarSrc(repositoryName);
+	const {
+		repositoryName,
+		routePrefix = "preview",
+		routePrefixName = routePrefix,
+	}: Props = $props();
+
+	const toolbarSrc = $derived(getToolbarSrc(repositoryName));
 
 	/**
 	 * Set to `true` when the next `beforeNavigate()` call should not prefix the
 	 * route.
 	 */
-	let endingPreview = false;
+	let endingPreview = $state(false);
 
 	// Register Prismic toolbar event handlers to refresh data on content updates.
 	onMount(() => {
@@ -53,7 +61,7 @@
 				goto(
 					new URL(
 						window.location.pathname.replace(
-							new RegExp(`^(\/${routePrefix}\/?$|\/${routePrefix}\/)`),
+							new RegExp(`^(/${routePrefix}/?$|/${routePrefix}/)`),
 							"/",
 						),
 						window.location.origin,

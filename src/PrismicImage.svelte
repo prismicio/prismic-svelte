@@ -1,14 +1,14 @@
 <script lang="ts">
 	import {
-		asImageWidthSrcSet,
-		asImagePixelDensitySrcSet,
-		isFilled,
 		type ImageFieldImage,
+		asImagePixelDensitySrcSet,
+		asImageWidthSrcSet,
+		isFilled,
 	} from "@prismicio/client";
 	import type { ImgixURLParams } from "imgix-url-builder";
 	import type { HTMLImgAttributes } from "svelte/elements";
 
-	type $$Props = Omit<HTMLImgAttributes, "src" | "srcset" | "alt"> & {
+	type Props = Omit<HTMLImgAttributes, "src" | "srcset" | "alt"> & {
 		/**
 		 * The Prismic image field or thumbnail to render.
 		 */
@@ -71,73 +71,69 @@
 			  }
 		);
 
-	export let field: $$Props["field"];
-	export let imgixParams: $$Props["imgixParams"] = {};
-	export let alt: $$Props["alt"] = undefined;
-	export let fallbackAlt: $$Props["fallbackAlt"] = undefined;
-	export let width: $$Props["width"] = undefined;
-	export let height: $$Props["width"] = undefined;
-	export let widths: $$Props["widths"] = undefined;
-	export let pixelDensities: $$Props["pixelDensities"] = undefined;
+	const {
+		field,
+		imgixParams = {},
+		alt,
+		fallbackAlt,
+		width,
+		height,
+		widths,
+		pixelDensities,
+		...restProps
+	}: Props = $props();
 
-	let src: string | undefined = undefined;
-	let srcset: string | undefined = undefined;
-	let resolvedWidth: $$Props["width"] = undefined;
-	let resolvedHeight: $$Props["height"] = undefined;
+	const { resolvedWidth, resolvedHeight } = $derived.by(() => {
+		if (!isFilled.imageThumbnail(field))
+			return { resolvedWidth: undefined, resolvedHeight: undefined };
 
-	$: {
-		if (isFilled.imageThumbnail(field)) {
-			const castInt = (
-				input: string | number | null | undefined,
-			): number | null | undefined => {
-				if (
-					typeof input === "number" ||
-					typeof input === "undefined" ||
-					input === null
-				) {
-					return input;
-				} else {
-					const parsed = Number.parseInt(input);
+		const ar = field.dimensions.width / field.dimensions.height;
 
-					if (Number.isNaN(parsed)) {
-						return undefined;
-					} else {
-						return parsed;
-					}
-				}
-			};
+		let resolvedWidth = castInt(width) ?? field.dimensions.width;
+		let resolvedHeight = castInt(height) ?? field.dimensions.height;
+		if (resolvedWidth != null && resolvedHeight == null) {
+			resolvedHeight = resolvedWidth / ar;
+		} else if (resolvedWidth == null && resolvedHeight != null) {
+			resolvedWidth = resolvedHeight * ar;
+		}
 
-			const ar = field.dimensions.width / field.dimensions.height;
+		return { resolvedWidth, resolvedHeight };
+	});
 
-			const castedWidth = castInt(width);
-			const castedHeight = castInt(height);
+	const { src, srcset } = $derived.by(() => {
+		if (!isFilled.imageThumbnail(field))
+			return { src: undefined, srcset: undefined };
 
-			resolvedWidth = castedWidth ?? field.dimensions.width;
-			resolvedHeight = castedHeight ?? field.dimensions.height;
+		if (pixelDensities) {
+			return asImagePixelDensitySrcSet(field, {
+				...imgixParams,
+				pixelDensities:
+					pixelDensities === "defaults" ? undefined : pixelDensities,
+			} as ImgixURLParams);
+		}
 
-			if (castedWidth != null && castedHeight == null) {
-				resolvedHeight = castedWidth / ar;
-			} else if (castedWidth == null && castedHeight != null) {
-				resolvedWidth = castedHeight * ar;
-			}
+		return asImageWidthSrcSet(field, {
+			...imgixParams,
+			widths: widths === "defaults" ? undefined : widths,
+		});
+	});
 
-			if (widths || !pixelDensities) {
-				const res = asImageWidthSrcSet(field, {
-					...imgixParams,
-					widths: widths === "defaults" ? undefined : widths,
-				});
+	function castInt(
+		input: string | number | null | undefined,
+	): number | null | undefined {
+		if (
+			typeof input === "number" ||
+			typeof input === "undefined" ||
+			input === null
+		) {
+			return input;
+		} else {
+			const parsed = Number.parseInt(input);
 
-				src = res.src;
-				srcset = res.srcset;
-			} else if (pixelDensities) {
-				const res = asImagePixelDensitySrcSet(field, {
-					...imgixParams,
-					pixelDensities:
-						pixelDensities === "defaults" ? undefined : pixelDensities,
-				} as ImgixURLParams);
-
-				src = res.src;
-				srcset = res.srcset;
+			if (Number.isNaN(parsed)) {
+				return undefined;
+			} else {
+				return parsed;
 			}
 		}
 	}
@@ -163,6 +159,6 @@
 		alt={alt ?? (field.alt || fallbackAlt)}
 		width={resolvedWidth}
 		height={resolvedHeight}
-		{...$$restProps}
+		{...restProps}
 	/>
 {/if}
