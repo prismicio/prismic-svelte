@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { RTAnyNode } from "@prismicio/client";
-	import { Snippet } from "svelte";
+	import type { Snippet } from "svelte";
 
 	import PrismicEmbed from "../PrismicEmbed.svelte";
 	import PrismicImage from "../PrismicImage.svelte";
