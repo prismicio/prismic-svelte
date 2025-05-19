@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-alpha.0](https://github.com/prismicio/prismic-svelte/compare/v1.5.0...v2.0.0-alpha.0) (2025-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* support Svelte 5
+
+### Features
+
+* **PrismicLink:** add `href` prop ([1098bd9](https://github.com/prismicio/prismic-svelte/commit/1098bd9717ef31c03d715788494603e2ed0d4737))
+* support Svelte 5 ([1ce5359](https://github.com/prismicio/prismic-svelte/commit/1ce53596125de55651422a8b31c75cf5565350e2))
+
+
+### Bug Fixes
+
+* use `import type` for `Snippet` ([e599730](https://github.com/prismicio/prismic-svelte/commit/e599730fb90562e2006e0529c1c7b3e45db6832a))
+
+
+### Documentation
+
+* update contributing guide ([#30](https://github.com/prismicio/prismic-svelte/issues/30)) ([f604594](https://github.com/prismicio/prismic-svelte/commit/f6045948ea685ab9ab22339d573fcc250e09f1a4))
+* update copyright year ([1fa1930](https://github.com/prismicio/prismic-svelte/commit/1fa1930edbafa6b7f66340b2cabb1ee36ee789d7))
+
+
+### Chore
+
+* release alpha as major ([013fad6](https://github.com/prismicio/prismic-svelte/commit/013fad62602c2f75b53835fb8ec678db63a93c79))
+* remove Vitest type checking ([6738c5d](https://github.com/prismicio/prismic-svelte/commit/6738c5db119431b6918e1fe8c5b5ee64ee160690))
+
 ## [1.5.0](https://github.com/prismicio/prismic-svelte/compare/v1.3.0-alpha.0...v1.5.0) (2025-03-19)
 
 
