@@ -20,14 +20,21 @@
 					 * A Prismic link field, content relationship field, or link to media
 					 * field.
 					 */
-					field: LinkField;
+					field: LinkField | null | undefined;
 					document?: never;
+					href?: never;
 			  }
 			| {
 					/**
 					 * A Prismic document.
 					 */
-					document: PrismicDocument;
+					document: PrismicDocument | null | undefined;
+					field?: never;
+					href?: never;
+			  }
+			| {
+					href: HTMLAnchorAttributes["href"];
+					document: never;
 					field?: never;
 			  }
 		);
@@ -38,6 +45,9 @@
 		asLinkAttrs(field ?? document, {
 			rel: typeof rel === "function" ? rel : undefined,
 		}),
+	);
+	const href = $derived(
+		("href" in restProps ? restProps.href : linkAttrs.href) || "",
 	);
 
 	const resolvedRel = $derived(typeof rel === "string" ? rel : linkAttrs.rel);
@@ -53,6 +63,6 @@
 	```
 -->
 
-<a {...linkAttrs} rel={resolvedRel} href={linkAttrs.href} {...restProps}>
+<a {...linkAttrs} rel={resolvedRel} {href} {...restProps}>
 	{#if children}{@render children?.()}{:else}{field?.text}{/if}
 </a>
