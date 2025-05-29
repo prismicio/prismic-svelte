@@ -2,7 +2,7 @@
 	import type { RichTextField } from "@prismicio/client";
 	import { asTree } from "@prismicio/client/richtext";
 
-	import type { SvelteRichTextSerializer } from "../types";
+	import type { RichTextComponents } from "../types";
 
 	import Serialize from "./Serialize.svelte";
 
@@ -15,7 +15,7 @@
 		/**
 		 * An object that maps a rich text block type to a Svelte component.
 		 */
-		components?: SvelteRichTextSerializer;
+		components?: RichTextComponents;
 	};
 
 	const { field, components = {} }: Props = $props();

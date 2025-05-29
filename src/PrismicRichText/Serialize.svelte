@@ -1,13 +1,13 @@
 <script lang="ts">
 	import type { asTree } from "@prismicio/client/richtext";
 
-	import type { SvelteRichTextSerializer } from "../types";
+	import type { RichTextComponent, RichTextComponents } from "../types";
 
 	import DefaultComponent from "./DefaultComponent.svelte";
 	import Serialize from "./Serialize.svelte";
 
 	type Props = {
-		components: SvelteRichTextSerializer;
+		components: RichTextComponents;
 		children: ReturnType<typeof asTree>["children"];
 	};
 
@@ -22,10 +22,10 @@
 
 	function getComponent(child: ReturnType<typeof asTree>["children"][number]) {
 		return (
-			components[
+			(components[
 				CHILD_TYPE_RENAMES[child.type as keyof typeof CHILD_TYPE_RENAMES] ||
 					(child.type as keyof typeof components)
-			] || DefaultComponent
+			] as RichTextComponent) || DefaultComponent
 		);
 	}
 </script>

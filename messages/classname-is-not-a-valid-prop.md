@@ -21,7 +21,9 @@ To add a `className` to a specific block type when using `<PrismicRichText>`, pr
 ```svelte
 <!-- Heading1.svelte -->
 
-<h1 className="font-bold text-3xl"><slot /></h1>
+<h1 className="font-bold text-3xl">
+	{@render children()}
+</h1>
 ```
 
 ```svelte

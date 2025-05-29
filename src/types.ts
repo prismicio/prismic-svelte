@@ -1,6 +1,24 @@
 import type {
 	RTAnyNode,
-	RichTextNodeType,
+	RTEmNode,
+	RTEmbedNode,
+	RTHeading1Node,
+	RTHeading2Node,
+	RTHeading3Node,
+	RTHeading4Node,
+	RTHeading5Node,
+	RTHeading6Node,
+	RTImageNode,
+	RTLabelNode,
+	RTLinkNode,
+	RTListItemNode,
+	RTListNode,
+	RTOListItemNode,
+	RTOListNode,
+	RTParagraphNode,
+	RTPreformattedNode,
+	RTSpanNode,
+	RTStrongNode,
 	Slice,
 	TableField,
 	TableFieldBody,
@@ -12,41 +30,62 @@ import type {
 } from "@prismicio/client";
 import type { Component, Snippet } from "svelte";
 
-export type SvelteRichTextSerializer = Partial<
-	Record<
-		keyof typeof RichTextNodeType,
-		Component<{
-			node?: RTAnyNode;
-			children?: Snippet;
-		}>
-	>
+export type RichTextComponents = {
+	heading1?: RichTextComponent<RTHeading1Node>;
+	heading2?: RichTextComponent<RTHeading2Node>;
+	heading3?: RichTextComponent<RTHeading3Node>;
+	heading4?: RichTextComponent<RTHeading4Node>;
+	heading5?: RichTextComponent<RTHeading5Node>;
+	heading6?: RichTextComponent<RTHeading6Node>;
+	paragraph?: RichTextComponent<RTParagraphNode>;
+	preformatted?: RichTextComponent<RTPreformattedNode>;
+	strong?: RichTextComponent<RTStrongNode>;
+	em?: RichTextComponent<RTEmNode>;
+	listItem?: RichTextComponent<RTListItemNode>;
+	oListItem?: RichTextComponent<RTOListItemNode>;
+	list?: RichTextComponent<RTListNode>;
+	oList?: RichTextComponent<RTOListNode>;
+	image?: RichTextComponent<RTImageNode>;
+	embed?: RichTextComponent<RTEmbedNode>;
+	hyperlink?: RichTextComponent<RTLinkNode>;
+	label?: RichTextComponent<RTLabelNode>;
+	span?: RichTextComponent<RTSpanNode>;
+};
+
+export type RichTextComponent<TNode extends RTAnyNode = RTAnyNode> = Component<
+	RichTextComponentProps<TNode>
 >;
+
+export type RichTextComponentProps<TNode extends RTAnyNode = RTAnyNode> = {
+	node: TNode;
+	children: Snippet;
+};
 
 // Define the type for the components prop
 export type TableComponents = {
 	table?: Component<{
 		table: TableField<"filled">;
-		children?: Snippet;
+		children: Snippet;
 	}>;
 	thead?: Component<{
 		head: TableFieldHead;
-		children?: Snippet;
+		children: Snippet;
 	}>;
 	tbody?: Component<{
 		body: TableFieldBody;
-		children?: Snippet;
+		children: Snippet;
 	}>;
 	tr?: Component<{
 		row: TableFieldHeadRow | TableFieldBodyRow;
-		children?: Snippet;
+		children: Snippet;
 	}>;
 	th?: Component<{
 		cell: TableFieldHeaderCell;
-		children?: Snippet;
+		children: Snippet;
 	}>;
 	td?: Component<{
 		cell: TableFieldDataCell;
-		children?: Snippet;
+		children: Snippet;
 	}>;
 };
 

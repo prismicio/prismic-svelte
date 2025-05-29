@@ -2,7 +2,7 @@
 	import { type TableField, isFilled } from "@prismicio/client";
 	import { type Component } from "svelte";
 
-	import type { SvelteRichTextSerializer, TableComponents } from "../types";
+	import type { RichTextComponents, TableComponents } from "../types";
 
 	import PrismicRichText from "../PrismicRichText/PrismicRichText.svelte";
 
@@ -17,7 +17,7 @@
 		/**
 		 * An object that maps a rich text block type to a Svelte component.
 		 */
-		components?: TableComponents & SvelteRichTextSerializer;
+		components?: TableComponents & RichTextComponents;
 
 		/**
 		 * The component rendered when the field is empty. If a fallback is not
