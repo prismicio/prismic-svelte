@@ -10,20 +10,44 @@ import type {
 	TableFieldHeadRow,
 	TableFieldHeaderCell,
 } from "@prismicio/client";
-import type { Component } from "svelte";
+import type { Component, Snippet } from "svelte";
 
 export type SvelteRichTextSerializer = Partial<
-	Record<keyof typeof RichTextNodeType, Component<{ node?: RTAnyNode }>>
+	Record<
+		keyof typeof RichTextNodeType,
+		Component<{
+			node?: RTAnyNode;
+			children?: Snippet;
+		}>
+	>
 >;
 
 // Define the type for the components prop
 export type TableComponents = {
-	table?: Component<{ table: TableField<"filled"> }>;
-	thead?: Component<{ head: TableFieldHead }>;
-	tbody?: Component<{ body: TableFieldBody }>;
-	tr?: Component<{ row: TableFieldHeadRow | TableFieldBodyRow }>;
-	th?: Component<{ cell: TableFieldHeaderCell }>;
-	td?: Component<{ cell: TableFieldDataCell }>;
+	table?: Component<{
+		table: TableField<"filled">;
+		children?: Snippet;
+	}>;
+	thead?: Component<{
+		head: TableFieldHead;
+		children?: Snippet;
+	}>;
+	tbody?: Component<{
+		body: TableFieldBody;
+		children?: Snippet;
+	}>;
+	tr?: Component<{
+		row: TableFieldHeadRow | TableFieldBodyRow;
+		children?: Snippet;
+	}>;
+	th?: Component<{
+		cell: TableFieldHeaderCell;
+		children?: Snippet;
+	}>;
+	td?: Component<{
+		cell: TableFieldDataCell;
+		children?: Snippet;
+	}>;
 };
 
 /**
