@@ -27,7 +27,8 @@
 		 * };
 		 * ```
 		 */
-		components?: Record<string, Component>;
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		components?: Record<string, Component<any>>;
 
 		/**
 		 * Arbitrary data passed to all Slice components as a `context` prop.
