@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-alpha.2](https://github.com/prismicio/prismic-svelte/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2025-05-30)
+
+
+### Bug Fixes
+
+* looser SliceZone prop type ([34a47e5](https://github.com/prismicio/prismic-svelte/commit/34a47e5728827594df2607f4eec11aa535666d8d))
+
 ## [2.0.0-alpha.1](https://github.com/prismicio/prismic-svelte/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2025-05-30)
 
 
