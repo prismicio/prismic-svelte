@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-alpha.1](https://github.com/prismicio/prismic-svelte/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2025-05-30)
+
+
+### Features
+
+* refine rich text and table component types ([0df5a13](https://github.com/prismicio/prismic-svelte/commit/0df5a13abb8e8bcf0b892f832a8a6e25805f1285))
+
+
+### Bug Fixes
+
+* add `children` prop to rich text and table components ([e178f9a](https://github.com/prismicio/prismic-svelte/commit/e178f9adcc8cd61bf38d0f76431eb83af0c72b0e))
+
 ## [2.0.0-alpha.0](https://github.com/prismicio/prismic-svelte/compare/v1.5.0...v2.0.0-alpha.0) (2025-05-19)
 
 
