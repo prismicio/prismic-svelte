@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/prismicio/prismic-svelte/compare/v1.5.0...v2.0.0) (2025-06-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* support Svelte 5 (#32)
+
+### Features
+
+* support Svelte 5 ([#32](https://github.com/prismicio/prismic-svelte/issues/32)) ([0fd7756](https://github.com/prismicio/prismic-svelte/commit/0fd7756fd9ed8d297559e4ec30622419e7ef0fd5))
+
+
+### Documentation
+
+* update contributing guide ([#30](https://github.com/prismicio/prismic-svelte/issues/30)) ([f604594](https://github.com/prismicio/prismic-svelte/commit/f6045948ea685ab9ab22339d573fcc250e09f1a4))
+
 ## [2.0.0-alpha.2](https://github.com/prismicio/prismic-svelte/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2025-05-30)
 
 
