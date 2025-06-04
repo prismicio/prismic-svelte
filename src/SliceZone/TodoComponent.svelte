@@ -1,16 +1,22 @@
 <script lang="ts">
 	import { DEV } from "esm-env";
 
-	export let slice: { slice_type: string } | { type: string };
+	type Props = {
+		slice: { slice_type: string } | { type: string };
+	};
 
-	const type = "slice_type" in slice ? slice.slice_type : slice.type;
+	const { slice }: Props = $props();
 
-	if (DEV) {
-		console.warn(
-			`[SliceZone] Could not find a component for Slice type "${type}"`,
-			slice,
-		);
-	}
+	const type = $derived("slice_type" in slice ? slice.slice_type : slice.type);
+
+	$effect(() => {
+		if (DEV) {
+			console.warn(
+				`[SliceZone] Could not find a component for Slice type "${type}"`,
+				$state.snapshot(slice),
+			);
+		}
+	});
 </script>
 
 {#if DEV}

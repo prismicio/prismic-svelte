@@ -1,22 +1,26 @@
 <script lang="ts">
-	import { asTree } from "@prismicio/richtext";
 	import type { RichTextField } from "@prismicio/client";
+	import { asTree } from "@prismicio/client/richtext";
 
-	import type { SvelteRichTextSerializer } from "../types";
+	import type { RichTextComponents } from "../types";
 
 	import Serialize from "./Serialize.svelte";
 
-	/**
-	 * The Prismic rich text field to render.
-	 */
-	export let field: RichTextField;
+	type Props = {
+		/**
+		 * The Prismic rich text field to render.
+		 */
+		field: RichTextField;
 
-	/**
-	 * An object that maps a rich text block type to a Svelte component.
-	 */
-	export let components: SvelteRichTextSerializer = {};
+		/**
+		 * An object that maps a rich text block type to a Svelte component.
+		 */
+		components?: RichTextComponents;
+	};
 
-	$: children = asTree(field).children;
+	const { field, components = {} }: Props = $props();
+
+	const children = $derived(asTree(field).children);
 </script>
 
 <!--

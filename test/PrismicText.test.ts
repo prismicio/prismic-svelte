@@ -17,31 +17,31 @@ it("renders a string when passed RichTextField", () => {
 
 	const { container } = render(PrismicText, { field });
 
-	expect(container.innerHTML).toBe("<div>Heading 1</div>");
+	expect(container.innerHTML.replaceAll("<!---->", "")).toBe("Heading 1");
 });
 
 it("renders nothing when passed an empty field", () => {
 	expect(
 		render(PrismicText, {
 			field: null,
-		}).container.innerHTML,
-	).toBe("<div></div>");
+		}).container.innerHTML.replaceAll("<!---->", ""),
+	).toBe("");
 
 	cleanup();
 
 	expect(
 		render(PrismicText, {
 			field: undefined,
-		}).container.innerHTML,
-	).toBe("<div></div>");
+		}).container.innerHTML.replaceAll("<!---->", ""),
+	).toBe("");
 
 	cleanup();
 
 	expect(
 		render(PrismicText, {
 			field: [{ type: "paragraph", text: "", spans: [] }],
-		}).container.innerHTML,
-	).toBe("<div></div>");
+		}).container.innerHTML.replaceAll("<!---->", ""),
+	).toBe("");
 });
 
 it("renders the fallback when passed empty field", () => {
@@ -49,8 +49,8 @@ it("renders the fallback when passed empty field", () => {
 		render(PrismicText, {
 			field: null,
 			fallback: "fallback",
-		}).container.innerHTML,
-	).toBe("<div>fallback</div>");
+		}).container.innerHTML.replaceAll("<!---->", ""),
+	).toBe("fallback");
 
 	cleanup();
 
@@ -58,8 +58,8 @@ it("renders the fallback when passed empty field", () => {
 		render(PrismicText, {
 			field: undefined,
 			fallback: "fallback",
-		}).container.innerHTML,
-	).toBe("<div>fallback</div>");
+		}).container.innerHTML.replaceAll("<!---->", ""),
+	).toBe("fallback");
 
 	cleanup();
 
@@ -67,8 +67,8 @@ it("renders the fallback when passed empty field", () => {
 		render(PrismicText, {
 			field: [{ type: "paragraph", text: "", spans: [] }],
 			fallback: "fallback",
-		}).container.innerHTML,
-	).toBe("<div>fallback</div>");
+		}).container.innerHTML.replaceAll("<!---->", ""),
+	).toBe("fallback");
 });
 
 it("throws error if passed a string-based field (e.g. Key Text or Select)", () => {

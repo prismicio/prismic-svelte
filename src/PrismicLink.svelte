@@ -1,13 +1,13 @@
 <script lang="ts">
 	import {
-		asLinkAttrs,
 		type AsLinkAttrsConfig,
 		type LinkField,
 		type PrismicDocument,
+		asLinkAttrs,
 	} from "@prismicio/client";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
-	type $$Props = Omit<HTMLAnchorAttributes, "rel" | "href"> & {
+	type Props = Omit<HTMLAnchorAttributes, "rel" | "href"> & {
 		/**
 		 * The `rel` attribute for the link. By default, `"noreferrer"` is provided
 		 * if the link's URL is external. This prop can be provided a function to
@@ -20,27 +20,37 @@
 					 * A Prismic link field, content relationship field, or link to media
 					 * field.
 					 */
-					field: LinkField;
+					field: LinkField | null | undefined;
 					document?: never;
+					href?: never;
 			  }
 			| {
 					/**
 					 * A Prismic document.
 					 */
-					document: PrismicDocument;
+					document: PrismicDocument | null | undefined;
+					field?: never;
+					href?: never;
+			  }
+			| {
+					href: HTMLAnchorAttributes["href"];
+					document: never;
 					field?: never;
 			  }
 		);
 
-	export let field: $$Props["field"] = undefined;
-	export let document: $$Props["document"] = undefined;
-	export let rel: $$Props["rel"] = undefined;
+	const { field, document, rel, children, ...restProps }: Props = $props();
 
-	$: linkAttrs = asLinkAttrs(field ?? document, {
-		rel: typeof rel === "function" ? rel : undefined,
-	});
+	const linkAttrs = $derived(
+		asLinkAttrs(field ?? document, {
+			rel: typeof rel === "function" ? rel : undefined,
+		}),
+	);
+	const href = $derived(
+		("href" in restProps ? restProps.href : linkAttrs.href) || "",
+	);
 
-	$: resolvedRel = typeof rel === "string" ? rel : linkAttrs.rel;
+	const resolvedRel = $derived(typeof rel === "string" ? rel : linkAttrs.rel);
 </script>
 
 <!--
@@ -53,12 +63,6 @@
 	```
 -->
 
-<a
-	{...linkAttrs}
-	rel={resolvedRel}
-	href={linkAttrs.href}
-	on:click
-	{...$$restProps}
->
-	<slot>{field?.text}</slot>
+<a {...linkAttrs} rel={resolvedRel} {href} {...restProps}>
+	{#if children}{@render children?.()}{:else}{field?.text}{/if}
 </a>

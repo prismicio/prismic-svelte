@@ -98,15 +98,15 @@ const filledTableField: TableField = {
 it("renders filled table elements", () => {
 	const { container } = render(PrismicTable, { field: filledTableField });
 
-	expect(container.innerHTML).toBe(
-		"<div><table><thead><tr><th><p>Method</p></th><th><p>Usage</p></th></tr></thead><tbody><tr><th><p>GET</p></th><td><p>For <strong>basic retrieval</strong> of information…</p></td></tr><tr><th><p>DELETE</p></th><td><p>To <em>dest</em>roy a resource and remove…</p></td></tr></tbody></table></div>",
+	expect(container.innerHTML.replaceAll("<!---->", "")).toBe(
+		"<table><thead><tr><th><p>Method</p></th><th><p>Usage</p></th></tr></thead><tbody><tr><th><p>GET</p></th><td><p>For <strong>basic retrieval</strong> of information…</p></td></tr><tr><th><p>DELETE</p></th><td><p>To <em>dest</em>roy a resource and remove…</p></td></tr></tbody></table>",
 	);
 });
 
 it("renders null when passed an empty field", () => {
 	const { container } = render(PrismicTable, { field: undefined });
 
-	expect(container.innerHTML).toBe("<div></div>");
+	expect(container.innerHTML.replaceAll("<!---->", "")).toBe("");
 });
 
 it("renders fallback when passed an empty field", () => {
@@ -115,7 +115,9 @@ it("renders fallback when passed an empty field", () => {
 		fallback: PrismicTableFallback,
 	});
 
-	expect(container.innerHTML).toBe("<div><div>Table</div></div>");
+	expect(container.innerHTML.replaceAll("<!---->", "")).toBe(
+		"<div>Table</div>",
+	);
 });
 
 it("renders custom table elements", () => {
@@ -131,8 +133,8 @@ it("renders custom table elements", () => {
 		},
 	});
 
-	expect(container.innerHTML).toBe(
-		'<div><div class="table"><div class="head"><div class="row"><div class="header"><p>Method</p></div><div class="header"><p>Usage</p></div></div></div><div class="body"><div class="row"><div class="header"><p>GET</p></div><div class="data"><p>For <strong>basic retrieval</strong> of information…</p></div></div><div class="row"><div class="header"><p>DELETE</p></div><div class="data"><p>To <em>dest</em>roy a resource and remove…</p></div></div></div></div></div>',
+	expect(container.innerHTML.replaceAll("<!---->", "")).toBe(
+		'<div class="table"><div class="head"><div class="row"><div class="header"><p>Method</p></div><div class="header"><p>Usage</p></div></div></div><div class="body"><div class="row"><div class="header"><p>GET</p></div><div class="data"><p>For <strong>basic retrieval</strong> of information…</p></div></div><div class="row"><div class="header"><p>DELETE</p></div><div class="data"><p>To <em>dest</em>roy a resource and remove…</p></div></div></div></div>',
 	);
 });
 
@@ -145,7 +147,7 @@ it("renders custom table cell content", () => {
 		},
 	});
 
-	expect(container.innerHTML).toBe(
-		'<div><div class="table"><thead><tr><th><p class="paragraph">Method</p></th><th><p class="paragraph">Usage</p></th></tr></thead><tbody><tr><th><p class="paragraph">GET</p></th><td><p class="paragraph">For <strong>basic retrieval</strong> of information…</p></td></tr><tr><th><p class="paragraph">DELETE</p></th><td><p class="paragraph">To <em>dest</em>roy a resource and remove…</p></td></tr></tbody></div></div>',
+	expect(container.innerHTML.replaceAll("<!---->", "")).toBe(
+		'<div class="table"><thead><tr><th><p class="paragraph">Method</p></th><th><p class="paragraph">Usage</p></th></tr></thead><tbody><tr><th><p class="paragraph">GET</p></th><td><p class="paragraph">For <strong>basic retrieval</strong> of information…</p></td></tr><tr><th><p class="paragraph">DELETE</p></th><td><p class="paragraph">To <em>dest</em>roy a resource and remove…</p></td></tr></tbody></div>',
 	);
 });

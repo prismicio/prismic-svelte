@@ -1,73 +1,67 @@
 <script lang="ts">
-	import { isFilled, type TableField } from "@prismicio/client";
-	import { type ComponentType } from "svelte";
+	import { type TableField, isFilled } from "@prismicio/client";
+	import { type Component } from "svelte";
+
+	import type { RichTextComponents, TableComponents } from "../types";
 
 	import PrismicRichText from "../PrismicRichText/PrismicRichText.svelte";
-	import type { SvelteRichTextSerializer, TableComponents } from "../types";
+
 	import DefaultComponent from "./DefaultComponent.svelte";
 
-	/**
-	 * The Prismic table field to render.
-	 */
-	export let field: TableField;
+	type Props = {
+		/**
+		 * The Prismic table field to render.
+		 */
+		field: TableField;
 
-	/**
-	 * An object that maps a rich text block type to a Svelte component.
-	 */
-	export let components: TableComponents & SvelteRichTextSerializer = {};
+		/**
+		 * An object that maps a rich text block type to a Svelte component.
+		 */
+		components?: TableComponents & RichTextComponents;
 
-	/**
-	 * The component rendered when the field is empty. If a fallback is not given,
-	 * `null` will be rendered.
-	 */
-	export let fallback: ComponentType | undefined = undefined;
-
-	/**
-	 * This function creates the needed table components, prioritizing any user
-	 * provided custom components and falling back to the default components.
-	 */
-	const createComponent = (type: keyof TableComponents) => {
-		const Component: ComponentType = components[type] ?? DefaultComponent;
-		return {
-			Component,
-			props: Component === DefaultComponent ? { type } : {},
-		};
+		/**
+		 * The component rendered when the field is empty. If a fallback is not
+		 * given, `null` will be rendered.
+		 */
+		fallback?: Component;
 	};
 
-	const { Component: Table, props: tableProps } = createComponent("table");
-	const { Component: Thead, props: theadProps } = createComponent("thead");
-	const { Component: Tbody, props: tbodyProps } = createComponent("tbody");
-	const { Component: Tr, props: trProps } = createComponent("tr");
-	const { Component: Th, props: thProps } = createComponent("th");
-	const { Component: Td, props: tdProps } = createComponent("td");
+	const { field, components = {}, fallback: Fallback }: Props = $props();
+
+	const Table = components.table ?? DefaultComponent;
+	const Thead = components.thead ?? DefaultComponent;
+	const Tbody = components.tbody ?? DefaultComponent;
+	const Tr = components.tr ?? DefaultComponent;
+	const Th = components.th ?? DefaultComponent;
+	const Td = components.td ?? DefaultComponent;
 </script>
 
 <!-- This formatting is intentional to prevent unwanted whitespace between elements. -->
 {#if isFilled.table(field)}
-	<Table {...tableProps} table={field}>
+	<Table type="table" table={field}>
 		{#if field?.head}
-			<Thead {...theadProps} head={field.head}>
+			<Thead type="thead" head={field.head}>
 				{#each field.head.rows as row (row.key)}
-					<Tr {...trProps} {row}>
+					<Tr type="tr" {row}>
 						{#each row.cells as cell (cell.key)}
-							<Th {...thProps} {cell}>
+							<Th type="th" {cell}>
 								<PrismicRichText field={cell.content} {components} /></Th
 							>{/each}</Tr
 					>{/each}</Thead
-			>{/if}<Tbody {...tbodyProps} body={field.body}>
+			>{/if}<Tbody type="tbody" body={field.body}>
 			{#each field.body.rows as row (row.key)}
-				<Tr {...trProps} {row}>
+				<Tr type="tr" {row}>
 					{#each row.cells as cell (cell.key)}
 						{#if cell.type === "header"}
-							<Th {...thProps} {cell}>
+							<Th type="th" {cell}>
 								<PrismicRichText field={cell.content} {components} /></Th
-							>{:else}<Td {...tdProps} {cell}>
+							>{:else}<Td type="td" {cell}>
 								<PrismicRichText field={cell.content} {components} /></Td
 							>{/if}{/each}</Tr
 				>
 			{/each}
 		</Tbody>
 	</Table>
-{:else if fallback !== undefined}
-	<svelte:component this={fallback} />
+{:else if Fallback}
+	<Fallback />
 {/if}
