@@ -167,7 +167,6 @@ it("renders with shorthand", () => {
 				"data-testid": "th",
 			},
 			td: {
-				as: "th",
 				class: "custom-td",
 				"data-testid": "td",
 			},
@@ -177,7 +176,7 @@ it("renders with shorthand", () => {
 	const html = container.innerHTML.replaceAll("<!---->", "");
 	expect(html).toContain('<table class="custom-table" data-testid="table">');
 	expect(html).toContain('<th class="custom-th" data-testid="th">');
-	expect(html).toContain('<th class="custom-td" data-testid="td">');
+	expect(html).toContain('<td class="custom-td" data-testid="td">');
 });
 
 it("renders filled table elements", () => {
