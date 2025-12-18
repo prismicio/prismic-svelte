@@ -1,5 +1,5 @@
-import { ClientConfig } from "@prismicio/client";
-import { Cookies } from "@sveltejs/kit";
+import type { ClientConfig } from "@prismicio/client";
+import type { Cookies } from "@sveltejs/kit";
 
 /**
  * Configuration for creating a Prismic client with automatic preview support in

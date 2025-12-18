@@ -2,10 +2,6 @@
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![Github Actions CI][github-actions-ci-src]][github-actions-ci-href]
-[![Codecov][codecov-src]][codecov-href]
-[![Conventional Commits][conventional-commits-src]][conventional-commits-href]
-[![License][license-src]][license-href]
 
 [Svelte][svelte] components to present [Prismic][prismic] content.
 
@@ -93,11 +89,3 @@ limitations under the License.
 [npm-version-href]: https://npmjs.com/package/@prismicio/svelte
 [npm-downloads-src]: https://img.shields.io/npm/dm/@prismicio/svelte.svg
 [npm-downloads-href]: https://npmjs.com/package/@prismicio/svelte
-[github-actions-ci-src]: https://github.com/prismicio/prismic-svelte/workflows/ci/badge.svg
-[github-actions-ci-href]: https://github.com/prismicio/prismic-svelte/actions?query=workflow%3Aci
-[codecov-src]: https://img.shields.io/codecov/c/github/prismicio/prismic-svelte.svg
-[codecov-href]: https://codecov.io/gh/prismicio/prismic-svelte
-[conventional-commits-src]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white
-[conventional-commits-href]: https://conventionalcommits.org
-[license-src]: https://img.shields.io/npm/l/@prismicio/svelte.svg
-[license-href]: https://npmjs.com/package/@prismicio/svelte
