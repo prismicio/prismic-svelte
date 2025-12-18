@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import { expect, it } from "vitest";
 
-import { RichTextField, RichTextNodeType } from "@prismicio/client";
+import { type RichTextField, RichTextNodeType } from "@prismicio/client";
 import { render } from "@testing-library/svelte";
 
 import RichTextWrapperComponent from "./RichTextWrapperComponent.svelte";
