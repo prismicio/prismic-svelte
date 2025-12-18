@@ -1,46 +1,40 @@
 <script lang="ts">
-	import type { ComponentShorthand, RichTextComponentProps } from "../types";
+	import type { HTMLAttributes } from "svelte/elements";
+
+	import type { RichTextComponentProps } from "../types";
 
 	import PrismicEmbed from "../PrismicEmbed.svelte";
 	import PrismicImage from "../PrismicImage.svelte";
 	import PrismicLink from "../PrismicLink.svelte";
 
-	type Props = RichTextComponentProps & { shorthand?: ComponentShorthand };
+	type Props = RichTextComponentProps &
+		HTMLAttributes<HTMLElement> & { as?: string };
 
-	const { node, children, shorthand }: Props = $props();
+	const { node, children, as, ...attrs }: Props = $props();
 
-	const as = $derived(
-		node.type !== "image" && node.type !== "span" ? shorthand?.as : undefined,
-	);
-
-	const attrs = $derived.by(() => {
-		const { as: _, ...attrs } = shorthand ?? {};
-		return attrs;
-	});
-
-	const dirProp = $derived(
-		"direction" in node && node.direction === "rtl" ? { direction: "rtl" } : {},
+	const dir = $derived(
+		"direction" in node && node.direction === "rtl" ? node.direction : null,
 	);
 </script>
 
 {#if as}
-	<svelte:element this={as} {...dirProp} {...attrs}
+	<svelte:element this={as} {dir} {...attrs}
 		>{@render children()}</svelte:element
 	>
 {:else if node.type === "heading1"}
-	<h1 {...dirProp} {...attrs}>{@render children()}</h1>
+	<h1 {dir} {...attrs}>{@render children()}</h1>
 {:else if node.type === "heading2"}
-	<h2 {...dirProp} {...attrs}>{@render children()}</h2>
+	<h2 {dir} {...attrs}>{@render children()}</h2>
 {:else if node.type === "heading3"}
-	<h3 {...dirProp} {...attrs}>{@render children()}</h3>
+	<h3 {dir} {...attrs}>{@render children()}</h3>
 {:else if node.type === "heading4"}
-	<h4 {...dirProp} {...attrs}>{@render children()}</h4>
+	<h4 {dir} {...attrs}>{@render children()}</h4>
 {:else if node.type === "heading5"}
-	<h5 {...dirProp} {...attrs}>{@render children()}</h5>
+	<h5 {dir} {...attrs}>{@render children()}</h5>
 {:else if node.type === "heading6"}
-	<h6 {...dirProp} {...attrs}>{@render children()}</h6>
+	<h6 {dir} {...attrs}>{@render children()}</h6>
 {:else if node.type === "paragraph"}
-	<p {...dirProp} {...attrs}>{@render children()}</p>
+	<p {dir} {...attrs}>{@render children()}</p>
 {:else if node.type === "preformatted"}
 	<pre {...attrs}>{@render children()}</pre>
 {:else if node.type === "strong"}
@@ -48,9 +42,9 @@
 {:else if node.type === "em"}
 	<em {...attrs}>{@render children()}</em>
 {:else if node.type === "list-item"}
-	<li {...dirProp} {...attrs}>{@render children()}</li>
+	<li {dir} {...attrs}>{@render children()}</li>
 {:else if node.type === "o-list-item"}
-	<li {...dirProp} {...attrs}>{@render children()}</li>
+	<li {dir} {...attrs}>{@render children()}</li>
 {:else if node.type === "group-list-item"}
 	<ul {...attrs}>{@render children()}</ul>
 {:else if node.type === "group-o-list-item"}
