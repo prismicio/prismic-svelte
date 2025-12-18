@@ -189,7 +189,6 @@ it("renders filled table elements", () => {
 });
 
 it("renders null when passed an empty field", () => {
-	// @ts-expect-error - undefined is not a valid TableField
 	const { container } = render(PrismicTable, { field: undefined });
 
 	expect(container.innerHTML.replaceAll("<!---->", "")).toBe("");
@@ -197,7 +196,6 @@ it("renders null when passed an empty field", () => {
 
 it("renders fallback when passed an empty field", () => {
 	const { container } = render(PrismicTable, {
-		// @ts-expect-error - undefined is not a valid TableField
 		field: undefined,
 		fallback: PrismicTableFallback,
 	});
