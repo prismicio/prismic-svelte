@@ -4,9 +4,9 @@ import { expect, it } from "vitest";
 import { RichTextField, RichTextNodeType } from "@prismicio/client";
 import { render } from "@testing-library/svelte";
 
-import { PrismicRichText } from "../src";
-
 import RichTextWrapperComponent from "./RichTextWrapperComponent.svelte";
+
+import { PrismicRichText } from "../src";
 
 it("renders with default components", () => {
 	const field: RichTextField = [

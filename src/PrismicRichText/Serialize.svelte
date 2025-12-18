@@ -1,7 +1,11 @@
 <script lang="ts">
 	import type { asTree } from "@prismicio/client/richtext";
 
-	import type { RichTextComponents } from "../types";
+	import type {
+		ComponentShorthand,
+		RichTextComponent,
+		RichTextComponents,
+	} from "../types";
 
 	import DefaultComponent from "./DefaultComponent.svelte";
 	import Serialize from "./Serialize.svelte";
@@ -24,12 +28,12 @@
 		return components[
 			CHILD_TYPE_RENAMES[child.type as keyof typeof CHILD_TYPE_RENAMES] ||
 				(child.type as keyof typeof components)
-		];
+		] as RichTextComponent | ComponentShorthand;
 	}
 </script>
 
 {#each children as child (child.key)}
-	{@const component = getComponent(child)}
+	{@const Component = getComponent(child)}
 	{#snippet serializedChildren()}
 		<!-- This formatting is intentional to prevent unwanted whitespace between elements. -->
 		{#if child.children.length > 0}<Serialize
@@ -37,10 +41,10 @@
 				{components}
 			/>{/if}
 	{/snippet}
-	{#if typeof component === "function"}
-		<component node={child.node}>{@render serializedChildren()}</component>
+	{#if typeof Component === "function"}
+		<Component node={child.node}>{@render serializedChildren()}</Component>
 	{:else}
-		<DefaultComponent {...component} node={child.node}
+		<DefaultComponent {...Component} node={child.node}
 			>{@render serializedChildren()}</DefaultComponent
 		>
 	{/if}
