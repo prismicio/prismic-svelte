@@ -127,7 +127,7 @@ const simpleTableField: TableField = {
 	},
 };
 
-it.only("renders with default components", () => {
+it("renders with default components", () => {
 	const { container } = render(PrismicTable, { field: simpleTableField });
 
 	const html = container.innerHTML.replaceAll("<!---->", "");
