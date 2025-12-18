@@ -87,4 +87,3 @@ it("renders with shorthand", () => {
 		'<h3 class="heading-2" data-testid="heading-2">Heading 2</h3>',
 	);
 });
-

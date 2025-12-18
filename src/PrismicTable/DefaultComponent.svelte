@@ -14,7 +14,7 @@
 	const as = $derived(shorthand?.as ?? type);
 
 	const attrs = $derived.by(() => {
-		const { as, ...attrs } = shorthand ?? {};
+		const { as: _, ...attrs } = shorthand ?? {};
 		return attrs;
 	});
 </script>

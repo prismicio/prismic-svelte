@@ -34,15 +34,15 @@ import type { Component, Snippet } from "svelte";
 /** A shorthand definition for `<PrismicRichText />` and `<PrismicTable />` component types. */
 export type ComponentShorthand = {
 	/** The HTML element type rendered for this node type. */
-	as?: string
+	as?: string;
 
 	/** Other attributes to apply to the element type. */
-	[Attribute: string]: string | boolean | null | undefined
+	[Attribute: string]: string | boolean | null | undefined;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isSvelteComponent = <T extends Record<string, any>>(
-	component: Component<T> | ComponentShorthand | undefined
+	component: Component<T> | ComponentShorthand | undefined,
 ): component is Component<T> => {
 	return typeof component === "function";
 };
@@ -71,47 +71,62 @@ export type RichTextComponents = {
 
 export type RichTextComponent<TNode extends RTAnyNode = RTAnyNode> = Component<
 	RichTextComponentProps<TNode>
->
+>;
 
 export type RichTextComponentProps<TNode extends RTAnyNode = RTAnyNode> = {
 	node: TNode;
 	children: Snippet;
 };
 
-export type InternalRichTextComponents = Record<RichTextNodeTypes, {
-	is: Component<
-		RichTextComponentProps<RTAnyNode> &
-		{ shorthand?: ComponentShorthand }
-	>,
-	shorthand?: ComponentShorthand;
-} | { is: RichTextComponent, shorthand?: never }>
+export type InternalRichTextComponents = Record<
+	RichTextNodeTypes,
+	| {
+			is: Component<
+				RichTextComponentProps<RTAnyNode> & { shorthand?: ComponentShorthand }
+			>;
+			shorthand?: ComponentShorthand;
+	  }
+	| { is: RichTextComponent; shorthand?: never }
+>;
 
 // Define the type for the components prop
 export type TableComponents = {
-	table?: Component<{
-		table: TableField<"filled">;
-		children: Snippet;
-	}> | ComponentShorthand;
-	thead?: Component<{
-		head: TableFieldHead;
-		children: Snippet;
-	}> | ComponentShorthand;
-	tbody?: Component<{
-		body: TableFieldBody;
-		children: Snippet;
-	}> | ComponentShorthand;
-	tr?: Component<{
-		row: TableFieldHeadRow | TableFieldBodyRow;
-		children: Snippet;
-	}> | ComponentShorthand;
-	th?: Component<{
-		cell: TableFieldHeaderCell;
-		children: Snippet;
-	}> | ComponentShorthand;
-	td?: Component<{
-		cell: TableFieldDataCell;
-		children: Snippet;
-	}> | ComponentShorthand;
+	table?:
+		| Component<{
+				table: TableField<"filled">;
+				children: Snippet;
+		  }>
+		| ComponentShorthand;
+	thead?:
+		| Component<{
+				head: TableFieldHead;
+				children: Snippet;
+		  }>
+		| ComponentShorthand;
+	tbody?:
+		| Component<{
+				body: TableFieldBody;
+				children: Snippet;
+		  }>
+		| ComponentShorthand;
+	tr?:
+		| Component<{
+				row: TableFieldHeadRow | TableFieldBodyRow;
+				children: Snippet;
+		  }>
+		| ComponentShorthand;
+	th?:
+		| Component<{
+				cell: TableFieldHeaderCell;
+				children: Snippet;
+		  }>
+		| ComponentShorthand;
+	td?:
+		| Component<{
+				cell: TableFieldDataCell;
+				children: Snippet;
+		  }>
+		| ComponentShorthand;
 };
 
 /**

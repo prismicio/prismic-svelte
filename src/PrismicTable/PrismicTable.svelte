@@ -2,7 +2,11 @@
 	import { type TableField, isFilled } from "@prismicio/client";
 	import { type Component } from "svelte";
 
-	import { isSvelteComponent, type RichTextComponents, type TableComponents } from "../types";
+	import {
+		isSvelteComponent,
+		type RichTextComponents,
+		type TableComponents,
+	} from "../types";
 
 	import PrismicRichText from "../PrismicRichText/PrismicRichText.svelte";
 
@@ -30,27 +34,45 @@
 
 	const { Table, tableProps } = isSvelteComponent(components.table)
 		? { Table: components.table }
-		: { Table: DefaultComponent, tableProps: { type: "table", shorthand: components.table } as const };
+		: {
+				Table: DefaultComponent,
+				tableProps: { type: "table", shorthand: components.table } as const,
+			};
 
 	const { Thead, theadProps } = isSvelteComponent(components.thead)
 		? { Thead: components.thead }
-		: { Thead: DefaultComponent, theadProps: { type: "thead", shorthand: components.thead } as const };
+		: {
+				Thead: DefaultComponent,
+				theadProps: { type: "thead", shorthand: components.thead } as const,
+			};
 
 	const { Tbody, tbodyProps } = isSvelteComponent(components.tbody)
 		? { Tbody: components.tbody }
-		: { Tbody: DefaultComponent, tbodyProps: { type: "tbody", shorthand: components.tbody } as const };
+		: {
+				Tbody: DefaultComponent,
+				tbodyProps: { type: "tbody", shorthand: components.tbody } as const,
+			};
 
 	const { Tr, trProps } = isSvelteComponent(components.tr)
 		? { Tr: components.tr }
-		: { Tr: DefaultComponent, trProps: { type: "tr", shorthand: components.tr } as const };
+		: {
+				Tr: DefaultComponent,
+				trProps: { type: "tr", shorthand: components.tr } as const,
+			};
 
 	const { Th, thProps } = isSvelteComponent(components.th)
 		? { Th: components.th }
-		: { Th: DefaultComponent, thProps: { type: "th", shorthand: components.th } as const };
+		: {
+				Th: DefaultComponent,
+				thProps: { type: "th", shorthand: components.th } as const,
+			};
 
 	const { Td, tdProps } = isSvelteComponent(components.td)
 		? { Td: components.td }
-		: { Td: DefaultComponent, tdProps: { type: "td", shorthand: components.td } as const };
+		: {
+				Td: DefaultComponent,
+				tdProps: { type: "td", shorthand: components.td } as const,
+			};
 </script>
 
 <!-- This formatting is intentional to prevent unwanted whitespace between elements. -->

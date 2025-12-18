@@ -2,7 +2,12 @@
 	import type { RichTextField } from "@prismicio/client";
 	import { asTree } from "@prismicio/client/richtext";
 
-	import type { RichTextComponent, RichTextComponents, ComponentShorthand, InternalRichTextComponents } from "../types";
+	import type {
+		RichTextComponent,
+		RichTextComponents,
+		ComponentShorthand,
+		InternalRichTextComponents,
+	} from "../types";
 	import { isSvelteComponent } from "../types";
 
 	import DefaultComponent from "./DefaultComponent.svelte";
@@ -25,7 +30,10 @@
 	const children = $derived(asTree(field).children);
 
 	function getInternalComponent(type: keyof RichTextComponents) {
-		const maybeComponentOrShorthand = components?.[type] as RichTextComponent | ComponentShorthand | undefined;
+		const maybeComponentOrShorthand = components?.[type] as
+			| RichTextComponent
+			| ComponentShorthand
+			| undefined;
 
 		if (isSvelteComponent(maybeComponentOrShorthand)) {
 			return { is: maybeComponentOrShorthand };

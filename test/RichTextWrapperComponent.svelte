@@ -5,4 +5,3 @@
 </script>
 
 <div class="wrapper-component">{@render children()}</div>
-

@@ -10,13 +10,11 @@
 	const { node, children, shorthand }: Props = $props();
 
 	const as = $derived(
-		node.type !== "image" && node.type !== "span"
-			? shorthand?.as
-			: undefined
+		node.type !== "image" && node.type !== "span" ? shorthand?.as : undefined,
 	);
 
 	const attrs = $derived.by(() => {
-		const { as, ...attrs } = shorthand ?? {};
+		const { as: _, ...attrs } = shorthand ?? {};
 		return attrs;
 	});
 
@@ -26,7 +24,9 @@
 </script>
 
 {#if as}
-	<svelte:element this={as} {...dirProp} {...attrs}>{@render children()}</svelte:element>
+	<svelte:element this={as} {...dirProp} {...attrs}
+		>{@render children()}</svelte:element
+	>
 {:else if node.type === "heading1"}
 	<h1 {...dirProp} {...attrs}>{@render children()}</h1>
 {:else if node.type === "heading2"}
