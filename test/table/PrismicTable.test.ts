@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import { expect, it } from "vitest";
 
-import { TableField } from "@prismicio/client";
+import type { TableField } from "@prismicio/client";
 import { render } from "@testing-library/svelte";
 
 import CustomParagraph from "./CustomParagraph.svelte";

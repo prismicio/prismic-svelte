@@ -4,7 +4,7 @@ passing slot content to the PrismicLink component is not easy in tests.
 -->
 
 <script lang="ts">
-	import { FilledLinkToWebField } from "@prismicio/client";
+	import type { FilledLinkToWebField } from "@prismicio/client";
 
 	import { PrismicLink } from "../src";
 

@@ -1,5 +1,5 @@
 import * as prismic from "@prismicio/client";
-import { Cookies } from "@sveltejs/kit";
+import type { Cookies } from "@sveltejs/kit";
 
 export type RedirectToPreviewURLConfig = {
 	/**
