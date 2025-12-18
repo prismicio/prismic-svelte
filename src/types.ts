@@ -19,7 +19,6 @@ import type {
 	RTPreformattedNode,
 	RTSpanNode,
 	RTStrongNode,
-	RichTextNodeTypes,
 	Slice,
 	TableField,
 	TableFieldBody,
@@ -30,22 +29,17 @@ import type {
 	TableFieldHeaderCell,
 } from "@prismicio/client";
 import type { Component, Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 
-/** A shorthand definition for `<PrismicRichText />` and `<PrismicTable />` component types. */
+/**
+ * A shorthand definition for `<PrismicRichText />` component types.
+ */
 export type ComponentShorthand = {
-	/** The HTML element type rendered for this node type. */
+	/**
+	 * The HTML element type rendered for this node type.
+	 */
 	as?: string;
-
-	/** Other attributes to apply to the element type. */
-	[Attribute: string]: string | boolean | null | undefined;
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isSvelteComponent = <T extends Record<string, any>>(
-	component: Component<T> | ComponentShorthand | undefined,
-): component is Component<T> => {
-	return typeof component === "function";
-};
+} & HTMLAttributes<HTMLElement>;
 
 export type RichTextComponents = {
 	heading1?: RichTextComponent<RTHeading1Node> | ComponentShorthand;
@@ -78,17 +72,6 @@ export type RichTextComponentProps<TNode extends RTAnyNode = RTAnyNode> = {
 	children: Snippet;
 };
 
-export type InternalRichTextComponents = Record<
-	RichTextNodeTypes,
-	| {
-			is: Component<
-				RichTextComponentProps<RTAnyNode> & { shorthand?: ComponentShorthand }
-			>;
-			shorthand?: ComponentShorthand;
-	  }
-	| { is: RichTextComponent; shorthand?: never }
->;
-
 // Define the type for the components prop
 export type TableComponents = {
 	table?:
@@ -96,37 +79,37 @@ export type TableComponents = {
 				table: TableField<"filled">;
 				children: Snippet;
 		  }>
-		| ComponentShorthand;
+		| HTMLAttributes<HTMLTableElement>;
 	thead?:
 		| Component<{
 				head: TableFieldHead;
 				children: Snippet;
 		  }>
-		| ComponentShorthand;
+		| HTMLAttributes<HTMLTableSectionElement>;
 	tbody?:
 		| Component<{
 				body: TableFieldBody;
 				children: Snippet;
 		  }>
-		| ComponentShorthand;
+		| HTMLAttributes<HTMLTableSectionElement>;
 	tr?:
 		| Component<{
 				row: TableFieldHeadRow | TableFieldBodyRow;
 				children: Snippet;
 		  }>
-		| ComponentShorthand;
+		| HTMLAttributes<HTMLTableRowElement>;
 	th?:
 		| Component<{
 				cell: TableFieldHeaderCell;
 				children: Snippet;
 		  }>
-		| ComponentShorthand;
+		| HTMLAttributes<HTMLTableCellElement>;
 	td?:
 		| Component<{
 				cell: TableFieldDataCell;
 				children: Snippet;
 		  }>
-		| ComponentShorthand;
+		| HTMLAttributes<HTMLTableCellElement>;
 };
 
 /**
