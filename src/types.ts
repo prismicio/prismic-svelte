@@ -19,6 +19,7 @@ import type {
 	RTPreformattedNode,
 	RTSpanNode,
 	RTStrongNode,
+	RichTextNodeTypes,
 	Slice,
 	TableField,
 	TableFieldBody,
@@ -30,63 +31,87 @@ import type {
 } from "@prismicio/client";
 import type { Component, Snippet } from "svelte";
 
+/** A shorthand definition for `<PrismicRichText />` and `<PrismicTable />` component types. */
+export type ComponentShorthand = {
+	/** The HTML element type rendered for this node type. */
+	as?: string
+
+	/** Other attributes to apply to the element type. */
+	[Attribute: string]: string | boolean | null | undefined
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isSvelteComponent = <T extends Record<string, any>>(
+	component: Component<T> | ComponentShorthand | undefined
+): component is Component<T> => {
+	return typeof component === "function";
+};
+
 export type RichTextComponents = {
-	heading1?: RichTextComponent<RTHeading1Node>;
-	heading2?: RichTextComponent<RTHeading2Node>;
-	heading3?: RichTextComponent<RTHeading3Node>;
-	heading4?: RichTextComponent<RTHeading4Node>;
-	heading5?: RichTextComponent<RTHeading5Node>;
-	heading6?: RichTextComponent<RTHeading6Node>;
-	paragraph?: RichTextComponent<RTParagraphNode>;
-	preformatted?: RichTextComponent<RTPreformattedNode>;
-	strong?: RichTextComponent<RTStrongNode>;
-	em?: RichTextComponent<RTEmNode>;
-	listItem?: RichTextComponent<RTListItemNode>;
-	oListItem?: RichTextComponent<RTOListItemNode>;
-	list?: RichTextComponent<RTListNode>;
-	oList?: RichTextComponent<RTOListNode>;
-	image?: RichTextComponent<RTImageNode>;
-	embed?: RichTextComponent<RTEmbedNode>;
-	hyperlink?: RichTextComponent<RTLinkNode>;
-	label?: RichTextComponent<RTLabelNode>;
-	span?: RichTextComponent<RTSpanNode>;
+	heading1?: RichTextComponent<RTHeading1Node> | ComponentShorthand;
+	heading2?: RichTextComponent<RTHeading2Node> | ComponentShorthand;
+	heading3?: RichTextComponent<RTHeading3Node> | ComponentShorthand;
+	heading4?: RichTextComponent<RTHeading4Node> | ComponentShorthand;
+	heading5?: RichTextComponent<RTHeading5Node> | ComponentShorthand;
+	heading6?: RichTextComponent<RTHeading6Node> | ComponentShorthand;
+	paragraph?: RichTextComponent<RTParagraphNode> | ComponentShorthand;
+	preformatted?: RichTextComponent<RTPreformattedNode> | ComponentShorthand;
+	strong?: RichTextComponent<RTStrongNode> | ComponentShorthand;
+	em?: RichTextComponent<RTEmNode> | ComponentShorthand;
+	listItem?: RichTextComponent<RTListItemNode> | ComponentShorthand;
+	oListItem?: RichTextComponent<RTOListItemNode> | ComponentShorthand;
+	list?: RichTextComponent<RTListNode> | ComponentShorthand;
+	oList?: RichTextComponent<RTOListNode> | ComponentShorthand;
+	image?: RichTextComponent<RTImageNode> | ComponentShorthand;
+	embed?: RichTextComponent<RTEmbedNode> | ComponentShorthand;
+	hyperlink?: RichTextComponent<RTLinkNode> | ComponentShorthand;
+	label?: RichTextComponent<RTLabelNode> | ComponentShorthand;
+	span?: RichTextComponent<RTSpanNode> | ComponentShorthand;
 };
 
 export type RichTextComponent<TNode extends RTAnyNode = RTAnyNode> = Component<
 	RichTextComponentProps<TNode>
->;
+>
 
 export type RichTextComponentProps<TNode extends RTAnyNode = RTAnyNode> = {
 	node: TNode;
 	children: Snippet;
 };
 
+export type InternalRichTextComponents = Record<RichTextNodeTypes, {
+	is: Component<
+		RichTextComponentProps<RTAnyNode> &
+		{ shorthand?: ComponentShorthand }
+	>,
+	shorthand?: ComponentShorthand;
+} | { is: RichTextComponent, shorthand?: never }>
+
 // Define the type for the components prop
 export type TableComponents = {
 	table?: Component<{
 		table: TableField<"filled">;
 		children: Snippet;
-	}>;
+	}> | ComponentShorthand;
 	thead?: Component<{
 		head: TableFieldHead;
 		children: Snippet;
-	}>;
+	}> | ComponentShorthand;
 	tbody?: Component<{
 		body: TableFieldBody;
 		children: Snippet;
-	}>;
+	}> | ComponentShorthand;
 	tr?: Component<{
 		row: TableFieldHeadRow | TableFieldBodyRow;
 		children: Snippet;
-	}>;
+	}> | ComponentShorthand;
 	th?: Component<{
 		cell: TableFieldHeaderCell;
 		children: Snippet;
-	}>;
+	}> | ComponentShorthand;
 	td?: Component<{
 		cell: TableFieldDataCell;
 		children: Snippet;
-	}>;
+	}> | ComponentShorthand;
 };
 
 /**

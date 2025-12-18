@@ -12,6 +12,7 @@ import CustomTHead from "./CustomTHead.svelte";
 import CustomTR from "./CustomTR.svelte";
 import CustomTable from "./CustomTable.svelte";
 import PrismicTableFallback from "./TableFallback.svelte";
+import TableWrapperComponent from "./TableWrapperComponent.svelte";
 
 import { PrismicTable } from "../../src";
 
@@ -95,6 +96,90 @@ const filledTableField: TableField = {
 	},
 };
 
+const simpleTableField: TableField = {
+	head: {
+		rows: [
+			{
+				key: "0",
+				cells: [
+					{
+						key: "0",
+						type: "header",
+						content: [{ type: "paragraph", text: "Header", spans: [] }],
+					},
+				],
+			},
+		],
+	},
+	body: {
+		rows: [
+			{
+				key: "0",
+				cells: [
+					{
+						key: "0",
+						type: "data",
+						content: [{ type: "paragraph", text: "Data", spans: [] }],
+					},
+				],
+			},
+		],
+	},
+};
+
+it("renders with default components", () => {
+	const { container } = render(PrismicTable, { field: simpleTableField });
+
+	const html = container.innerHTML.replaceAll("<!---->", "");
+	expect(html).toContain("<table>");
+	expect(html).toContain("<thead>");
+	expect(html).toContain("<tbody>");
+	expect(html).toContain("<th>");
+	expect(html).toContain("<td>");
+	expect(html).toContain("Header");
+	expect(html).toContain("Data");
+});
+
+it("renders with a Svelte component", () => {
+	const { container } = render(PrismicTable, {
+		field: simpleTableField,
+		components: {
+			table: TableWrapperComponent,
+		},
+	});
+
+	const html = container.innerHTML.replaceAll("<!---->", "");
+	expect(html).toContain('<div class="wrapper-table">');
+	expect(html).toContain("Header");
+	expect(html).toContain("Data");
+});
+
+it("renders with shorthand", () => {
+	const { container } = render(PrismicTable, {
+		field: simpleTableField,
+		components: {
+			table: {
+				class: "custom-table",
+				"data-testid": "table",
+			},
+			th: {
+				class: "custom-th",
+				"data-testid": "th",
+			},
+			td: {
+				as: "th",
+				class: "custom-td",
+				"data-testid": "td",
+			},
+		},
+	});
+
+	const html = container.innerHTML.replaceAll("<!---->", "");
+	expect(html).toContain('<table class="custom-table" data-testid="table">');
+	expect(html).toContain('<th class="custom-th" data-testid="th">');
+	expect(html).toContain('<th class="custom-td" data-testid="td">');
+});
+
 it("renders filled table elements", () => {
 	const { container } = render(PrismicTable, { field: filledTableField });
 
@@ -104,6 +189,7 @@ it("renders filled table elements", () => {
 });
 
 it("renders null when passed an empty field", () => {
+	// @ts-expect-error - undefined is not a valid TableField
 	const { container } = render(PrismicTable, { field: undefined });
 
 	expect(container.innerHTML.replaceAll("<!---->", "")).toBe("");
@@ -111,6 +197,7 @@ it("renders null when passed an empty field", () => {
 
 it("renders fallback when passed an empty field", () => {
 	const { container } = render(PrismicTable, {
+		// @ts-expect-error - undefined is not a valid TableField
 		field: undefined,
 		fallback: PrismicTableFallback,
 	});

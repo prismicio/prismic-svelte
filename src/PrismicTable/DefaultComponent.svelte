@@ -1,14 +1,22 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
 
-	import type { TableComponents } from "../types";
+	import type { ComponentShorthand, TableComponents } from "../types";
 
 	type Props = {
-		type: keyof TableComponents;
+		type?: keyof TableComponents;
 		children: Snippet;
+		shorthand?: ComponentShorthand;
 	};
 
-	const { type, children }: Props = $props();
+	const { type, children, shorthand }: Props = $props();
+
+	const as = $derived(shorthand?.as ?? type);
+
+	const attrs = $derived.by(() => {
+		const { as, ...attrs } = shorthand ?? {};
+		return attrs;
+	});
 </script>
 
-<svelte:element this={type}>{@render children()}</svelte:element>
+<svelte:element this={as} {...attrs}>{@render children()}</svelte:element>

@@ -2,7 +2,7 @@
 	import { type TableField, isFilled } from "@prismicio/client";
 	import { type Component } from "svelte";
 
-	import type { RichTextComponents, TableComponents } from "../types";
+	import { isSvelteComponent, type RichTextComponents, type TableComponents } from "../types";
 
 	import PrismicRichText from "../PrismicRichText/PrismicRichText.svelte";
 
@@ -28,34 +28,51 @@
 
 	const { field, components = {}, fallback: Fallback }: Props = $props();
 
-	const Table = components.table ?? DefaultComponent;
-	const Thead = components.thead ?? DefaultComponent;
-	const Tbody = components.tbody ?? DefaultComponent;
-	const Tr = components.tr ?? DefaultComponent;
-	const Th = components.th ?? DefaultComponent;
-	const Td = components.td ?? DefaultComponent;
+	const { Table, tableProps } = isSvelteComponent(components.table)
+		? { Table: components.table }
+		: { Table: DefaultComponent, tableProps: { type: "table", shorthand: components.table } as const };
+
+	const { Thead, theadProps } = isSvelteComponent(components.thead)
+		? { Thead: components.thead }
+		: { Thead: DefaultComponent, theadProps: { type: "thead", shorthand: components.thead } as const };
+
+	const { Tbody, tbodyProps } = isSvelteComponent(components.tbody)
+		? { Tbody: components.tbody }
+		: { Tbody: DefaultComponent, tbodyProps: { type: "tbody", shorthand: components.tbody } as const };
+
+	const { Tr, trProps } = isSvelteComponent(components.tr)
+		? { Tr: components.tr }
+		: { Tr: DefaultComponent, trProps: { type: "tr", shorthand: components.tr } as const };
+
+	const { Th, thProps } = isSvelteComponent(components.th)
+		? { Th: components.th }
+		: { Th: DefaultComponent, thProps: { type: "th", shorthand: components.th } as const };
+
+	const { Td, tdProps } = isSvelteComponent(components.td)
+		? { Td: components.td }
+		: { Td: DefaultComponent, tdProps: { type: "td", shorthand: components.td } as const };
 </script>
 
 <!-- This formatting is intentional to prevent unwanted whitespace between elements. -->
 {#if isFilled.table(field)}
-	<Table type="table" table={field}>
+	<Table {...tableProps} table={field}>
 		{#if field?.head}
-			<Thead type="thead" head={field.head}>
+			<Thead {...theadProps} head={field.head}>
 				{#each field.head.rows as row (row.key)}
-					<Tr type="tr" {row}>
+					<Tr {...trProps} {row}>
 						{#each row.cells as cell (cell.key)}
-							<Th type="th" {cell}>
+							<Th {...thProps} {cell}>
 								<PrismicRichText field={cell.content} {components} /></Th
 							>{/each}</Tr
 					>{/each}</Thead
-			>{/if}<Tbody type="tbody" body={field.body}>
+			>{/if}<Tbody {...tbodyProps} body={field.body}>
 			{#each field.body.rows as row (row.key)}
-				<Tr type="tr" {row}>
+				<Tr {...trProps} {row}>
 					{#each row.cells as cell (cell.key)}
 						{#if cell.type === "header"}
-							<Th type="th" {cell}>
+							<Th {...thProps} {cell}>
 								<PrismicRichText field={cell.content} {components} /></Th
-							>{:else}<Td type="td" {cell}>
+							>{:else}<Td {...tdProps} {cell}>
 								<PrismicRichText field={cell.content} {components} /></Td
 							>{/if}{/each}</Tr
 				>
