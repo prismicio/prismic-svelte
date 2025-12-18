@@ -36,29 +36,35 @@
 {:else if node.type === "paragraph"}
 	<p {...dirProp} {...attrs}>{@render children()}</p>
 {:else if node.type === "preformatted"}
-	<pre>{@render children()}</pre>
+	<pre {...attrs}>{@render children()}</pre>
 {:else if node.type === "strong"}
-	<strong>{@render children()}</strong>
+	<strong {...attrs}>{@render children()}</strong>
 {:else if node.type === "em"}
-	<em>{@render children()}</em>
+	<em {...attrs}>{@render children()}</em>
 {:else if node.type === "list-item"}
 	<li {...dirProp} {...attrs}>{@render children()}</li>
 {:else if node.type === "o-list-item"}
 	<li {...dirProp} {...attrs}>{@render children()}</li>
 {:else if node.type === "group-list-item"}
-	<ul>{@render children()}</ul>
+	<ul {...attrs}>{@render children()}</ul>
 {:else if node.type === "group-o-list-item"}
-	<ol>{@render children()}</ol>
+	<ol {...attrs}>{@render children()}</ol>
 {:else if node.type === "image"}
 	<p class="block-img">
-		<PrismicImage field={node} />
+		{#if node.linkTo}
+			<PrismicLink field={node.linkTo}>
+				<PrismicImage field={node} {...attrs} />
+			</PrismicLink>
+		{:else}
+			<PrismicImage field={node} {...attrs} />
+		{/if}
 	</p>
 {:else if node.type === "embed"}
-	<PrismicEmbed field={node.oembed} />
+	<PrismicEmbed field={node.oembed} {...attrs} />
 {:else if node.type === "hyperlink"}
-	<PrismicLink field={node.data}>{@render children()}</PrismicLink>
+	<PrismicLink field={node.data} {...attrs}>{@render children()}</PrismicLink>
 {:else if node.type === "label"}
-	<span class={node.data.label}>{@render children()}</span>
+	<span class={node.data.label} {...attrs}>{@render children()}</span>
 {:else}
 	{#each node.text.split("\n") as line, index (index)}
 		{#if index > 0}<br />{/if}{line}
