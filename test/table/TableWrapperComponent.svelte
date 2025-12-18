@@ -1,9 +1,7 @@
 <script lang="ts">
-	import type { TableField } from "@prismicio/client";
 	import type { Snippet } from "svelte";
 
-	const { children }: { table: TableField<"filled">; children: Snippet } =
-		$props();
+	const { children }: { children: Snippet } = $props();
 </script>
 
 <div class="wrapper-table">{@render children()}</div>
