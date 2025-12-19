@@ -56,11 +56,11 @@ export type RichTextComponents = {
 	oListItem?: RichTextComponent<RTOListItemNode> | ComponentShorthand;
 	list?: RichTextComponent<RTListNode> | ComponentShorthand;
 	oList?: RichTextComponent<RTOListNode> | ComponentShorthand;
-	image?: RichTextComponent<RTImageNode> | ComponentShorthand;
-	embed?: RichTextComponent<RTEmbedNode> | ComponentShorthand;
-	hyperlink?: RichTextComponent<RTLinkNode> | ComponentShorthand;
-	label?: RichTextComponent<RTLabelNode> | ComponentShorthand;
-	span?: RichTextComponent<RTSpanNode> | ComponentShorthand;
+	image?: RichTextComponent<RTImageNode> | HTMLAttributes<HTMLImageElement>;
+	embed?: RichTextComponent<RTEmbedNode> | HTMLAttributes<HTMLDivElement>;
+	hyperlink?: RichTextComponent<RTLinkNode> | HTMLAttributes<HTMLAnchorElement>;
+	label?: RichTextComponent<RTLabelNode> | HTMLAttributes<HTMLSpanElement>;
+	span?: RichTextComponent<RTSpanNode>;
 };
 
 export type RichTextComponent<TNode extends RTAnyNode = RTAnyNode> = Component<
