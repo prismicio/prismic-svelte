@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/prismicio/prismic-svelte/compare/v2.0.0...v2.1.0) (2025-12-19)
+
+
+### Features
+
+* support shorthand component definition ([#36](https://github.com/prismicio/prismic-svelte/issues/36)) ([6efc805](https://github.com/prismicio/prismic-svelte/commit/6efc8058bb06d27268849d78e7763fccdaa495c2))
+
 ## [2.0.0](https://github.com/prismicio/prismic-svelte/compare/v1.5.0...v2.0.0) (2025-06-04)
 
 
