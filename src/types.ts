@@ -29,26 +29,37 @@ import type {
 	TableFieldHeaderCell,
 } from "@prismicio/client";
 import type { Component, Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
+
+/**
+ * A shorthand definition for `<PrismicRichText />` component types.
+ */
+export type ComponentShorthand = {
+	/**
+	 * The HTML element type rendered for this node type.
+	 */
+	as?: string;
+} & HTMLAttributes<HTMLElement>;
 
 export type RichTextComponents = {
-	heading1?: RichTextComponent<RTHeading1Node>;
-	heading2?: RichTextComponent<RTHeading2Node>;
-	heading3?: RichTextComponent<RTHeading3Node>;
-	heading4?: RichTextComponent<RTHeading4Node>;
-	heading5?: RichTextComponent<RTHeading5Node>;
-	heading6?: RichTextComponent<RTHeading6Node>;
-	paragraph?: RichTextComponent<RTParagraphNode>;
-	preformatted?: RichTextComponent<RTPreformattedNode>;
-	strong?: RichTextComponent<RTStrongNode>;
-	em?: RichTextComponent<RTEmNode>;
-	listItem?: RichTextComponent<RTListItemNode>;
-	oListItem?: RichTextComponent<RTOListItemNode>;
-	list?: RichTextComponent<RTListNode>;
-	oList?: RichTextComponent<RTOListNode>;
-	image?: RichTextComponent<RTImageNode>;
-	embed?: RichTextComponent<RTEmbedNode>;
-	hyperlink?: RichTextComponent<RTLinkNode>;
-	label?: RichTextComponent<RTLabelNode>;
+	heading1?: RichTextComponent<RTHeading1Node> | ComponentShorthand;
+	heading2?: RichTextComponent<RTHeading2Node> | ComponentShorthand;
+	heading3?: RichTextComponent<RTHeading3Node> | ComponentShorthand;
+	heading4?: RichTextComponent<RTHeading4Node> | ComponentShorthand;
+	heading5?: RichTextComponent<RTHeading5Node> | ComponentShorthand;
+	heading6?: RichTextComponent<RTHeading6Node> | ComponentShorthand;
+	paragraph?: RichTextComponent<RTParagraphNode> | ComponentShorthand;
+	preformatted?: RichTextComponent<RTPreformattedNode> | ComponentShorthand;
+	strong?: RichTextComponent<RTStrongNode> | ComponentShorthand;
+	em?: RichTextComponent<RTEmNode> | ComponentShorthand;
+	listItem?: RichTextComponent<RTListItemNode> | ComponentShorthand;
+	oListItem?: RichTextComponent<RTOListItemNode> | ComponentShorthand;
+	list?: RichTextComponent<RTListNode> | ComponentShorthand;
+	oList?: RichTextComponent<RTOListNode> | ComponentShorthand;
+	image?: RichTextComponent<RTImageNode> | HTMLAttributes<HTMLImageElement>;
+	embed?: RichTextComponent<RTEmbedNode> | HTMLAttributes<HTMLDivElement>;
+	hyperlink?: RichTextComponent<RTLinkNode> | HTMLAttributes<HTMLAnchorElement>;
+	label?: RichTextComponent<RTLabelNode> | HTMLAttributes<HTMLSpanElement>;
 	span?: RichTextComponent<RTSpanNode>;
 };
 
@@ -63,30 +74,42 @@ export type RichTextComponentProps<TNode extends RTAnyNode = RTAnyNode> = {
 
 // Define the type for the components prop
 export type TableComponents = {
-	table?: Component<{
-		table: TableField<"filled">;
-		children: Snippet;
-	}>;
-	thead?: Component<{
-		head: TableFieldHead;
-		children: Snippet;
-	}>;
-	tbody?: Component<{
-		body: TableFieldBody;
-		children: Snippet;
-	}>;
-	tr?: Component<{
-		row: TableFieldHeadRow | TableFieldBodyRow;
-		children: Snippet;
-	}>;
-	th?: Component<{
-		cell: TableFieldHeaderCell;
-		children: Snippet;
-	}>;
-	td?: Component<{
-		cell: TableFieldDataCell;
-		children: Snippet;
-	}>;
+	table?:
+		| Component<{
+				table: TableField<"filled">;
+				children: Snippet;
+		  }>
+		| HTMLAttributes<HTMLTableElement>;
+	thead?:
+		| Component<{
+				head: TableFieldHead;
+				children: Snippet;
+		  }>
+		| HTMLAttributes<HTMLTableSectionElement>;
+	tbody?:
+		| Component<{
+				body: TableFieldBody;
+				children: Snippet;
+		  }>
+		| HTMLAttributes<HTMLTableSectionElement>;
+	tr?:
+		| Component<{
+				row: TableFieldHeadRow | TableFieldBodyRow;
+				children: Snippet;
+		  }>
+		| HTMLAttributes<HTMLTableRowElement>;
+	th?:
+		| Component<{
+				cell: TableFieldHeaderCell;
+				children: Snippet;
+		  }>
+		| HTMLAttributes<HTMLTableCellElement>;
+	td?:
+		| Component<{
+				cell: TableFieldDataCell;
+				children: Snippet;
+		  }>
+		| HTMLAttributes<HTMLTableCellElement>;
 };
 
 /**
