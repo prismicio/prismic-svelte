@@ -1,6 +1,6 @@
 import { afterEach, beforeEach } from "vitest";
 
-import type { MockFactory} from "@prismicio/mock";
+import type { MockFactory } from "@prismicio/mock";
 import { createMockFactory } from "@prismicio/mock";
 import { cleanup } from "@testing-library/svelte";
 
