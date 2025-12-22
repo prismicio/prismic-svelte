@@ -1,17 +1,17 @@
 <script lang="ts">
-	import {
-		type TableField,
+	import type {
+		TableField,
 		TableFieldBody,
 		TableFieldBodyRow,
 		TableFieldDataCell,
 		TableFieldHead,
 		TableFieldHeadRow,
 		TableFieldHeaderCell,
-		isFilled,
 	} from "@prismicio/client";
-	import { type Component } from "svelte";
+	import { isFilled } from "@prismicio/client";
+	import type { Component } from "svelte";
 
-	import { type RichTextComponents, type TableComponents } from "./types";
+	import type { RichTextComponents, TableComponents } from "./types";
 
 	import PrismicRichText from "./PrismicRichText/PrismicRichText.svelte";
 

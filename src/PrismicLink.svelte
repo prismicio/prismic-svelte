@@ -1,9 +1,9 @@
 <script lang="ts">
-	import {
-		type AsLinkAttrsConfig,
-		type LinkField,
-		type PrismicDocument,
-		asLinkAttrs,
+	import { asLinkAttrs } from "@prismicio/client";
+	import type {
+		AsLinkAttrsConfig,
+		LinkField,
+		PrismicDocument,
 	} from "@prismicio/client";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 

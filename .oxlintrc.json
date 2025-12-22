@@ -1,5 +1,5 @@
 {
-	"plugins": ["unicorn", "typescript", "oxc", "jsdoc"],
+	"plugins": ["unicorn", "typescript", "oxc", "jsdoc", "import"],
 	"rules": {
 		"no-console": ["warn", { "allow": ["info", "warn", "error"] }],
 		"no-debugger": "warn",
@@ -15,6 +15,7 @@
 				"varsIgnorePattern": "^_"
 			}
 		],
+		"import/consistent-type-specifier-style": "error",
 		"typescript/explicit-module-boundary-types": "error",
 		"typescript/consistent-type-imports": "error",
 		"typescript/no-explicit-any": "error",

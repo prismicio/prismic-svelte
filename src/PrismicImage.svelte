@@ -1,10 +1,10 @@
 <script lang="ts">
 	import {
-		type ImageFieldImage,
 		asImagePixelDensitySrcSet,
 		asImageWidthSrcSet,
 		isFilled,
 	} from "@prismicio/client";
+	import type { ImageFieldImage } from "@prismicio/client";
 	import type { ImgixURLParams } from "imgix-url-builder";
 	import type { HTMLImgAttributes } from "svelte/elements";
 
