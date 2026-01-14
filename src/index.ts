@@ -7,6 +7,7 @@ export { default as PrismicRichText } from "./PrismicRichText/PrismicRichText.sv
 export { default as PrismicTable } from "./PrismicTable.svelte";
 export { default as PrismicText } from "./PrismicText.svelte";
 export { default as SliceZone } from "./SliceZone/SliceZone.svelte";
+export { default as SliceSimulator } from "./SliceSimulator.svelte";
 
 /**
  * @deprecated Replaced with `RichTextComponents`
