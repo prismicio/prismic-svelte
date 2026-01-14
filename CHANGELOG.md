@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/prismicio/prismic-svelte/compare/v2.1.1...v2.2.0) (2026-01-14)
+
+
+### Features
+
+* add `<SliceSimulator>` component ([#40](https://github.com/prismicio/prismic-svelte/issues/40)) ([0fd90e0](https://github.com/prismicio/prismic-svelte/commit/0fd90e0ff056adce21c5030d73258c18e8829820))
+
 ## [2.1.1](https://github.com/prismicio/prismic-svelte/compare/v2.1.0...v2.1.1) (2025-12-22)
 
 
