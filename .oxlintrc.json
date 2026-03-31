@@ -1,5 +1,13 @@
 {
 	"plugins": ["unicorn", "typescript", "oxc", "jsdoc", "import"],
+	"overrides": [
+		{
+			"files": ["*.svelte"],
+			"rules": {
+				"prefer-const": "off"
+			}
+		}
+	],
 	"rules": {
 		"no-console": ["warn", { "allow": ["info", "warn", "error"] }],
 		"no-debugger": "warn",
