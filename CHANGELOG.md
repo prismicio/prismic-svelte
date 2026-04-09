@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.1](https://github.com/prismicio/prismic-svelte/compare/v2.2.0...v2.2.1) (2026-04-09)
+
+
+### Bug Fixes
+
+* **deps:** maintain dependencies ([3c7af6d](https://github.com/prismicio/prismic-svelte/commit/3c7af6d51563c1ab3ff6e507bcbacfc5f4944e77))
+
 ## [2.2.0](https://github.com/prismicio/prismic-svelte/compare/v2.1.1...v2.2.0) (2026-01-14)
 
 
