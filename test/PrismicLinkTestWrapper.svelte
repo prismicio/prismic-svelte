@@ -8,8 +8,12 @@ passing slot content to the PrismicLink component is not easy in tests.
 
 	import { PrismicLink } from "../src";
 
-	export let field: FilledLinkToWebField;
-	export let children: string | undefined = undefined;
+	type Props = {
+		field: FilledLinkToWebField;
+		children?: string;
+	};
+
+	const { field, children }: Props = $props();
 </script>
 
 {#if children}
