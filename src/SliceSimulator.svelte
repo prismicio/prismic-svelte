@@ -11,7 +11,6 @@
 		simulatorClass,
 		simulatorRootClass,
 	} from "@prismicio/simulator/kit";
-	import { onMount } from "svelte";
 	import type { Snippet } from "svelte";
 	import type { ClassValue } from "svelte/elements";
 
