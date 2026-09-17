@@ -26,6 +26,12 @@ Non-breaking space: &nbsp; are here on purpose to fix emoji rendering on certain
 npm install @prismicio/svelte
 ```
 
+Using an AI agent? Teach it how to use `@prismicio/svelte` by installing the Prismic skill:
+
+```bash
+npx skills add --global --yes prismicio/skills
+```
+
 ## Documentation
 
 To discover what's new on this package check out [the changelog][changelog]. For full documentation, visit the [official Prismic documentation][prismic-docs].
