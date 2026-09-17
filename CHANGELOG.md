@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.2](https://github.com/prismicio/prismic-svelte/compare/v2.2.1...v2.2.2) (2026-09-17)
+
+
+### Documentation
+
+* add a README note that tells AI agents to install the Prismic skill ([8e60582](https://github.com/prismicio/prismic-svelte/commit/8e60582e1930be0399dc676cb6a82ecbc47cbd43))
+
 ## [2.2.1](https://github.com/prismicio/prismic-svelte/compare/v2.2.0...v2.2.1) (2026-04-09)
 
 
