@@ -185,8 +185,7 @@ type SliceLikeGraphQL<SliceType extends string = string> = {
  * @typeParam SliceType - Type name of the Slice.
  */
 type SliceLike<SliceType extends string = string> = (
-	| SliceLikeRestV2<SliceType>
-	| SliceLikeGraphQL<SliceType>
+	SliceLikeRestV2<SliceType> | SliceLikeGraphQL<SliceType>
 ) & {
 	/**
 	 * If `true`, this Slice has been modified from its original value using a
