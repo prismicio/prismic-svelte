@@ -61,7 +61,7 @@
 	"devDependencies": {
 		"@prismicio/client": "^7.22.1",
 		"@prismicio/mock": "^0.7.2",
-		"@sveltejs/kit": "^2.70.3",
+		"@sveltejs/kit": "^3.0.1",
 		"@sveltejs/package": "^3.0.0",
 		"@sveltejs/vite-plugin-svelte": "^7.3.1",
 		"@testing-library/svelte": "^5.4.2",
