@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { SliceZone } from "@prismicio/client";
 	import {
 		SimulatorManager,
 		StateEventType,
@@ -10,14 +11,27 @@
 		simulatorClass,
 		simulatorRootClass,
 	} from "@prismicio/simulator/kit";
+	import type { Snippet } from "svelte";
+	import type { ClassValue } from "svelte/elements";
 
 	const defaultProps = getDefaultProps();
 
-	export let zIndex = defaultProps.zIndex;
-	export let background = defaultProps.background;
+	type Props = {
+		zIndex?: number;
+		background?: string;
+		class?: ClassValue;
+		children: Snippet<[{ slices: SliceZone }]>;
+	};
 
-	let slices = getDefaultSlices();
-	let message = getDefaultMessage();
+	const {
+		zIndex = defaultProps.zIndex,
+		background = defaultProps.background,
+		class: classes,
+		children,
+	}: Props = $props();
+
+	let slices = $state(getDefaultSlices());
+	let message = $state(getDefaultMessage());
 
 	if (typeof window !== "undefined") {
 		const simulatorManager = new SimulatorManager();
@@ -42,7 +56,7 @@
 </script>
 
 <div
-	class="{simulatorClass} {$$props.class}"
+	class={[simulatorClass, classes]}
 	style="z-index: {zIndex}; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; overflow: auto; background: {background}"
 >
 	{#if message}
@@ -51,15 +65,15 @@
 			{@html message}
 		</article>
 	{:else if slices.length}
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<!-- svelte-ignore a11y_no_static_element_interactions, event_directive_deprecated -->
 		<div
 			id="root"
 			class={simulatorRootClass}
-			on:click={onClickHandler}
-			on:submit={disableEventHandler}
-			on:keypress={disableEventHandler}
+			onclick={onClickHandler}
+			onsubmit={disableEventHandler}
+			onkeypress={disableEventHandler}
 		>
-			<slot {slices} />
+			{@render children({ slices })}
 		</div>
 	{/if}
 </div>
