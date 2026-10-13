@@ -59,20 +59,20 @@
 		"esm-env": "^1.2.2"
 	},
 	"devDependencies": {
-		"@prismicio/client": "^7.22.1",
+		"@prismicio/client": "^7.22.3",
 		"@prismicio/mock": "^0.7.2",
 		"@sveltejs/kit": "^2.70.3",
 		"@sveltejs/package": "^3.0.0",
 		"@sveltejs/vite-plugin-svelte": "^7.3.1",
 		"@testing-library/svelte": "^5.4.2",
-		"@types/node": "^26.6.4",
+		"@types/node": "^26.6.5",
 		"@vitest/coverage-v8": "^5.0.3",
 		"globals": "^17.13.0",
 		"happy-dom": "^20.14.6",
 		"oxfmt": "^0.72.0",
 		"oxlint": "^1.87.0",
 		"standard-version": "^9.5.0",
-		"svelte": "^5.57.1",
+		"svelte": "^5.57.2",
 		"typescript": "^6.0.3",
 		"vitest": "^5.0.3"
 	},
