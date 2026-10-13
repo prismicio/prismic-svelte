@@ -1,0 +1,8 @@
+{
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"semi": false,
+	"sortImports": true,
+	"jsdoc": true,
+	"svelte": true,
+	"ignorePatterns": ["CHANGELOG.md"]
+}

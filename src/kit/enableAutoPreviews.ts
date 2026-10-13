@@ -1,36 +1,31 @@
-import * as prismic from "@prismicio/client";
-import type { Cookies } from "@sveltejs/kit";
+import * as prismic from "@prismicio/client"
+import type { Cookies } from "@sveltejs/kit"
 
-/**
- * Configuration for `enableAutoPreviews`.
- */
+/** Configuration for `enableAutoPreviews`. */
 export type EnableAutoPreviewsConfig = {
-	/**
-	 * Prismic client with which automatic previews will be enabled.
-	 */
+	/** Prismic client with which automatic previews will be enabled. */
 	// `Pick` is used to use the smallest possible subset of `Client`. Doing
 	// this reduces the surface area for breaking type changes.
-	client: Pick<prismic.Client, "queryContentFromRef">;
+	client: Pick<prismic.Client, "queryContentFromRef">
 
 	/**
-	 * The `cookies` object provided to a route's `load()` function. This
-	 * parameter is required to load previews.
+	 * The `cookies` object provided to a route's `load()` function. This parameter is required to
+	 * load previews.
 	 */
-	cookies?: Cookies;
-};
+	cookies?: Cookies
+}
 
 /**
- * Configures a Prismic client to automatically query draft content during a
- * preview session.
+ * Configures a Prismic client to automatically query draft content during a preview session.
  *
  * @param config - Configuration for the function.
  */
 export const enableAutoPreviews = (config: EnableAutoPreviewsConfig): void => {
 	if (!config.cookies) {
-		return;
+		return
 	}
 
-	const cookie = config.cookies.get(prismic.cookie.preview);
+	const cookie = config.cookies.get(prismic.cookie.preview)
 
 	// We only return the cookie if a Prismic Preview session is active.
 	//
@@ -47,6 +42,6 @@ export const enableAutoPreviews = (config: EnableAutoPreviewsConfig): void => {
 	// 		}
 	// 	}
 	if (cookie && /\.prismic\.io/.test(cookie)) {
-		config.client.queryContentFromRef(cookie);
+		config.client.queryContentFromRef(cookie)
 	}
-};
+}

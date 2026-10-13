@@ -1,29 +1,25 @@
 <script lang="ts">
-	import type { RichTextField } from "@prismicio/client";
-	import { asText, isFilled } from "@prismicio/client";
-	import { DEV } from "esm-env";
+	import type { RichTextField } from "@prismicio/client"
+	import { asText, isFilled } from "@prismicio/client"
+	import { DEV } from "esm-env"
 
-	import { devMsg } from "./lib/devMsg";
+	import { devMsg } from "./lib/devMsg"
 
 	type Props = {
-		/**
-		 * A Rich Text or Title field from Prismic.
-		 */
-		field: RichTextField;
+		/** A Rich Text or Title field from Prismic. */
+		field: RichTextField
+
+		/** The separator used between blocks. Defaults to `\n`. */
+		separator?: string | undefined
 
 		/**
-		 * The separator used between blocks. Defaults to `\n`.
+		 * The string rendered when the field is empty. If a fallback is not given, `null` will be
+		 * rendered.
 		 */
-		separator?: string | undefined;
+		fallback?: string | undefined
+	}
 
-		/**
-		 * The string rendered when the field is empty. If a fallback is not given,
-		 * `null` will be rendered.
-		 */
-		fallback?: string | undefined;
-	};
-
-	const { field, separator, fallback, ...restProps }: Props = $props();
+	const { field, separator, fallback, ...restProps }: Props = $props()
 
 	$effect(() => {
 		if (DEV) {
@@ -33,10 +29,10 @@
 						"classname-is-not-a-valid-prop",
 					)}.`,
 					$state.snapshot(field),
-				);
+				)
 			}
 		}
-	});
+	})
 
 	if (DEV) {
 		if (typeof field === "string") {
@@ -44,7 +40,7 @@
 				`[PrismicText] The "field" prop only accepts a Rich Text or Title field's value but was provided a different type of field instead (e.g. a Key Text or Select field). You can resolve this error by rendering the field value inline without <PrismicText>. For more details, see ${devMsg(
 					"prismictext-works-only-with-rich-text-and-title-fields",
 				)}`,
-			);
+			)
 		}
 	}
 </script>

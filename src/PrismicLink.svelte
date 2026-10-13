@@ -1,56 +1,45 @@
 <script lang="ts">
-	import { asLinkAttrs } from "@prismicio/client";
-	import type {
-		AsLinkAttrsConfig,
-		LinkField,
-		PrismicDocument,
-	} from "@prismicio/client";
-	import type { HTMLAnchorAttributes } from "svelte/elements";
+	import { asLinkAttrs } from "@prismicio/client"
+	import type { AsLinkAttrsConfig, LinkField, PrismicDocument } from "@prismicio/client"
+	import type { HTMLAnchorAttributes } from "svelte/elements"
 
 	type Props = Omit<HTMLAnchorAttributes, "rel" | "href"> & {
 		/**
-		 * The `rel` attribute for the link. By default, `"noreferrer"` is provided
-		 * if the link's URL is external. This prop can be provided a function to
-		 * use the link's metadata to determine the `rel` value.
+		 * The `rel` attribute for the link. By default, `"noreferrer"` is provided if the link's URL is
+		 * external. This prop can be provided a function to use the link's metadata to determine the
+		 * `rel` value.
 		 */
-		rel?: string | AsLinkAttrsConfig["rel"];
+		rel?: string | AsLinkAttrsConfig["rel"]
 	} & (
 			| {
-					/**
-					 * A Prismic link field, content relationship field, or link to media
-					 * field.
-					 */
-					field: LinkField | null | undefined;
-					document?: never;
-					href?: never;
+					/** A Prismic link field, content relationship field, or link to media field. */
+					field: LinkField | null | undefined
+					document?: never
+					href?: never
 			  }
 			| {
-					/**
-					 * A Prismic document.
-					 */
-					document: PrismicDocument | null | undefined;
-					field?: never;
-					href?: never;
+					/** A Prismic document. */
+					document: PrismicDocument | null | undefined
+					field?: never
+					href?: never
 			  }
 			| {
-					href: HTMLAnchorAttributes["href"];
-					document: never;
-					field?: never;
+					href: HTMLAnchorAttributes["href"]
+					document: never
+					field?: never
 			  }
-		);
+		)
 
-	const { field, document, rel, children, ...restProps }: Props = $props();
+	const { field, document, rel, children, ...restProps }: Props = $props()
 
 	const linkAttrs = $derived(
 		asLinkAttrs(field ?? document, {
 			rel: typeof rel === "function" ? rel : undefined,
 		}),
-	);
-	const href = $derived(
-		("href" in restProps ? restProps.href : linkAttrs.href) || "",
-	);
+	)
+	const href = $derived(("href" in restProps ? restProps.href : linkAttrs.href) || "")
 
-	const resolvedRel = $derived(typeof rel === "string" ? rel : linkAttrs.rel);
+	const resolvedRel = $derived(typeof rel === "string" ? rel : linkAttrs.rel)
 </script>
 
 <!--

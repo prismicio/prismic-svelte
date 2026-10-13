@@ -1,19 +1,18 @@
-import { afterEach, beforeEach } from "vitest";
-
-import type { MockFactory } from "@prismicio/mock";
-import { createMockFactory } from "@prismicio/mock";
-import { cleanup } from "@testing-library/svelte";
+import type { MockFactory } from "@prismicio/mock"
+import { createMockFactory } from "@prismicio/mock"
+import { cleanup } from "@testing-library/svelte"
+import { afterEach, beforeEach } from "vitest"
 
 declare module "vitest" {
 	export interface TestContext {
-		mock: MockFactory;
+		mock: MockFactory
 	}
 }
 
 beforeEach((ctx) => {
-	ctx.mock = createMockFactory({ seed: ctx.task.name });
-});
+	ctx.mock = createMockFactory({ seed: ctx.task.name })
+})
 
 afterEach(() => {
-	cleanup();
-});
+	cleanup()
+})

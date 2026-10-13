@@ -1,26 +1,22 @@
 <script lang="ts">
-	import type { HTMLAttributes } from "svelte/elements";
+	import type { HTMLAttributes } from "svelte/elements"
 
-	import type { RichTextComponentProps } from "../types";
+	import PrismicEmbed from "../PrismicEmbed.svelte"
+	import PrismicImage from "../PrismicImage.svelte"
+	import PrismicLink from "../PrismicLink.svelte"
+	import type { RichTextComponentProps } from "../types"
 
-	import PrismicEmbed from "../PrismicEmbed.svelte";
-	import PrismicImage from "../PrismicImage.svelte";
-	import PrismicLink from "../PrismicLink.svelte";
+	type Props = RichTextComponentProps & HTMLAttributes<HTMLElement> & { as?: string }
 
-	type Props = RichTextComponentProps &
-		HTMLAttributes<HTMLElement> & { as?: string };
-
-	const { node, children, as, ...attrs }: Props = $props();
+	const { node, children, as, ...attrs }: Props = $props()
 
 	const dirProp = $derived(
 		"direction" in node && node.direction === "rtl" ? { direction: "rtl" } : {},
-	);
+	)
 </script>
 
 {#if as}
-	<svelte:element this={as} {...dirProp} {...attrs} {...attrs}
-		>{@render children()}</svelte:element
-	>
+	<svelte:element this={as} {...dirProp} {...attrs} {...attrs}>{@render children()}</svelte:element>
 {:else if node.type === "heading1"}
 	<h1 {...dirProp} {...attrs}>{@render children()}</h1>
 {:else if node.type === "heading2"}
