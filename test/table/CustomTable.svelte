@@ -1,3 +1,9 @@
 <!-- This file is a custom table component to be used in tests. -->
 
-<div class="table"><slot /></div>
+<script lang="ts">
+	import type { Snippet } from "svelte"
+
+	const { children }: { children: Snippet } = $props()
+</script>
+
+<div class="table">{@render children()}</div>

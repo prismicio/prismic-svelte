@@ -1,3 +1,9 @@
 <!-- This file is a custom th component to be used in tests. -->
 
-<div class="header"><slot /></div>
+<script lang="ts">
+	import type { Snippet } from "svelte"
+
+	const { children }: { children: Snippet } = $props()
+</script>
+
+<div class="header">{@render children()}</div>
