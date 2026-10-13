@@ -3,29 +3,20 @@
 	"version": "2.2.2",
 	"description": "Svelte components to present Prismic content.",
 	"keywords": [
-		"typescript",
-		"prismic"
+		"prismic",
+		"typescript"
 	],
+	"license": "Apache-2.0",
+	"author": "Prismic <contact@prismic.io> (https://prismic.io)",
 	"repository": {
 		"type": "git",
 		"url": "ssh://git@github.com/prismicio/prismic-svelte.git"
 	},
-	"license": "Apache-2.0",
-	"author": "Prismic <contact@prismic.io> (https://prismic.io)",
+	"files": [
+		"./dist",
+		"./src"
+	],
 	"type": "module",
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"svelte": "./dist/index.js",
-			"default": "./dist/index.js"
-		},
-		"./kit": {
-			"types": "./dist/kit/index.d.ts",
-			"svelte": "./dist/kit/index.js",
-			"default": "./dist/kit/index.js"
-		},
-		"./package.json": "./package.json"
-	},
 	"main": "./dist/index.js",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -39,10 +30,22 @@
 			]
 		}
 	},
-	"files": [
-		"./dist",
-		"./src"
-	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js",
+			"default": "./dist/index.js"
+		},
+		"./kit": {
+			"types": "./dist/kit/index.d.ts",
+			"svelte": "./dist/kit/index.js",
+			"default": "./dist/kit/index.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"build": "svelte-package --input ./src",
 		"dev": "svelte-package --input ./src --watch",
@@ -88,8 +91,5 @@
 	},
 	"engines": {
 		"node": ">=22"
-	},
-	"publishConfig": {
-		"access": "public"
 	}
 }

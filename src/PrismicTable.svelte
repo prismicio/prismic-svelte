@@ -7,40 +7,35 @@
 		TableFieldHead,
 		TableFieldHeadRow,
 		TableFieldHeaderCell,
-	} from "@prismicio/client";
-	import { isFilled } from "@prismicio/client";
-	import type { Component } from "svelte";
+	} from "@prismicio/client"
+	import { isFilled } from "@prismicio/client"
+	import type { Component } from "svelte"
 
-	import type { RichTextComponents, TableComponents } from "./types";
-
-	import PrismicRichText from "./PrismicRichText/PrismicRichText.svelte";
+	import PrismicRichText from "./PrismicRichText/PrismicRichText.svelte"
+	import type { RichTextComponents, TableComponents } from "./types"
 
 	type Props = {
-		/**
-		 * The Prismic table field to render.
-		 */
-		field: TableField;
+		/** The Prismic table field to render. */
+		field: TableField
+
+		/** An object that maps a rich text block type to a Svelte component. */
+		components?: TableComponents & RichTextComponents
 
 		/**
-		 * An object that maps a rich text block type to a Svelte component.
+		 * The component rendered when the field is empty. If a fallback is not given, `null` will be
+		 * rendered.
 		 */
-		components?: TableComponents & RichTextComponents;
+		fallback?: Component
+	}
 
-		/**
-		 * The component rendered when the field is empty. If a fallback is not
-		 * given, `null` will be rendered.
-		 */
-		fallback?: Component;
-	};
+	const { field, components = {}, fallback: Fallback }: Props = $props()
 
-	const { field, components = {}, fallback: Fallback }: Props = $props();
-
-	const Table = components.table;
-	const Thead = components.thead;
-	const Tbody = components.tbody;
-	const Tr = components.tr;
-	const Th = components.th;
-	const Td = components.td;
+	const Table = components.table
+	const Thead = components.thead
+	const Tbody = components.tbody
+	const Tr = components.tr
+	const Th = components.th
+	const Td = components.td
 </script>
 
 {#snippet thead(head: TableFieldHead)}
@@ -72,31 +67,21 @@
 {/snippet}
 
 {#snippet th(cell: TableFieldHeaderCell)}
-	{#if typeof Th === "function"}<Th {cell}
-			><PrismicRichText field={cell.content} {components} /></Th
-		>{:else}<th {...Th}
-			><PrismicRichText field={cell.content} {components} /></th
-		>{/if}
+	{#if typeof Th === "function"}<Th {cell}><PrismicRichText field={cell.content} {components} /></Th
+		>{:else}<th {...Th}><PrismicRichText field={cell.content} {components} /></th>{/if}
 {/snippet}
 
 {#snippet td(cell: TableFieldDataCell)}
-	{#if typeof Td === "function"}<Td {cell}
-			><PrismicRichText field={cell.content} {components} /></Td
-		>{:else}<td {...Td}
-			><PrismicRichText field={cell.content} {components} /></td
-		>{/if}
+	{#if typeof Td === "function"}<Td {cell}><PrismicRichText field={cell.content} {components} /></Td
+		>{:else}<td {...Td}><PrismicRichText field={cell.content} {components} /></td>{/if}
 {/snippet}
 
 <!-- This formatting is intentional to prevent unwanted whitespace between elements. -->
 {#if isFilled.table(field)}
 	{#if typeof Table === "function"}<Table table={field}
-			>{#if field?.head}{@render thead(field.head)}{/if}{@render tbody(
-				field.body,
-			)}</Table
+			>{#if field?.head}{@render thead(field.head)}{/if}{@render tbody(field.body)}</Table
 		>{:else}<table {...Table}>
-			{#if field?.head}{@render thead(field.head)}{/if}{@render tbody(
-				field.body,
-			)}
+			{#if field?.head}{@render thead(field.head)}{/if}{@render tbody(field.body)}
 		</table>{/if}
 {:else if Fallback}
 	<Fallback />

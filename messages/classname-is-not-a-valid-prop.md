@@ -28,7 +28,7 @@ To add a `className` to a specific block type when using `<PrismicRichText>`, pr
 
 ```svelte
 <script>
-	import Heading1 from "./Heading1.svelte";
+	import Heading1 from "./Heading1.svelte"
 </script>
 
 <PrismicRichText

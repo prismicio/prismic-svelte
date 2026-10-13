@@ -1,15 +1,13 @@
 <script lang="ts">
-	import type { EmbedField } from "@prismicio/client";
-	import { isFilled } from "@prismicio/client";
+	import type { EmbedField } from "@prismicio/client"
+	import { isFilled } from "@prismicio/client"
 
 	type Props = {
-		/**
-		 * An Embed field from Prismic.
-		 */
-		field: EmbedField;
-	};
+		/** An Embed field from Prismic. */
+		field: EmbedField
+	}
 
-	const { field }: Props = $props();
+	const { field }: Props = $props()
 </script>
 
 <!--

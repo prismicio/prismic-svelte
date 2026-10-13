@@ -4,12 +4,12 @@ passing slot content to the PrismicLink component is not easy in tests.
 -->
 
 <script lang="ts">
-	import type { FilledLinkToWebField } from "@prismicio/client";
+	import type { FilledLinkToWebField } from "@prismicio/client"
 
-	import { PrismicLink } from "../src";
+	import { PrismicLink } from "../src"
 
-	export let field: FilledLinkToWebField;
-	export let children: string | undefined = undefined;
+	export let field: FilledLinkToWebField
+	export let children: string | undefined = undefined
 </script>
 
 {#if children}

@@ -1,62 +1,51 @@
 <script lang="ts">
-	import { beforeNavigate, goto, invalidateAll } from "$app/navigation";
-	import { getToolbarSrc } from "@prismicio/client";
-	import { onMount } from "svelte";
+	import { beforeNavigate, goto, invalidateAll } from "$app/navigation"
+	import { getToolbarSrc } from "@prismicio/client"
+	import { onMount } from "svelte"
 
 	type Props = {
 		/**
-		 * The name of your Prismic repository. A Prismic Toolbar will be registered
-		 * using this repository.
+		 * The name of your Prismic repository. A Prismic Toolbar will be registered using this
+		 * repository.
 		 */
-		repositoryName: string;
+		repositoryName: string
+
+		/** The route parameter prefixed during preview sessions. */
+		routePrefix?: string
 
 		/**
-		 * The route parameter prefixed during preview sessions.
-		 */
-		routePrefix?: string;
-
-		/**
-		 * The name of the preview-specific route parameter prefixed during preview
-		 * sessions.
+		 * The name of the preview-specific route parameter prefixed during preview sessions.
 		 *
-		 * Only set this value if the route parameter's name differs from the
-		 * parameter's value.
+		 * Only set this value if the route parameter's name differs from the parameter's value.
 		 */
-		routePrefixName?: string;
-	};
+		routePrefixName?: string
+	}
 
-	const {
-		repositoryName,
-		routePrefix = "preview",
-		routePrefixName = routePrefix,
-	}: Props = $props();
+	const { repositoryName, routePrefix = "preview", routePrefixName = routePrefix }: Props = $props()
 
-	const toolbarSrc = $derived(getToolbarSrc(repositoryName));
+	const toolbarSrc = $derived(getToolbarSrc(repositoryName))
 
-	/**
-	 * Set to `true` when the next `beforeNavigate()` call should not prefix the
-	 * route.
-	 */
-	let endingPreview = $state(false);
+	/** Set to `true` when the next `beforeNavigate()` call should not prefix the route. */
+	let endingPreview = $state(false)
 
 	// Register Prismic toolbar event handlers to refresh data on content updates.
 	onMount(() => {
-		const controller = new AbortController();
+		const controller = new AbortController()
 
 		window.addEventListener(
 			"prismicPreviewUpdate",
 			(event) => {
-				event.preventDefault();
-				invalidateAll();
+				event.preventDefault()
+				invalidateAll()
 			},
 			{ signal: controller.signal },
-		);
+		)
 		window.addEventListener(
 			"prismicPreviewEnd",
 			(event) => {
-				event.preventDefault();
+				event.preventDefault()
 
-				endingPreview = true;
+				endingPreview = true
 
 				goto(
 					new URL(
@@ -70,15 +59,15 @@
 						invalidateAll: true,
 						noScroll: true,
 					},
-				);
+				)
 			},
 			{ signal: controller.signal },
-		);
+		)
 
 		return () => {
-			controller.abort();
-		};
-	});
+			controller.abort()
+		}
+	})
 
 	beforeNavigate((navigation) => {
 		// Prefix links with the preview route parameter if the current
@@ -92,19 +81,14 @@
 			// event, don't prefix the route. The exception is only
 			// valid for one call.
 			if (endingPreview) {
-				endingPreview = false;
-				return;
+				endingPreview = false
+				return
 			}
 
-			navigation.cancel();
-			goto(
-				new URL(
-					routePrefix + navigation.to.url.pathname,
-					navigation.to.url.origin,
-				),
-			);
+			navigation.cancel()
+			goto(new URL(routePrefix + navigation.to.url.pathname, navigation.to.url.origin))
 		}
-	});
+	})
 </script>
 
 <svelte:head>

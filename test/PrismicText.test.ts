@@ -1,11 +1,10 @@
+import type { RichTextField } from "@prismicio/client"
+import { RichTextNodeType } from "@prismicio/client"
+import { cleanup, render } from "@testing-library/svelte"
 // @vitest-environment happy-dom
-import { expect, it, vi } from "vitest";
+import { expect, it, vi } from "vitest"
 
-import type { RichTextField } from "@prismicio/client";
-import { RichTextNodeType } from "@prismicio/client";
-import { cleanup, render } from "@testing-library/svelte";
-
-import { PrismicText } from "../src";
+import { PrismicText } from "../src"
 
 it("renders a string when passed RichTextField", () => {
 	const field: RichTextField = [
@@ -14,36 +13,36 @@ it("renders a string when passed RichTextField", () => {
 			text: "Heading 1",
 			spans: [],
 		},
-	];
+	]
 
-	const { container } = render(PrismicText, { field });
+	const { container } = render(PrismicText, { field })
 
-	expect(container.innerHTML.replaceAll("<!---->", "")).toBe("Heading 1");
-});
+	expect(container.innerHTML.replaceAll("<!---->", "")).toBe("Heading 1")
+})
 
 it("renders nothing when passed an empty field", () => {
 	expect(
 		render(PrismicText, {
 			field: null,
 		}).container.innerHTML.replaceAll("<!---->", ""),
-	).toBe("");
+	).toBe("")
 
-	cleanup();
+	cleanup()
 
 	expect(
 		render(PrismicText, {
 			field: undefined,
 		}).container.innerHTML.replaceAll("<!---->", ""),
-	).toBe("");
+	).toBe("")
 
-	cleanup();
+	cleanup()
 
 	expect(
 		render(PrismicText, {
 			field: [{ type: "paragraph", text: "", spans: [] }],
 		}).container.innerHTML.replaceAll("<!---->", ""),
-	).toBe("");
-});
+	).toBe("")
+})
 
 it("renders the fallback when passed empty field", () => {
 	expect(
@@ -51,54 +50,52 @@ it("renders the fallback when passed empty field", () => {
 			field: null,
 			fallback: "fallback",
 		}).container.innerHTML.replaceAll("<!---->", ""),
-	).toBe("fallback");
+	).toBe("fallback")
 
-	cleanup();
+	cleanup()
 
 	expect(
 		render(PrismicText, {
 			field: undefined,
 			fallback: "fallback",
 		}).container.innerHTML.replaceAll("<!---->", ""),
-	).toBe("fallback");
+	).toBe("fallback")
 
-	cleanup();
+	cleanup()
 
 	expect(
 		render(PrismicText, {
 			field: [{ type: "paragraph", text: "", spans: [] }],
 			fallback: "fallback",
 		}).container.innerHTML.replaceAll("<!---->", ""),
-	).toBe("fallback");
-});
+	).toBe("fallback")
+})
 
 it("throws error if passed a string-based field (e.g. Key Text or Select)", () => {
-	vi.doMock("esm-env", () => ({ DEV: true }));
+	vi.doMock("esm-env", () => ({ DEV: true }))
 
 	expect(() => {
 		render(PrismicText, {
 			field: "not a Rich Text field",
-		});
-	}).throws(/prismictext-works-only-with-rich-text-and-title-fields/);
+		})
+	}).throws(/prismictext-works-only-with-rich-text-and-title-fields/)
 
-	vi.restoreAllMocks();
-});
+	vi.restoreAllMocks()
+})
 
 it("warns if a className prop is provided", () => {
-	vi.doMock("esm-env", () => ({ DEV: true }));
+	vi.doMock("esm-env", () => ({ DEV: true }))
 
-	const consoleWarnSpy = vi
-		.spyOn(console, "warn")
-		.mockImplementation(() => void 0);
+	const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(() => void 0)
 
-	const field: RichTextField = [];
+	const field: RichTextField = []
 
-	render(PrismicText, { field, className: "foo" });
+	render(PrismicText, { field, className: "foo" })
 
 	expect(consoleWarnSpy).toHaveBeenCalledWith(
 		expect.stringMatching(/classname-is-not-a-valid-prop/),
 		field,
-	);
+	)
 
-	vi.restoreAllMocks();
-});
+	vi.restoreAllMocks()
+})

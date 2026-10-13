@@ -1,75 +1,61 @@
 <script lang="ts">
-	import {
-		asImagePixelDensitySrcSet,
-		asImageWidthSrcSet,
-		isFilled,
-	} from "@prismicio/client";
-	import type { ImageFieldImage } from "@prismicio/client";
-	import type { ImgixURLParams } from "imgix-url-builder";
-	import type { HTMLImgAttributes } from "svelte/elements";
+	import { asImagePixelDensitySrcSet, asImageWidthSrcSet, isFilled } from "@prismicio/client"
+	import type { ImageFieldImage } from "@prismicio/client"
+	import type { ImgixURLParams } from "imgix-url-builder"
+	import type { HTMLImgAttributes } from "svelte/elements"
 
 	type Props = Omit<HTMLImgAttributes, "src" | "srcset" | "alt"> & {
-		/**
-		 * The Prismic image field or thumbnail to render.
-		 */
-		field: ImageFieldImage | null | undefined;
+		/** The Prismic image field or thumbnail to render. */
+		field: ImageFieldImage | null | undefined
 
 		/**
 		 * An object of Imgix URL API parameters to transform the image.
 		 *
 		 * See: https://docs.imgix.com/apis/rendering
 		 */
-		imgixParams?: ImgixURLParams;
+		imgixParams?: ImgixURLParams
 
 		/**
 		 * Declare an image as decorative by providing `alt=""`.
 		 *
-		 * See:
-		 * https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/alt#decorative_images
+		 * See: https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/alt#decorative_images
 		 */
-		alt?: "";
+		alt?: ""
 
 		/**
-		 * Declare an image as decorative only if the Image field does not have
-		 * alternative text by providing `fallbackAlt=""`.
+		 * Declare an image as decorative only if the Image field does not have alternative text by
+		 * providing `fallbackAlt=""`.
 		 *
-		 * See:
-		 * https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/alt#decorative_images
+		 * See: https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/alt#decorative_images
 		 */
-		fallbackAlt?: "";
+		fallbackAlt?: ""
 	} & (
 			| {
 					/**
 					 * Widths used to build a `srcset` value for the Image field.
 					 *
-					 * If a `widths` prop is not given or `"defaults"` is passed, the
-					 * following widths will be used: 640, 750, 828, 1080, 1200, 1920,
-					 * 2048, 3840.
+					 * If a `widths` prop is not given or `"defaults"` is passed, the following widths will be
+					 * used: 640, 750, 828, 1080, 1200, 1920, 2048, 3840.
 					 *
-					 * If the Image field contains responsive views, each responsive view
-					 * can be used as a width in the resulting `srcset` by passing
-					 * `"thumbnails"` as the `widths` prop.
+					 * If the Image field contains responsive views, each responsive view can be used as a
+					 * width in the resulting `srcset` by passing `"thumbnails"` as the `widths` prop.
 					 */
-					widths?:
-						| NonNullable<Parameters<typeof asImageWidthSrcSet>[1]>["widths"]
-						| "defaults";
-					pixelDensities?: never;
+					widths?: NonNullable<Parameters<typeof asImageWidthSrcSet>[1]>["widths"] | "defaults"
+					pixelDensities?: never
 			  }
 			| {
 					/**
 					 * Pixel densities used to build a `srcset` value for the Image field.
 					 *
-					 * If a `pixelDensities` prop is passed `"defaults"`, the following
-					 * pixel densities will be used: 1, 2, 3.
+					 * If a `pixelDensities` prop is passed `"defaults"`, the following pixel densities will
+					 * be used: 1, 2, 3.
 					 */
 					pixelDensities:
-						| NonNullable<
-								Parameters<typeof asImagePixelDensitySrcSet>[1]
-						  >["pixelDensities"]
-						| "defaults";
-					widths?: never;
+						| NonNullable<Parameters<typeof asImagePixelDensitySrcSet>[1]>["pixelDensities"]
+						| "defaults"
+					widths?: never
 			  }
-		);
+		)
 
 	const {
 		field,
@@ -81,59 +67,51 @@
 		widths,
 		pixelDensities,
 		...restProps
-	}: Props = $props();
+	}: Props = $props()
 
 	const { resolvedWidth, resolvedHeight } = $derived.by(() => {
 		if (!isFilled.imageThumbnail(field))
-			return { resolvedWidth: undefined, resolvedHeight: undefined };
+			return { resolvedWidth: undefined, resolvedHeight: undefined }
 
-		const ar = field.dimensions.width / field.dimensions.height;
+		const ar = field.dimensions.width / field.dimensions.height
 
-		let resolvedWidth = castInt(width) ?? field.dimensions.width;
-		let resolvedHeight = castInt(height) ?? field.dimensions.height;
+		let resolvedWidth = castInt(width) ?? field.dimensions.width
+		let resolvedHeight = castInt(height) ?? field.dimensions.height
 		if (resolvedWidth != null && resolvedHeight == null) {
-			resolvedHeight = resolvedWidth / ar;
+			resolvedHeight = resolvedWidth / ar
 		} else if (resolvedWidth == null && resolvedHeight != null) {
-			resolvedWidth = resolvedHeight * ar;
+			resolvedWidth = resolvedHeight * ar
 		}
 
-		return { resolvedWidth, resolvedHeight };
-	});
+		return { resolvedWidth, resolvedHeight }
+	})
 
 	const { src, srcset } = $derived.by(() => {
-		if (!isFilled.imageThumbnail(field))
-			return { src: undefined, srcset: undefined };
+		if (!isFilled.imageThumbnail(field)) return { src: undefined, srcset: undefined }
 
 		if (pixelDensities) {
 			return asImagePixelDensitySrcSet(field, {
 				...imgixParams,
-				pixelDensities:
-					pixelDensities === "defaults" ? undefined : pixelDensities,
-			} as ImgixURLParams);
+				pixelDensities: pixelDensities === "defaults" ? undefined : pixelDensities,
+			} as ImgixURLParams)
 		}
 
 		return asImageWidthSrcSet(field, {
 			...imgixParams,
 			widths: widths === "defaults" ? undefined : widths,
-		});
-	});
+		})
+	})
 
-	function castInt(
-		input: string | number | null | undefined,
-	): number | null | undefined {
-		if (
-			typeof input === "number" ||
-			typeof input === "undefined" ||
-			input === null
-		) {
-			return input;
+	function castInt(input: string | number | null | undefined): number | null | undefined {
+		if (typeof input === "number" || typeof input === "undefined" || input === null) {
+			return input
 		} else {
-			const parsed = Number.parseInt(input);
+			const parsed = Number.parseInt(input)
 
 			if (Number.isNaN(parsed)) {
-				return undefined;
+				return undefined
 			} else {
-				return parsed;
+				return parsed
 			}
 		}
 	}

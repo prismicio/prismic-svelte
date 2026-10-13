@@ -1,20 +1,18 @@
+import type { TableField } from "@prismicio/client"
+import { render } from "@testing-library/svelte"
 // @vitest-environment happy-dom
-import { expect, it } from "vitest";
+import { expect, it } from "vitest"
 
-import type { TableField } from "@prismicio/client";
-import { render } from "@testing-library/svelte";
-
-import CustomParagraph from "./CustomParagraph.svelte";
-import CustomTBody from "./CustomTBody.svelte";
-import CustomTD from "./CustomTD.svelte";
-import CustomTH from "./CustomTH.svelte";
-import CustomTHead from "./CustomTHead.svelte";
-import CustomTR from "./CustomTR.svelte";
-import CustomTable from "./CustomTable.svelte";
-import PrismicTableFallback from "./TableFallback.svelte";
-import TableWrapperComponent from "./TableWrapperComponent.svelte";
-
-import { PrismicTable } from "../../src";
+import { PrismicTable } from "../../src"
+import CustomParagraph from "./CustomParagraph.svelte"
+import CustomTable from "./CustomTable.svelte"
+import CustomTBody from "./CustomTBody.svelte"
+import CustomTD from "./CustomTD.svelte"
+import CustomTH from "./CustomTH.svelte"
+import CustomTHead from "./CustomTHead.svelte"
+import CustomTR from "./CustomTR.svelte"
+import PrismicTableFallback from "./TableFallback.svelte"
+import TableWrapperComponent from "./TableWrapperComponent.svelte"
 
 const filledTableField: TableField = {
 	head: {
@@ -94,7 +92,7 @@ const filledTableField: TableField = {
 			},
 		],
 	},
-};
+}
 
 const simpleTableField: TableField = {
 	head: {
@@ -125,20 +123,20 @@ const simpleTableField: TableField = {
 			},
 		],
 	},
-};
+}
 
 it("renders with default components", () => {
-	const { container } = render(PrismicTable, { field: simpleTableField });
+	const { container } = render(PrismicTable, { field: simpleTableField })
 
-	const html = container.innerHTML.replaceAll("<!---->", "");
-	expect(html).toContain("<table>");
-	expect(html).toContain("<thead>");
-	expect(html).toContain("<tbody>");
-	expect(html).toContain("<th>");
-	expect(html).toContain("<td>");
-	expect(html).toContain("Header");
-	expect(html).toContain("Data");
-});
+	const html = container.innerHTML.replaceAll("<!---->", "")
+	expect(html).toContain("<table>")
+	expect(html).toContain("<thead>")
+	expect(html).toContain("<tbody>")
+	expect(html).toContain("<th>")
+	expect(html).toContain("<td>")
+	expect(html).toContain("Header")
+	expect(html).toContain("Data")
+})
 
 it("renders with a Svelte component", () => {
 	const { container } = render(PrismicTable, {
@@ -146,13 +144,13 @@ it("renders with a Svelte component", () => {
 		components: {
 			table: TableWrapperComponent,
 		},
-	});
+	})
 
-	const html = container.innerHTML.replaceAll("<!---->", "");
-	expect(html).toContain('<div class="wrapper-table">');
-	expect(html).toContain("Header");
-	expect(html).toContain("Data");
-});
+	const html = container.innerHTML.replaceAll("<!---->", "")
+	expect(html).toContain('<div class="wrapper-table">')
+	expect(html).toContain("Header")
+	expect(html).toContain("Data")
+})
 
 it("renders with shorthand", () => {
 	const { container } = render(PrismicTable, {
@@ -171,38 +169,36 @@ it("renders with shorthand", () => {
 				"data-testid": "td",
 			},
 		},
-	});
+	})
 
-	const html = container.innerHTML.replaceAll("<!---->", "");
-	expect(html).toContain('<table class="custom-table" data-testid="table">');
-	expect(html).toContain('<th class="custom-th" data-testid="th">');
-	expect(html).toContain('<td class="custom-td" data-testid="td">');
-});
+	const html = container.innerHTML.replaceAll("<!---->", "")
+	expect(html).toContain('<table class="custom-table" data-testid="table">')
+	expect(html).toContain('<th class="custom-th" data-testid="th">')
+	expect(html).toContain('<td class="custom-td" data-testid="td">')
+})
 
 it("renders filled table elements", () => {
-	const { container } = render(PrismicTable, { field: filledTableField });
+	const { container } = render(PrismicTable, { field: filledTableField })
 
 	expect(container.innerHTML.replaceAll("<!---->", "")).toBe(
 		"<table><thead><tr><th><p>Method</p></th><th><p>Usage</p></th></tr></thead><tbody><tr><th><p>GET</p></th><td><p>For <strong>basic retrieval</strong> of information…</p></td></tr><tr><th><p>DELETE</p></th><td><p>To <em>dest</em>roy a resource and remove…</p></td></tr></tbody></table>",
-	);
-});
+	)
+})
 
 it("renders null when passed an empty field", () => {
-	const { container } = render(PrismicTable, { field: undefined });
+	const { container } = render(PrismicTable, { field: undefined })
 
-	expect(container.innerHTML.replaceAll("<!---->", "")).toBe("");
-});
+	expect(container.innerHTML.replaceAll("<!---->", "")).toBe("")
+})
 
 it("renders fallback when passed an empty field", () => {
 	const { container } = render(PrismicTable, {
 		field: undefined,
 		fallback: PrismicTableFallback,
-	});
+	})
 
-	expect(container.innerHTML.replaceAll("<!---->", "")).toBe(
-		"<div>Table</div>",
-	);
-});
+	expect(container.innerHTML.replaceAll("<!---->", "")).toBe("<div>Table</div>")
+})
 
 it("renders custom table elements", () => {
 	const { container } = render(PrismicTable, {
@@ -215,12 +211,12 @@ it("renders custom table elements", () => {
 			th: CustomTH,
 			td: CustomTD,
 		},
-	});
+	})
 
 	expect(container.innerHTML.replaceAll("<!---->", "")).toBe(
 		'<div class="table"><div class="head"><div class="row"><div class="header"><p>Method</p></div><div class="header"><p>Usage</p></div></div></div><div class="body"><div class="row"><div class="header"><p>GET</p></div><div class="data"><p>For <strong>basic retrieval</strong> of information…</p></div></div><div class="row"><div class="header"><p>DELETE</p></div><div class="data"><p>To <em>dest</em>roy a resource and remove…</p></div></div></div></div>',
-	);
-});
+	)
+})
 
 it("renders custom table cell content", () => {
 	const { container } = render(PrismicTable, {
@@ -229,9 +225,9 @@ it("renders custom table cell content", () => {
 			table: CustomTable,
 			paragraph: CustomParagraph,
 		},
-	});
+	})
 
 	expect(container.innerHTML.replaceAll("<!---->", "")).toBe(
 		'<div class="table"><thead><tr><th><p class="paragraph">Method</p></th><th><p class="paragraph">Usage</p></th></tr></thead><tbody><tr><th><p class="paragraph">GET</p></th><td><p class="paragraph">For <strong>basic retrieval</strong> of information…</p></td></tr><tr><th><p class="paragraph">DELETE</p></th><td><p class="paragraph">To <em>dest</em>roy a resource and remove…</p></td></tr></tbody></div>',
-	);
-});
+	)
+})

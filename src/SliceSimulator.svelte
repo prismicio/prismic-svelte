@@ -9,35 +9,35 @@
 		onClickHandler,
 		simulatorClass,
 		simulatorRootClass,
-	} from "@prismicio/simulator/kit";
+	} from "@prismicio/simulator/kit"
 
-	const defaultProps = getDefaultProps();
+	const defaultProps = getDefaultProps()
 
-	export let zIndex = defaultProps.zIndex;
-	export let background = defaultProps.background;
+	export let zIndex = defaultProps.zIndex
+	export let background = defaultProps.background
 
-	let slices = getDefaultSlices();
-	let message = getDefaultMessage();
+	let slices = getDefaultSlices()
+	let message = getDefaultMessage()
 
 	if (typeof window !== "undefined") {
-		const simulatorManager = new SimulatorManager();
+		const simulatorManager = new SimulatorManager()
 
 		simulatorManager.state.on(
 			StateEventType.Slices,
 			(newSlices) => {
-				slices = newSlices;
+				slices = newSlices
 			},
 			"simulator-slices",
-		);
+		)
 		simulatorManager.state.on(
 			StateEventType.Message,
 			(newMessage) => {
-				message = newMessage;
+				message = newMessage
 			},
 			"simulator-message",
-		);
+		)
 
-		simulatorManager.init();
+		simulatorManager.init()
 	}
 </script>
 
