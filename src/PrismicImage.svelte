@@ -75,15 +75,12 @@
 
 		const ar = field.dimensions.width / field.dimensions.height
 
-		const castedWidth = castInt(width)
-		const castedHeight = castInt(height)
-
-		let resolvedWidth = castedWidth ?? field.dimensions.width
-		let resolvedHeight = castedHeight ?? field.dimensions.height
-		if (castedWidth != null && castedHeight == null) {
-			resolvedHeight = castedWidth / ar
-		} else if (castedWidth == null && castedHeight != null) {
-			resolvedWidth = castedHeight * ar
+		let resolvedWidth = castInt(width) ?? field.dimensions.width
+		let resolvedHeight = castInt(height) ?? field.dimensions.height
+		if (resolvedWidth != null && resolvedHeight == null) {
+			resolvedHeight = resolvedWidth / ar
+		} else if (resolvedWidth == null && resolvedHeight != null) {
+			resolvedWidth = resolvedHeight * ar
 		}
 
 		return { resolvedWidth, resolvedHeight }
