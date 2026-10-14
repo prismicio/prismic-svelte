@@ -1,3 +1,9 @@
 <!-- This file is a custom tr component to be used in tests. -->
 
-<div class="row"><slot /></div>
+<script lang="ts">
+	import type { Snippet } from "svelte"
+
+	const { children }: { children: Snippet } = $props()
+</script>
+
+<div class="row">{@render children()}</div>
