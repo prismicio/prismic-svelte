@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.3](https://github.com/prismicio/prismic-svelte/compare/v2.2.2...v2.2.3) (2026-10-14)
+
+
+### Bug Fixes
+
+* **SliceSimulator:** support runes mode ([#62](https://github.com/prismicio/prismic-svelte/issues/62)) ([5465068](https://github.com/prismicio/prismic-svelte/commit/5465068bc15e20582f8668a249d6bb30903b5efc))
+
 ## [2.2.2](https://github.com/prismicio/prismic-svelte/compare/v2.2.1...v2.2.2) (2026-09-17)
 
 
