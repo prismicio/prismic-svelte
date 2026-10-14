@@ -2,6 +2,7 @@ import { render } from "@testing-library/svelte"
 // @vitest-environment happy-dom
 import { expect, it } from "vitest"
 
+import { PrismicLink } from "../src"
 import PrismicLinkTestWrapper from "./PrismicLinkTestWrapper.svelte"
 
 it("renders the link's text if no children are provided", (ctx) => {
@@ -29,4 +30,10 @@ it("renders the given children, overriding the link's text", (ctx) => {
 	expect(container.innerHTML.replaceAll("<!---->", "")).toBe(
 		`<a href="${field.url}" rel="noreferrer">${children}</a>`,
 	)
+})
+
+it("renders a link with an href", () => {
+	const { container } = render(PrismicLink, { href: "/about" })
+
+	expect(container.querySelector("a")?.getAttribute("href")).toBe("/about")
 })
