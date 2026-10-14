@@ -11,14 +11,14 @@ export type RedirectToPreviewURLConfig = {
 	/**
 	 * The `request` object from a `+server` file.
 	 *
-	 * @see SvelteKit `+server` docs: \<https://kit.svelte.dev/docs/routing#server\>
+	 * @see SvelteKit `+server` docs: \<https://svelte.dev/docs/kit/routing#server\>
 	 */
 	request: Request
 
 	/**
 	 * The `cookies` object from a `+server` file.
 	 *
-	 * @see SvelteKit `+server` docs: \<https://kit.svelte.dev/docs/routing#server\>
+	 * @see SvelteKit `+server` docs: \<https://svelte.dev/docs/kit/routing#server\>
 	 */
 	cookies: Cookies
 
@@ -36,7 +36,7 @@ export type RedirectToPreviewURLConfig = {
  * Return the created `Response` in your `+server` file.
  *
  * @example
- * 	```typescript
+ * 	;```typescript
  * 	import { createClient } from "$lib/prismicio.js"
  * 	import { redirectToPreviewURL } from "@prismicio/svelte/kit"
  *

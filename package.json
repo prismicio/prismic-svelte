@@ -81,7 +81,7 @@
 	},
 	"peerDependencies": {
 		"@prismicio/client": ">=7",
-		"@sveltejs/kit": "^2.27.0 || ^3.0.0",
+		"@sveltejs/kit": "^3.0.0",
 		"svelte": "^5.16.0"
 	},
 	"peerDependenciesMeta": {
