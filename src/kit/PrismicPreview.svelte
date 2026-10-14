@@ -56,8 +56,7 @@
 						),
 						window.location.origin,
 					),
-					// SvelteKit 3 replaced `noScroll` with `reset`, and
-					// throws if `noScroll` is passed.
+					// SvelteKit 3 replaced `noScroll` with `reset` and throws on `noScroll`.
 					(VERSION.startsWith("2.")
 						? { invalidateAll: true, noScroll: true }
 						: { refreshAll: true, reset: false }) as Parameters<typeof goto>[1],
