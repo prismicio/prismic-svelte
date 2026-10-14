@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { beforeNavigate, goto, invalidateAll } from "$app/navigation"
+	import { beforeNavigate, goto, refreshAll } from "$app/navigation"
 	import { getToolbarSrc } from "@prismicio/client"
+	import { VERSION } from "@sveltejs/kit"
 	import { onMount } from "svelte"
 
 	type Props = {
@@ -36,7 +37,7 @@
 			"prismicPreviewUpdate",
 			(event) => {
 				event.preventDefault()
-				invalidateAll()
+				refreshAll()
 			},
 			{ signal: controller.signal },
 		)
@@ -55,10 +56,11 @@
 						),
 						window.location.origin,
 					),
-					{
-						invalidateAll: true,
-						noScroll: true,
-					},
+					// SvelteKit 3 replaced `noScroll` with `reset`, and
+					// throws if `noScroll` is passed.
+					(VERSION.startsWith("2.")
+						? { invalidateAll: true, noScroll: true }
+						: { refreshAll: true, reset: false }) as Parameters<typeof goto>[1],
 				)
 			},
 			{ signal: controller.signal },

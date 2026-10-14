@@ -30,12 +30,12 @@
 
 	const { field, components = {}, fallback: Fallback }: Props = $props()
 
-	const Table = components.table
-	const Thead = components.thead
-	const Tbody = components.tbody
-	const Tr = components.tr
-	const Th = components.th
-	const Td = components.td
+	const Table = $derived(components.table)
+	const Thead = $derived(components.thead)
+	const Tbody = $derived(components.tbody)
+	const Tr = $derived(components.tr)
+	const Th = $derived(components.th)
+	const Td = $derived(components.td)
 </script>
 
 {#snippet thead(head: TableFieldHead)}

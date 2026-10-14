@@ -10,19 +10,23 @@
 		simulatorClass,
 		simulatorRootClass,
 	} from "@prismicio/simulator/kit"
+	import type { Snippet } from "svelte"
+	import type { ClassValue } from "svelte/elements"
 
 	const defaultProps = getDefaultProps()
 
 	type Props = {
 		zIndex?: number
 		background?: string
-		class?: string
+		class?: ClassValue
+		children?: Snippet<[{ slices: ReturnType<typeof getDefaultSlices> }]>
 	}
 
 	const {
 		zIndex = defaultProps.zIndex,
 		background = defaultProps.background,
 		class: className,
+		children,
 	}: Props = $props()
 
 	let slices = $state.raw(getDefaultSlices())
@@ -51,7 +55,7 @@
 </script>
 
 <div
-	class="{simulatorClass} {className}"
+	class={[simulatorClass, className]}
 	style="z-index: {zIndex}; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; overflow: auto; background: {background}"
 >
 	{#if message}
@@ -68,9 +72,7 @@
 			onsubmit={disableEventHandler}
 			onkeypress={disableEventHandler}
 		>
-			<!-- TODO: Use a snippet in the next major; it would break `let:slices`. -->
-			<!-- svelte-ignore slot_element_deprecated -->
-			<slot {slices} />
+			{@render children?.({ slices })}
 		</div>
 	{/if}
 </div>
