@@ -103,17 +103,9 @@
 	})
 
 	function castInt(input: string | number | null | undefined): number | null | undefined {
-		if (typeof input === "number" || typeof input === "undefined" || input === null) {
-			return input
-		} else {
-			const parsed = Number.parseInt(input)
-
-			if (Number.isNaN(parsed)) {
-				return undefined
-			} else {
-				return parsed
-			}
-		}
+		if (typeof input !== "string") return input
+		const parsed = Number.parseInt(input)
+		return Number.isNaN(parsed) ? undefined : parsed
 	}
 </script>
 

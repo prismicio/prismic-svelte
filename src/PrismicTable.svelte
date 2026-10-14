@@ -74,9 +74,9 @@
 <!-- This formatting is intentional to prevent unwanted whitespace between elements. -->
 {#if isFilled.table(field)}
 	{#if typeof Table === "function"}<Table table={field}
-			>{#if field?.head}{@render thead(field.head)}{/if}{@render tbody(field.body)}</Table
+			>{#if field.head}{@render thead(field.head)}{/if}{@render tbody(field.body)}</Table
 		>{:else}<table {...Table}>
-			{#if field?.head}{@render thead(field.head)}{/if}{@render tbody(field.body)}
+			{#if field.head}{@render thead(field.head)}{/if}{@render tbody(field.body)}
 		</table>{/if}
 {:else if Fallback}
 	<Fallback />

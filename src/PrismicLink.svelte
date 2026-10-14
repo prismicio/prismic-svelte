@@ -53,5 +53,5 @@
 -->
 
 <a {...linkAttrs} rel={resolvedRel} {href} {...restProps}>
-	{#if children}{@render children?.()}{:else}{field?.text}{/if}
+	{#if children}{@render children()}{:else}{field?.text}{/if}
 </a>
