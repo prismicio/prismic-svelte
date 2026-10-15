@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.4](https://github.com/prismicio/prismic-svelte/compare/v2.2.3...v2.2.4) (2026-10-15)
+
+
+### Bug Fixes
+
+* keep the image aspect ratio and allow href-only links ([#66](https://github.com/prismicio/prismic-svelte/issues/66)) ([585b987](https://github.com/prismicio/prismic-svelte/commit/585b9871a829d258a1f13183dad73f0de409223e))
+
 ## [2.2.3](https://github.com/prismicio/prismic-svelte/compare/v2.2.2...v2.2.3) (2026-10-14)
 
 
