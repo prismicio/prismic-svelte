@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/prismicio/prismic-svelte/compare/v2.2.4...v3.0.0) (2026-10-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* Requires SvelteKit 3. See the upgrade guide: https://prismic.io/docs/technical-reference/prismicio-svelte/v3#upgrade-from-v2
+
+### Features
+
+* require SvelteKit 3 and use Svelte 5 snippets ([61c0434](https://github.com/prismicio/prismic-svelte/commit/61c0434a7d4b8310e1246ed69c889fa04cc623ef))
+
 ## [2.2.4](https://github.com/prismicio/prismic-svelte/compare/v2.2.3...v2.2.4) (2026-10-15)
 
 
