@@ -25,7 +25,7 @@
 			  }
 			| {
 					href: HTMLAnchorAttributes["href"]
-					document: never
+					document?: never
 					field?: never
 			  }
 		)
