@@ -38,12 +38,7 @@
 		defaultComponent?: Component<SliceComponentProps> | undefined
 	}
 
-	const {
-		slices = [],
-		components = {},
-		context = {},
-		defaultComponent = undefined,
-	}: Props = $props()
+	const { slices = [], components = {}, context = {}, defaultComponent }: Props = $props()
 </script>
 
 <!--

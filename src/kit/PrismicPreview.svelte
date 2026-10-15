@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { beforeNavigate, goto, invalidateAll } from "$app/navigation"
+	import { beforeNavigate, goto, refreshAll } from "$app/navigation"
 	import { getToolbarSrc } from "@prismicio/client"
 	import { onMount } from "svelte"
 
@@ -36,7 +36,7 @@
 			"prismicPreviewUpdate",
 			(event) => {
 				event.preventDefault()
-				invalidateAll()
+				refreshAll()
 			},
 			{ signal: controller.signal },
 		)
@@ -55,10 +55,7 @@
 						),
 						window.location.origin,
 					),
-					{
-						invalidateAll: true,
-						noScroll: true,
-					},
+					{ refreshAll: true, reset: false },
 				)
 			},
 			{ signal: controller.signal },
