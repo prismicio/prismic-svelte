@@ -65,19 +65,19 @@
 		"@prismicio/client": "^7.22.3",
 		"@prismicio/mock": "^0.7.2",
 		"@sveltejs/kit": "^3.0.1",
-		"@sveltejs/package": "^3.0.0",
+		"@sveltejs/package": "^3.0.1",
 		"@sveltejs/vite-plugin-svelte": "^7.3.1",
 		"@testing-library/svelte": "^5.4.2",
 		"@types/node": "^26.6.5",
-		"@vitest/coverage-v8": "^5.0.4",
+		"@vitest/coverage-v8": "^5.0.5",
 		"globals": "^17.13.0",
-		"happy-dom": "^21.0.1",
+		"happy-dom": "^21.0.3",
 		"oxfmt": "^0.73.0",
 		"oxlint": "^1.88.0",
 		"standard-version": "^9.5.0",
 		"svelte": "^5.57.2",
 		"typescript": "^6.0.3",
-		"vitest": "^5.0.4"
+		"vitest": "^5.0.5"
 	},
 	"peerDependencies": {
 		"@prismicio/client": ">=7",
