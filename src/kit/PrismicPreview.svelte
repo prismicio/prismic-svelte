@@ -23,7 +23,9 @@
 
 	const { repositoryName, routePrefix = "preview", routePrefixName = routePrefix }: Props = $props()
 
-	const toolbarSrc = $derived(getToolbarSrc(repositoryName))
+	// `v=5` opts into the toolbar's modern flow.
+	// TODO: Remove `&v=5` once `getToolbarSrc()` from `@prismicio/client` adds it.
+	const toolbarSrc = $derived(`${getToolbarSrc(repositoryName)}&v=5`)
 
 	/** Set to `true` when the next `beforeNavigate()` call should not prefix the route. */
 	let endingPreview = $state(false)
