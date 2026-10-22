@@ -72,7 +72,7 @@ export const redirectToPreviewURL = async (
 	// The toolbar's `v=5` flow follows the preview session with this cookie.
 	const session = new URL(config.request.url).searchParams.get("session")
 	if (session) {
-		config.cookies.set("io.prismic.previewSession", session, {
+		config.cookies.set(prismic.cookie.previewSession, session, {
 			path: "/",
 			httpOnly: false,
 		})

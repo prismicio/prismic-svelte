@@ -62,7 +62,7 @@
 		"esm-env": "^1.2.2"
 	},
 	"devDependencies": {
-		"@prismicio/client": "^7.22.3",
+		"@prismicio/client": "7.22.3-pr.477.9eb2102",
 		"@prismicio/mock": "^0.7.2",
 		"@sveltejs/kit": "^3.0.1",
 		"@sveltejs/package": "^3.0.1",
@@ -80,7 +80,7 @@
 		"vitest": "^5.0.5"
 	},
 	"peerDependencies": {
-		"@prismicio/client": ">=7",
+		"@prismicio/client": "^7.23.0",
 		"@sveltejs/kit": "^3.0.0",
 		"svelte": "^5.16.0"
 	},
@@ -88,6 +88,9 @@
 		"@sveltejs/kit": {
 			"optional": true
 		}
+	},
+	"overrides": {
+		"@prismicio/client": "$@prismicio/client"
 	},
 	"engines": {
 		"node": ">=22"
