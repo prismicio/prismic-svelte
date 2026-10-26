@@ -102,11 +102,11 @@ const getSharedPath = (requestURL: string, routePrefix: string): string | undefi
 	// `path` comes from the browser, so it already includes `paths.base`. `resolve()` returns `base`
 	// either absolute or relative to the request.
 	const base = new URL(resolve("/", {}), requestURL).pathname.slice(0, -1)
-	if (!path?.startsWith(`${base}/`)) {
+	const rest = path?.startsWith(base) ? path.slice(base.length) : undefined
+	// `/docs` and `/docs?q=1` are under the `/docs` base, but `/docs-old` isn't.
+	if (rest === undefined || !/^([/?#]|$)/.test(rest)) {
 		return
 	}
 
-	const pathname = path.slice(base.length)
-
-	return pathname.split(/[/?#]/)[1] === routePrefix ? path : `${base}/${routePrefix}${pathname}`
+	return /^\/([^/?#]*)/.exec(rest)?.[1] === routePrefix ? path : `${base}/${routePrefix}${rest}`
 }

@@ -54,6 +54,8 @@ it.each([
 	["", "/previews", "/preview/previews"],
 	["/docs", "/docs/preview/blog", "/docs/preview/blog"],
 	["/docs", "/docs/blog", "/docs/preview/blog"],
+	["/docs", "/docs", "/docs/preview"],
+	["/docs", "/docs?q=1#top", "/docs/preview?q=1#top"],
 ])("redirects inside the preview prefix (base %j, path %j)", async (base, path, location) => {
 	const res = await preview(`token=ref&session=abc&path=${encodeURIComponent(path)}`, base)
 
@@ -66,6 +68,7 @@ it.each([
 	["", "https://evil.com"],
 	["", "blog"],
 	["/docs", "/blog"],
+	["/docs", "/docs-old"],
 ])("falls back for an unsafe path (base %j, path %j)", async (base, path) => {
 	const res = await preview(`token=ref&session=abc&path=${encodeURIComponent(path)}`, base)
 
