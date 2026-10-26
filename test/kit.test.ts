@@ -7,11 +7,17 @@ import { expect, it } from "vitest"
 import { PrismicPreview, redirectToPreviewURL } from "../src/kit"
 
 it("loads the toolbar with v=5 and the preview route's URL", () => {
-	render(PrismicPreview, { repositoryName: "qwerty", previewURL: "/api/preview" })
+	render(PrismicPreview, { repositoryName: "qwerty" })
 
 	const script = document.head.querySelector("script")
 	expect(script?.src).toBe("https://static.cdn.prismic.io/prismic.js?repo=qwerty&v=5")
-	expect(script?.dataset.previewUrl).toBe("/api/preview")
+	expect(script?.dataset.previewUrl).toBe("/docs/api/preview")
+})
+
+it("resolves a custom preview route", () => {
+	render(PrismicPreview, { repositoryName: "qwerty", previewURL: "/preview-route" })
+
+	expect(document.head.querySelector("script")?.dataset.previewUrl).toBe("/docs/preview-route")
 })
 
 /** Calls the preview route of a website served at `base`. */

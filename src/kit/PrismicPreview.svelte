@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { beforeNavigate, goto, refreshAll } from "$app/navigation"
+	import { resolve } from "$app/paths"
+	import { page } from "$app/state"
 	import { getToolbarSrc } from "@prismicio/client"
 	import { onMount } from "svelte"
 
@@ -21,8 +23,10 @@
 		routePrefixName?: string
 
 		/**
-		 * The URL of your preview route, such as `/api/preview`. The Prismic Toolbar uses it to create
-		 * share links, and hides its Share button without it.
+		 * The path of your preview route, without `paths.base`. The Prismic Toolbar uses it to create
+		 * share links.
+		 *
+		 * @defaultValue `"/api/preview"`
 		 */
 		previewURL?: string
 	}
@@ -31,10 +35,12 @@
 		repositoryName,
 		routePrefix = "preview",
 		routePrefixName = routePrefix,
-		previewURL,
+		previewURL = "/api/preview",
 	}: Props = $props()
 
 	const toolbarSrc = $derived(getToolbarSrc(repositoryName, { version: 5 }))
+	// `resolve()` can return a path relative to the current page, which changes on navigation.
+	const previewPath = $derived(new URL(resolve(previewURL, {}), page.url).pathname)
 
 	/** Set to `true` when the next `beforeNavigate()` call should not prefix the route. */
 	let endingPreview = $state(false)
@@ -100,5 +106,5 @@
 </script>
 
 <svelte:head>
-	<script defer src={toolbarSrc} data-preview-url={previewURL}></script>
+	<script defer src={toolbarSrc} data-preview-url={previewPath}></script>
 </svelte:head>
