@@ -65,6 +65,7 @@ it.each([
 it.each([
 	["", "//evil.com"],
 	["", "/\\evil.com"],
+	["", "/.//evil.com"],
 	["", "https://evil.com"],
 	["", "blog"],
 	["/docs", "/blog"],
