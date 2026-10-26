@@ -2,6 +2,8 @@ import { resolve } from "$app/paths"
 import * as prismic from "@prismicio/client"
 import type { Cookies } from "@sveltejs/kit"
 
+import { getSafePath } from "../lib/getSafePath"
+
 export type RedirectToPreviewURLConfig = {
 	/** The Prismic client configured for the preview session's repository. */
 	// `Pick` is used to use the smallest possible subset of
@@ -96,25 +98,15 @@ export const redirectToPreviewURL = async (
  * if it is missing or not a path on this website.
  */
 const getSharedPath = (requestURL: string, routePrefix: string): string | undefined => {
-	const path = new URL(requestURL).searchParams.get("path")
-	if (!path?.startsWith("/")) {
-		return
-	}
-
-	// Paths like `//evil.com` and `/\evil.com` resolve to another origin.
-	const origin = "https://placeholder.invalid"
-	const url = new URL(path, origin)
+	const path = getSafePath(new URL(requestURL).searchParams.get("path"))
 	// `path` comes from the browser, so it already includes `paths.base`. `resolve()` returns `base`
 	// either absolute or relative to the request.
 	const base = new URL(resolve("/", {}), requestURL).pathname.slice(0, -1)
-	if (url.origin !== origin || !url.pathname.startsWith(`${base}/`)) {
+	if (!path?.startsWith(`${base}/`)) {
 		return
 	}
 
-	const pathname = url.pathname.slice(base.length)
-	if (pathname !== `/${routePrefix}` && !pathname.startsWith(`/${routePrefix}/`)) {
-		url.pathname = `${base}/${routePrefix}${pathname}`
-	}
+	const pathname = path.slice(base.length)
 
-	return url.pathname + url.search + url.hash
+	return pathname.split(/[/?#]/)[1] === routePrefix ? path : `${base}/${routePrefix}${pathname}`
 }

@@ -45,6 +45,7 @@ it("stores the session and redirects to the shared path", async () => {
 it.each([
 	["", "/preview", "/preview"],
 	["", "/blog", "/preview/blog"],
+	["", "/previews", "/preview/previews"],
 	["/docs", "/docs/preview/blog", "/docs/preview/blog"],
 	["/docs", "/docs/blog", "/docs/preview/blog"],
 ])("redirects inside the preview prefix (base %j, path %j)", async (base, path, location) => {
