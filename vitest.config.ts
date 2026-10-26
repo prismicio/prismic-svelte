@@ -25,6 +25,7 @@ export default defineConfig({
 					"$app/navigation": fileURLToPath(
 						new URL("./test/__mocks__/navigation.ts", import.meta.url),
 					),
+					"$app/paths": fileURLToPath(new URL("./test/__mocks__/paths.ts", import.meta.url)),
 				},
 			}
 		: undefined,

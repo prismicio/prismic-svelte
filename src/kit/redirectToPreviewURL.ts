@@ -1,3 +1,4 @@
+import { resolve } from "$app/paths"
 import * as prismic from "@prismicio/client"
 import type { Cookies } from "@sveltejs/kit"
 
@@ -54,11 +55,15 @@ export const redirectToPreviewURL = async (
 	const documentID = new URL(config.request.url).searchParams.get("documentId") ?? undefined
 	const routePrefix = config.routePrefix ?? "preview"
 
-	const previewURL = await config.client.resolvePreviewURL({
-		previewToken,
-		documentID,
-		defaultURL: config.defaultURL || "/",
-	})
+	const location =
+		getSharedPath(config.request.url, routePrefix) ??
+		"/" +
+			routePrefix +
+			(await config.client.resolvePreviewURL({
+				previewToken,
+				documentID,
+				defaultURL: config.defaultURL || "/",
+			}))
 
 	// Prevent a flash of non-preview content by setting the preview token
 	// on the initial page load.
@@ -81,7 +86,35 @@ export const redirectToPreviewURL = async (
 	return new Response(undefined, {
 		status: 307,
 		headers: {
-			Location: "/" + routePrefix + previewURL,
+			Location: location,
 		},
 	})
+}
+
+/**
+ * Returns the `path` param of toolbar share links inside the preview route prefix, or `undefined`
+ * if it is missing or not a path on this website.
+ */
+const getSharedPath = (requestURL: string, routePrefix: string): string | undefined => {
+	const path = new URL(requestURL).searchParams.get("path")
+	if (!path?.startsWith("/")) {
+		return
+	}
+
+	// Paths like `//evil.com` and `/\evil.com` resolve to another origin.
+	const origin = "https://placeholder.invalid"
+	const url = new URL(path, origin)
+	// `path` comes from the browser, so it already includes `paths.base`. `resolve()` returns `base`
+	// either absolute or relative to the request.
+	const base = new URL(resolve("/", {}), requestURL).pathname.slice(0, -1)
+	if (url.origin !== origin || !url.pathname.startsWith(`${base}/`)) {
+		return
+	}
+
+	const pathname = url.pathname.slice(base.length)
+	if (pathname !== `/${routePrefix}` && !pathname.startsWith(`/${routePrefix}/`)) {
+		url.pathname = `${base}/${routePrefix}${pathname}`
+	}
+
+	return url.pathname + url.search + url.hash
 }

@@ -19,9 +19,20 @@
 		 * Only set this value if the route parameter's name differs from the parameter's value.
 		 */
 		routePrefixName?: string
+
+		/**
+		 * The URL of your preview route, such as `/api/preview`. The Prismic Toolbar uses it to create
+		 * share links, and hides its Share button without it.
+		 */
+		previewURL?: string
 	}
 
-	const { repositoryName, routePrefix = "preview", routePrefixName = routePrefix }: Props = $props()
+	const {
+		repositoryName,
+		routePrefix = "preview",
+		routePrefixName = routePrefix,
+		previewURL,
+	}: Props = $props()
 
 	const toolbarSrc = $derived(getToolbarSrc(repositoryName, { version: 5 }))
 
@@ -89,5 +100,5 @@
 </script>
 
 <svelte:head>
-	<script defer src={toolbarSrc}></script>
+	<script defer src={toolbarSrc} data-preview-url={previewURL}></script>
 </svelte:head>
