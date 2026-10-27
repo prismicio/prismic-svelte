@@ -142,9 +142,10 @@ export type SliceComponentProps<TSlice extends SliceLike = SliceLike, TContext =
  *
  * @typeParam SliceType - Type name of the Slice.
  */
-type SliceLikeRestV2<SliceType extends string = string> = {
-	slice_type: Slice<SliceType>["slice_type"]
-}
+type SliceLikeRestV2<SliceType extends string = string> = Pick<
+	Slice<SliceType>,
+	"id" | "slice_type"
+>
 
 /**
  * The minimum required properties to represent a Prismic Slice from the Prismic GraphQL API for the
@@ -164,7 +165,7 @@ type SliceLikeGraphQL<SliceType extends string = string> = {
  *
  * @typeParam SliceType - Type name of the Slice.
  */
-type SliceLike<SliceType extends string = string> = (
+export type SliceLike<SliceType extends string = string> = (
 	| SliceLikeRestV2<SliceType>
 	| SliceLikeGraphQL<SliceType>
 ) & {

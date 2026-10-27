@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { Component } from "svelte"
 
-	import type { SliceComponentProps, SliceZoneLike } from "../types"
+	import type { SliceComponentProps, SliceLike, SliceZoneLike } from "../types"
+	import SliceBoundary from "./SliceBoundary.svelte"
 	import TodoComponent from "./TodoComponent.svelte"
 
 	type Props = {
@@ -39,6 +40,10 @@
 	}
 
 	const { slices = [], components = {}, context = {}, defaultComponent }: Props = $props()
+
+	function getSliceId(slice: SliceLike): string | undefined {
+		return "id" in slice ? slice.id : undefined
+	}
 </script>
 
 <!--
@@ -57,17 +62,25 @@
 	```
 -->
 
-{#each slices as slice, index ("id" in slice && slice.id ? slice.id : `${index}-${JSON.stringify(slice)}`)}
+{#each slices as slice, index (getSliceId(slice) || `${index}-${JSON.stringify(slice)}`)}
+	{@const sliceId = getSliceId(slice)}
 	{@const type = "slice_type" in slice ? slice.slice_type : slice.type}
 	{@const Component = components[type] || defaultComponent}
-	{#if Component}
-		{#if slice.__mapped}
-			{@const { __mapped, ...mappedProps } = slice}
-			<Component {...mappedProps} />
+	{#snippet content()}
+		{#if Component}
+			{#if slice.__mapped}
+				{@const { __mapped, ...mappedProps } = slice}
+				<Component {...mappedProps} />
+			{:else}
+				<Component {slice} {slices} {context} {index} />
+			{/if}
 		{:else}
-			<Component {slice} {slices} {context} {index} />
+			<TodoComponent {slice} />
 		{/if}
+	{/snippet}
+	{#if sliceId}
+		<SliceBoundary {sliceId}>{@render content()}</SliceBoundary>
 	{:else}
-		<TodoComponent {slice} />
+		{@render content()}
 	{/if}
 {/each}
