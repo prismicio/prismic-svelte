@@ -1,3 +1,5 @@
+import { fileURLToPath } from "node:url"
+
 import { svelte } from "@sveltejs/vite-plugin-svelte"
 import { defineConfig } from "vitest/config"
 
@@ -18,6 +20,13 @@ export default defineConfig({
 	resolve: process.env.VITEST
 		? {
 				conditions: ["browser"],
+				// SvelteKit provides `$app/*` modules at build time.
+				alias: {
+					"$app/navigation": fileURLToPath(
+						new URL("./test/__mocks__/navigation.ts", import.meta.url),
+					),
+					"$app/paths": fileURLToPath(new URL("./test/__mocks__/paths.ts", import.meta.url)),
+				},
 			}
 		: undefined,
 })
