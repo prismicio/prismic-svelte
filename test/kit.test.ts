@@ -14,15 +14,14 @@ it("loads the toolbar with v=5", () => {
 	)
 })
 
-/** Calls the preview route of a website served at `base`. */
-const preview = async (search: string, base = "") => {
+const preview = async (search: string) => {
 	const client = prismic.createClient("qwerty")
 	client.resolvePreviewURL = async () => "/resolved"
 	const cookies: Record<string, unknown[]> = {}
 
 	const response = await redirectToPreviewURL({
 		client,
-		request: new Request(`https://example.com${base}/api/preview?${search}`),
+		request: new Request(`https://example.com/api/preview?${search}`),
 		cookies: {
 			set: (name: string, ...args: unknown[]) => (cookies[name] = args),
 		} as unknown as Cookies,
@@ -42,30 +41,11 @@ it("stores the session and redirects to the shared path", async () => {
 	})
 })
 
-it.each([
-	["", "/preview", "/preview"],
-	["", "/blog", "/preview/blog"],
-	["", "/previews", "/preview/previews"],
-	["/docs", "/docs/preview/blog", "/docs/preview/blog"],
-	["/docs", "/docs/blog", "/docs/preview/blog"],
-	["/docs", "/docs", "/docs/preview"],
-	["/docs", "/docs?q=1#top", "/docs/preview?q=1#top"],
-])("redirects inside the preview prefix (base %j, path %j)", async (base, path, location) => {
-	const res = await preview(`token=ref&session=abc&path=${encodeURIComponent(path)}`, base)
+it.each(["//evil.com", "/\\evil.com", "/.//evil.com", "https://evil.com", "blog"])(
+	"falls back for an unsafe path (%j)",
+	async (path) => {
+		const res = await preview(`token=ref&session=abc&path=${encodeURIComponent(path)}`)
 
-	expect(res.location).toBe(location)
-})
-
-it.each([
-	["", "//evil.com"],
-	["", "/\\evil.com"],
-	["", "/.//evil.com"],
-	["", "https://evil.com"],
-	["", "blog"],
-	["/docs", "/blog"],
-	["/docs", "/docs-old"],
-])("falls back for an unsafe path (base %j, path %j)", async (base, path) => {
-	const res = await preview(`token=ref&session=abc&path=${encodeURIComponent(path)}`, base)
-
-	expect(res.location).toBe("/preview/resolved")
-})
+		expect(res.location).toBe("/preview/resolved")
+	},
+)

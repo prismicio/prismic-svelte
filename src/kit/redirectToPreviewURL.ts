@@ -1,4 +1,3 @@
-import { resolve } from "$app/paths"
 import * as prismic from "@prismicio/client"
 import type { Cookies } from "@sveltejs/kit"
 
@@ -57,8 +56,9 @@ export const redirectToPreviewURL = async (
 	const documentID = new URL(config.request.url).searchParams.get("documentId") ?? undefined
 	const routePrefix = config.routePrefix ?? "preview"
 
+	// Toolbar share links carry the shared page's `path`.
 	const location =
-		getSharedPath(config.request.url, routePrefix) ??
+		getSafePath(new URL(config.request.url).searchParams.get("path")) ??
 		"/" +
 			routePrefix +
 			(await config.client.resolvePreviewURL({
@@ -91,22 +91,4 @@ export const redirectToPreviewURL = async (
 			Location: location,
 		},
 	})
-}
-
-/**
- * Returns the `path` param of toolbar share links inside the preview route prefix, or `undefined`
- * if it is missing or not a path on this website.
- */
-const getSharedPath = (requestURL: string, routePrefix: string): string | undefined => {
-	const path = getSafePath(new URL(requestURL).searchParams.get("path"))
-	// `path` comes from the browser, so it already includes `paths.base`. `resolve()` returns `base`
-	// either absolute or relative to the request.
-	const base = new URL(resolve("/", {}), requestURL).pathname.slice(0, -1)
-	const rest = path?.startsWith(base) ? path.slice(base.length) : undefined
-	// `/docs` and `/docs?q=1` are under the `/docs` base, but `/docs-old` isn't.
-	if (rest === undefined || !/^([/?#]|$)/.test(rest)) {
-		return
-	}
-
-	return /^\/([^/?#]*)/.exec(rest)?.[1] === routePrefix ? path : `${base}/${routePrefix}${rest}`
 }
