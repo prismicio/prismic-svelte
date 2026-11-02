@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/prismicio/prismic-svelte/compare/v3.0.0...v3.1.0) (2026-10-28)
+
+
+### Features
+
+* make rendered Slices discoverable in the DOM ([#76](https://github.com/prismicio/prismic-svelte/pull/76)) ([6a071a2](https://github.com/prismicio/prismic-svelte/commit/6a071a2d9b92379c674fc2c62a222f2addd1767a))
+
 ## [3.0.0](https://github.com/prismicio/prismic-svelte/compare/v2.2.4...v3.0.0) (2026-10-15)
 
 
