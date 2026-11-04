@@ -1,6 +1,8 @@
 import * as prismic from "@prismicio/client"
 import type { Cookies } from "@sveltejs/kit"
 
+import { getSafePath } from "../lib/getSafePath"
+
 export type RedirectToPreviewURLConfig = {
 	/** The Prismic client configured for the preview session's repository. */
 	// `Pick` is used to use the smallest possible subset of
@@ -54,11 +56,16 @@ export const redirectToPreviewURL = async (
 	const documentID = new URL(config.request.url).searchParams.get("documentId") ?? undefined
 	const routePrefix = config.routePrefix ?? "preview"
 
-	const previewURL = await config.client.resolvePreviewURL({
-		previewToken,
-		documentID,
-		defaultURL: config.defaultURL || "/",
-	})
+	// Toolbar share links carry the shared page's `path`.
+	const location =
+		getSafePath(new URL(config.request.url).searchParams.get("path")) ??
+		"/" +
+			routePrefix +
+			(await config.client.resolvePreviewURL({
+				previewToken,
+				documentID,
+				defaultURL: config.defaultURL || "/",
+			}))
 
 	// Prevent a flash of non-preview content by setting the preview token
 	// on the initial page load.
@@ -69,10 +76,19 @@ export const redirectToPreviewURL = async (
 		})
 	}
 
+	// The toolbar's `v=5` flow follows the preview session with this cookie.
+	const session = new URL(config.request.url).searchParams.get("session")
+	if (session) {
+		config.cookies.set(prismic.cookie.previewSession, session, {
+			path: "/",
+			httpOnly: false,
+		})
+	}
+
 	return new Response(undefined, {
 		status: 307,
 		headers: {
-			Location: "/" + routePrefix + previewURL,
+			Location: location,
 		},
 	})
 }

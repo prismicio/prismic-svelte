@@ -23,7 +23,7 @@
 
 	const { repositoryName, routePrefix = "preview", routePrefixName = routePrefix }: Props = $props()
 
-	const toolbarSrc = $derived(getToolbarSrc(repositoryName))
+	const toolbarSrc = $derived(getToolbarSrc(repositoryName, { version: 5 }))
 
 	/** Set to `true` when the next `beforeNavigate()` call should not prefix the route. */
 	let endingPreview = $state(false)
