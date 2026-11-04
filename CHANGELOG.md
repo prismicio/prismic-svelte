@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/prismicio/prismic-svelte/compare/v3.1.0...v3.2.0) (2026-11-04)
+
+
+### Features
+
+* support Prismic toolbar v5 previews ([#71](https://github.com/prismicio/prismic-svelte/issues/71)) ([30a7ff6](https://github.com/prismicio/prismic-svelte/commit/30a7ff6261ffe3c30754c27689add5e440269113))
+
 ## [3.1.0](https://github.com/prismicio/prismic-svelte/compare/v3.0.0...v3.1.0) (2026-10-28)
 
 
