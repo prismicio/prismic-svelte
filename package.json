@@ -70,7 +70,7 @@
 		"@testing-library/svelte": "^5.4.2",
 		"@types/node": "^26.6.6",
 		"@vitest/coverage-v8": "^5.0.5",
-		"globals": "^17.13.0",
+		"globals": "^17.14.0",
 		"happy-dom": "^21.0.4",
 		"oxfmt": "^0.75.0",
 		"oxlint": "^1.90.0",
