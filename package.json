@@ -69,15 +69,15 @@
 		"@sveltejs/vite-plugin-svelte": "^7.3.1",
 		"@testing-library/svelte": "^5.4.2",
 		"@types/node": "^26.6.6",
-		"@vitest/coverage-v8": "^5.0.5",
+		"@vitest/coverage-v8": "^5.1.0",
 		"globals": "^17.14.0",
 		"happy-dom": "^21.0.4",
 		"oxfmt": "^0.75.0",
-		"oxlint": "^1.90.0",
+		"oxlint": "^1.92.0",
 		"standard-version": "^9.5.0",
 		"svelte": "^5.57.3",
 		"typescript": "^6.0.3",
-		"vitest": "^5.0.5"
+		"vitest": "^5.1.0"
 	},
 	"peerDependencies": {
 		"@prismicio/client": "^7.23.0",
