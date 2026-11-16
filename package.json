@@ -62,9 +62,9 @@
 		"esm-env": "^1.2.2"
 	},
 	"devDependencies": {
-		"@prismicio/client": "^7.23.0",
+		"@prismicio/client": "^7.23.1",
 		"@prismicio/mock": "^0.7.2",
-		"@sveltejs/kit": "^3.1.1",
+		"@sveltejs/kit": "^3.2.0",
 		"@sveltejs/package": "^3.0.2",
 		"@sveltejs/vite-plugin-svelte": "^7.3.1",
 		"@testing-library/svelte": "^5.4.2",
