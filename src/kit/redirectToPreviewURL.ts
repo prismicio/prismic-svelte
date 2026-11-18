@@ -38,7 +38,6 @@ export type RedirectToPreviewURLConfig = {
  * Return the created `Response` in your `+server` file.
  *
  * @example
- * 	```typescript
  * 	import { createClient } from "#lib/prismicio.ts"
  * 	import { redirectToPreviewURL } from "@prismicio/svelte/kit"
  *
@@ -47,7 +46,6 @@ export type RedirectToPreviewURLConfig = {
  *
  * 		return await redirectToPreviewURL({ client, request, cookies })
  * 	}
- * 	```
  */
 export const redirectToPreviewURL = async (
 	config: RedirectToPreviewURLConfig,
