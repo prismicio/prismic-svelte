@@ -64,20 +64,20 @@
 	"devDependencies": {
 		"@prismicio/client": "^7.23.1",
 		"@prismicio/mock": "^0.7.2",
-		"@sveltejs/kit": "^3.2.0",
-		"@sveltejs/package": "^3.0.2",
+		"@sveltejs/kit": "^3.4.0",
+		"@sveltejs/package": "^3.0.3",
 		"@sveltejs/vite-plugin-svelte": "^7.3.1",
 		"@testing-library/svelte": "^5.4.2",
 		"@types/node": "^26.6.6",
-		"@vitest/coverage-v8": "^5.1.0",
+		"@vitest/coverage-v8": "^5.1.1",
 		"globals": "^17.14.0",
 		"happy-dom": "^21.0.4",
 		"oxfmt": "^0.79.0",
 		"oxlint": "^1.94.0",
 		"standard-version": "^9.5.0",
-		"svelte": "^5.57.3",
+		"svelte": "^5.58.0",
 		"typescript": "^6.0.3",
-		"vitest": "^5.1.0"
+		"vitest": "^5.1.1"
 	},
 	"peerDependencies": {
 		"@prismicio/client": "^7.23.0",
